@@ -10,7 +10,7 @@ import com.mall.common.util.QueryMapper;
 @Repository
 public class ExcelDao extends QueryMapper{
 
-	private String namespace = "com.study.excel.";
+	private String namespace = "com.mall.excel.";
 	
 	/**
 	 * board 입력하는 DML을 실행한다.

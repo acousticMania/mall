@@ -10,7 +10,7 @@ import com.mall.common.util.QueryMapper;
 @Repository
 public class LoginDao extends QueryMapper{
 
-	private String namespace = "com.study.admin.user.LoginDao.";
+	private String namespace = "com.mall.admin.user.LoginDao.";
 	
 	@SuppressWarnings("unchecked")
 	public Map<String, String> selectUserInfo(Map<String, String> paramMap) {
