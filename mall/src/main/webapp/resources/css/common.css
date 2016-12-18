@@ -1,0 +1,93 @@
+* {margin:0; padding:0;}
+body {
+	display:block; text-align:center; margin:0; padding:0;
+    font-family:"굴림"; font-size:12px; color:#666; scroll:auto;
+    background-color:#777;
+}
+table {
+	margin-top:10px;
+	border-top:2px solid #ccccff; border-bottom:1px solid #ccccff;
+	border-spacing:0px; border-collapse:collapse;
+	font-family:"돋움"; font-size:12px; color:#eee;
+}
+table th {
+	border-bottom:1px solid #dddddd;
+	background-color:#666;
+	height:26px; text-align:center; vertical-align:middle; color:#efefef;
+}
+table td {
+	height:22px; padding:2px 3px 2px 3px; border-bottom:1px dotted #ddd;
+}
+img { border:0; vertical-align:middle; }
+p { height:20px; margin:0; padding:5 0 0 0; }
+
+a:link { font-size:12px; font-family:"돋움"; color:#eff; text-decoration:none; line-height:100%; }
+a:visited { font-size:12px; font-family:"돋움"; color:#eff; text-decoration:none; }
+a:active { font-size:12px; font-family:"돋움"; color:#cff; text-decoration:none; }
+a:hover { font-size:12px; font-family:"돋움"; color:#cff; text-decoration:none; }
+
+#header { text-align:left; /*width:98%;*/ padding:10px 10px 0px 10px; color:#eee; }
+#header #systemBI { float:left; width:300px; font-size:1.4em; font-weight:bold; }
+#header #loginUserName { float:right; width:300px; text-align:right; }
+#header #topMenu { clear:both; margin-top:10px; }
+
+#content { text-align:left; /*width:98%;*/ padding:10px 10px 0px 10px; color:#eee }
+#content_pop { text-align:left; width:800px; padding:10px 10px 10px 10px; }
+
+#title { margin:0; padding:0; height:20px; /*width:98%;*/ border-bottom:1px solid #e5e5e5; }
+#title span { width:800px; font-family:"돋움"; font-size:14px; font-weight:bold; color:#efefef; }
+#title span img { margin-bottom:3px; }
+
+#footer { margin-top:10px; color:#eee; }
+
+.sysbtn {text-align:right; padding:0; margin:10px 0 10px 0;}
+/*
+.sysbtn a:link { font-size:12px; font-family:"돋움"; color:#68a; text-decoration:none; line-height:100%;}
+.sysbtn a:visited { font-size:12px; font-family:"돋움"; color:#68a; text-decoration:none}
+.sysbtn a:active { font-size:12px; font-family:"돋움"; color:#488; text-decoration:none;}
+.sysbtn a:hover { font-size:12px; font-family:"돋움"; color:#488; text-decoration:none;}
+*/
+
+#menuTbl a:link { font-size:12px; font-family:"돋움"; color:#688; text-decoration:none; line-height:100%;}
+#menuTbl a:visited { font-size:12px; font-family:"돋움"; color:#688; text-decoration:none}
+#menuTbl a:active { font-size:12px; font-family:"돋움"; color:#488; text-decoration:none;}
+#menuTbl a:hover { font-size:12px; font-family:"돋움"; color:#488; text-decoration:none;}
+
+.btn_blue_l {
+	display:inline-block; /* height 설정을 위해 추가 */
+	height:20px;
+	background:url(../images/common/rte/btn_bg_l.gif) 0 0 no-repeat;
+	padding:0px 0px 0px 4px;
+	margin:0px 0px 0px 0px;
+	font-family:"돋움"; font-size:12px; font-weight:bold;
+	cursor:pointer;
+}
+.btn_blue_l a {
+	color:#68a;
+}
+.btn_blue_l_sub {
+	background:url(../images/common/rte/btn_bg_l.gif) 0 0 no-repeat;
+	padding:4px 0px 5px 4px; margin:0px 0px 0px 0px;
+	font-family:"돋움"; font-size:11px;
+	cursor:pointer;
+}
+.btn_blue_r {
+	background:url(../images/common/rte/btn_bg_r.gif) 0 0 no-repeat;
+	background-position:right;
+	height:20px;
+	font-family:"돋움"; font-size:12px; color:#000000;
+	margin:0px 0px 0px 0px; padding-top:0px; _padding-top:0px; padding-left:10px; padding-right:10px; padding-bottom:0px;
+	text-align:center;
+}
+
+button {cursor:pointer; border:0px solid #FFFFFF; padding:0px 0px 0px 0px; background-color:#FFFFFF; white-space:nowrap;}
+
+input { height:20px; font-family:"돋움"; font-size:12px; color:#000000; padding:2px 2px 0px 2px; margin-top:0px; _margin-top:-1px;}
+select { font-family:'돋움'; font-size:12px; margin-top:0px; height:22px; padding:2px; }
+textarea { font-family:"돋움"; font-size:12px; color:#000000; padding:2px 2px 2px 2px; }
+input.txt { height:18px; background-color:#FFF; border:1px solid #BCC8D8; padding-top:2px; color:#5e5e5e; cursor:text; }
+input.essentiality { height:18px; background-color:#ebebeb; border:1px solid #BCC8D8; padding-top:2px; color:#000; cursor:text; }
+
+.subtitle {
+	margin-top:5px;
+}

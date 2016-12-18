@@ -59,9 +59,9 @@
 		</property>
 		<property name="defaultViews">
 			<list>
-<!-- 				<bean id="excelView"  class="com.study.common.view.ExcelView"/> -->
+				<bean id="excelView"  class="com.mall.common.view.ExcelView"/>
 				<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
-<!-- 				<bean id="pdfView" class="com.study.common.view.PdfView"/> -->
+<!-- 				<bean id="pdfView" class="com.mall.common.view.PdfView"/> -->
 			</list>
 		</property>
 	</bean>

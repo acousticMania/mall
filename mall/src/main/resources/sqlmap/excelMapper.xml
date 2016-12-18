@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.excel">
+	<!-- #{CREA_DTM, jdbcType=TIMESTAMP}, 날짜함수로 변경하여 넣기 -->
+	<insert id="insertExcelBoard">
+		INSERT INTO TB_BOARD
+        (
+            TITLE, 
+            CONTENTS, 
+            HIT_CNT, 
+            DEL_GB, 
+            CREA_DTM, 
+            CREA_ID
+        )
+        VALUES
+        (
+            #{TITLE}, 
+            #{CONTENTS}, 
+            0, 
+            'N', 
+            NOW(), 
+            #{CREA_ID}
+        )
+	</insert>
+	
+	<select id="selectBoardList" parameterType="map" resultType="map">
+		SELECT
+		    IDX,
+		    TITLE,
+		    CONTENTS,
+		    HIT_CNT,
+		    DATE_FORMAT(CREA_DTM,'%Y-%m-%d') AS CREA_DTM,
+		    CREA_ID
+		FROM
+		    TB_BOARD
+		WHERE
+		    DEL_GB = 'N'    
+		ORDER BY IDX DESC
+	</select>
+
+</mapper>

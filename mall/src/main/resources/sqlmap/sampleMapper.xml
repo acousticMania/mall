@@ -1,5 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mall.sample">
+<mapper namespace="com.study.sample">
+	<select id="selectMemberList" parameterType="map" resultType="map">
+		SELECT 
+			*
+		  FROM 
+		    MBR_MEMBER
+	</select>
+	
+	<select id="selectBoardList" parameterType="map" resultType="map">
+		SELECT
+		    BOARD_IDX,
+		    TITLE,
+		    HIT_CNT,
+		    REG_DATE
+		FROM
+		    BRD_BOARD
+		WHERE
+		    DEL_YN = 'N'    
+		ORDER BY BOARD_IDX DESC
+	</select>
+	
+	<insert id="insertBoard" parameterType="map" useGeneratedKeys="true" keyProperty="BOARD_IDX"  >
+		 INSERT INTO BRD_BOARD
+        (
+            TITLE, 
+            CONTENTS, 
+            HIT_CNT, 
+            DEL_YN, 
+            REG_DATE, 
+            REG_ID
+        )
+        VALUES
+        (
+            #{TITLE}, 
+            #{CONTENTS}, 
+            0, 
+            'N', 
+            NOW(), 
+            #{REG_ID}
+        )
+	</insert>
+	
+	<select id="selectBoardDetail" parameterType="map" resultType="map" >
+		SELECT
+            BOARD_IDX,
+            HIT_CNT,
+            REG_ID,
+            REG_DATE,
+            TITLE,
+            CONTENTS
+        FROM
+            BRD_BOARD
+        WHERE
+            BOARD_IDX = #{BOARD_IDX}
+	</select>
+	
+	<update id="updateHitCnt" parameterType="map" >
+		UPDATE BRD_BOARD 
+        SET
+            HIT_CNT = IFNULL(HIT_CNT, 0) + 1
+        WHERE
+            BOARD_IDX = #{BOARD_IDX}
+	</update>
+	
+	<insert id="insertTest" parameterType="map">
+		 INSERT INTO BRD_BOARD
+        (
+        	BOARD_IDX,
+            TITLE, 
+            CONTENTS, 
+            HIT_CNT, 
+            DEL_YN, 
+            REG_DATE, 
+            REG_ID
+        )
+        VALUES
+        (
+        	1,
+            "1234", 
+            "12345", 
+            0, 
+            'N', 
+            NOW(), 
+            'Admin'
+        )
+	</insert>
+	
+	<update id="updateBoard" parameterType="map">
+		UPDATE BRD_BOARD SET
+			TITLE = #{TITLE},
+			CONTENTS = #{CONTENTS}
+		WHERE
+			BOARD_IDX = #{BOARD_IDX}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="map">
+		DELETE FROM BRD_BOARD
+		WHERE 
+			IDX = #{IDX}
+	</delete>
+	
+	<insert id="insertFile" parameterType="map">
+		INSERT INTO CMM_FILE
+			(
+				  BOARD_IDX
+				, REAL_FILE_NAME
+				, FILE_PATH
+				, FILE_NAME
+				, FILE_SIZE
+				, FILE_EXT
+				, REG_DATE
+				, REG_ID
+			) VALUES (
+				  #{BOARD_IDX}
+				, #{REAL_FILE_NAME}
+				, #{FILE_PATH}
+				, #{FILE_NAME}
+				, #{FILE_SIZE}
+				, #{FILE_EXT}
+				, NOW()
+				, #{REG_ID}
+			)	
+	</insert>
+	
+	<select id="selectFileList" parameterType="map" resultType="map">
+		SELECT
+			FILE_IDX,
+			REAL_FILE_NAME,
+			ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		FROM
+			CMM_FILE
+		WHERE
+			BOARD_IDX = #{BOARD_IDX}
+			AND DEL_YN = 'N'
+	</select>
+	
+	<select id="selectFileInfo" parameterType="map" resultType="map">
+		SELECT
+			FILE_NAME,
+			REAL_FILE_NAME
+		FROM
+			CMM_FILE
+		WHERE
+			FILE_IDX = #{FILE_IDX}
+	</select>
+	
+	<update id="deleteFileList" parameterType="map">
+		UPDATE CMM_FILE SET
+			DEL_YN = 'Y'
+		WHERE
+			BOARD_IDX = #{BOARD_IDX}
+	</update>
+	
+	<update id="updateFile" parameterType="map">
+		UPDATE CMM_FILE SET
+			DEL_YN = 'N'
+		WHERE
+			FILE_IDX = #{FILE_IDX}	
+	</update>
 	
 </mapper>
