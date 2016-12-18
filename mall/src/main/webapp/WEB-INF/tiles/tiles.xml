@@ -1,0 +1,72 @@
+<!DOCTYPE tiles-definitions PUBLIC 
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+<tiles-definitions>   
+ 
+	<definition name="tilesbase"  
+	    template="/WEB-INF/views/layout.jsp">   
+	    <put-attribute name="title" value="" />        
+	    <put-attribute name="header" value="/WEB-INF/views/header.jsp" />   
+	    <put-attribute name="menu" value="/WEB-INF/views/menu.jsp" />      
+	    <put-attribute name="body" value="" />       
+	    <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />   
+	</definition>      
+	 
+	<definition name="hello" extends="tilesbase">    
+	    <put-attribute name="title" value="OracleJava Community, MVC HelloWorld by Tiles" />     
+	    <put-attribute name="body" value="/WEB-INF/views/home.jsp" />    
+	</definition>
+
+	<definition name="layouts-tiles" template="/WEB-INF/views/common/default-layouts.jsp">
+		<put-attribute name="head" value="/WEB-INF/views/common/default-head.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/common/default-header.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/default-footer.jsp" />
+	</definition> 
+ 
+	<definition name="layouts-tiles1" template="/WEB-INF/views/common/sample/default-layouts.jsp">
+		<put-attribute name="head" value="/WEB-INF/views/common/sample/default-head.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/common/sample/default-header.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/sample/default-footer.jsp" />
+	</definition>
+
+	<definition name="layouts-tiles2" template="/WEB-INF/views/common/sample/default-layouts2.jsp">
+		<put-attribute name="head" value="/WEB-INF/views/common/sample/default-head.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/common/sample/default-header.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/sample/default-footer.jsp" />
+	</definition>
+
+	<!-- <definition name="layouts-tiles3" template="/WEB-INF/views/common/sample/default-layouts3.jsp">
+		<put-attribute name="head" value="/WEB-INF/views/common/sample/default-head.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/sample/default-footer.jsp" />
+	</definition> -->
+	
+	
+	
+	<!-- <definition name="/*/*/*" extends="layouts-tiles3">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition> -->
+	
+	<definition name="/*.tiles" extends="layouts-tiles">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+
+	<definition name="/board/*.tiles" extends="layouts-tiles1">
+		<put-attribute name="content" value="/WEB-INF/views/board/{1}.jsp" />
+	</definition>
+	
+	<definition name="/sample/*" extends="layouts-tiles2">
+		<put-attribute name="content" value="/WEB-INF/views/sample/{1}.jsp" />
+	</definition>
+	
+	<definition name="/*/*.tiles" extends="layouts-tiles">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="/*/*/*.tiles" extends="layouts-tiles">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition>
+ 
+</tiles-definitions>
