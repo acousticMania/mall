@@ -53,8 +53,9 @@ public class SampleController {
 	public ModelAndView openBoardList(@RequestParam Map<String, String> paramMap) {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Map<String, String>> list = sampleService.selectBoardList(paramMap);
-		mv.addObject("list", list);
+		//Ajax로 변경
+//		List<Map<String, String>> list = sampleService.selectBoardList(paramMap);
+//		mv.addObject("list", list);
 		mv.setViewName("/sample/boardList");
 		
 		return mv;
@@ -137,6 +138,21 @@ public class SampleController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value="/sample/selectBoardList", produces = {"application/json"})
+	public ModelAndView selectBoardList(@RequestParam Map<String, Object> paramMap) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Map<String, Object>> list = sampleService.selectBoardList(paramMap);
+		mv.addObject("list", list);
+		if(list.size() >0){
+			mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+		} else {
+			mv.addObject("TOTAL", 0);
+		}
+		
+		return mv;
 	}
 	
 	

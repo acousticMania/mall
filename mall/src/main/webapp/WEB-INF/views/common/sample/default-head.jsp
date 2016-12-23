@@ -8,6 +8,7 @@
 
 <title>2016_Study</title>
 <script type="text/javascript" src="<study:url value="/resources/js/jquery/jquery-1.10.2.js"/>"></script>
+<%-- <script type="text/javascript" src="<study:url value="/resources/js/jquery-1.9.1.min.js"/>"></script> --%>
 <%-- <link rel="stylesheet" type="text/css" href="<study:url value="/resources/css/ext-all.css"/>"/> --%>
 <%-- <link rel="stylesheet" type="text/css" href="<study:url value="/resources/css/bootstrap.min.css"/>"/> --%>
 <link rel="stylesheet" type="text/css" href="<study:url value="/resources/js/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>"/>

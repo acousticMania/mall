@@ -18,8 +18,8 @@ public class SampleDao extends QueryMapper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Map<String, String>> selectBoardList(Map<String, String> map) {
-		return selectList(namespace + "selectBoardList");
+	public List<Map<String, Object>> selectBoardList(Map<String, Object> map) {
+		return (List<Map<String, Object>>) selectPagingList(namespace + "selectBoardList", map);
 	}
 
 	public void insertBoard(Map<String, Object> map) {

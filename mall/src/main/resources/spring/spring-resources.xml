@@ -9,5 +9,20 @@
 		<property name="maxInMemorySize" value="100000000" />
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
+	
+	<bean id="messageSource"
+	    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basename" value="classpath:messages/message" />
+	    <property name="defaultEncoding" value="UTF-8" />
+	    <property name="cacheSeconds" value="60"/>
+	    <property name="fallbackToSystemLocale" value="false"/> <!-- false = message.properties만적용됨 -->
+    </bean>
+   
+    <bean id="localeResolver"
+    	class="org.springframework.web.servlet.i18n.CookieLocaleResolver" >
+    	<property name="cookieName" value="clientlanguage"/>    
+    	<property name="cookieMaxAge" value="100000"/>
+    	<property name="cookiePath" value="web/cookie"/>
+	</bean>
 
 </beans>

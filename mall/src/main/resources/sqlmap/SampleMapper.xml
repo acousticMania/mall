@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mall.sample">
+	<sql id="pagingPre">
+		SELECT
+			COUNT(*) AS TOTAL_COUNT,
+			AA.*
+			FROM(
+	</sql>
+	
+	<sql id="pagingPost">
+		) AA
+		WHERE AA.TOTAL_COUNT BETWEEN #{START} AND #{END}
+	</sql>
+
+
 	<select id="selectMemberList" parameterType="map" resultType="map">
 		SELECT 
 			*
@@ -9,7 +22,9 @@
 	</select>
 	
 	<select id="selectBoardList" parameterType="map" resultType="map">
+		<include refid="pagingPre"/>
 		SELECT
+			COUNT(*) AS TOTAL_COUNT,
 		    BOARD_IDX,
 		    TITLE,
 		    HIT_CNT,
@@ -19,6 +34,7 @@
 		WHERE
 		    DEL_YN = 'N'    
 		ORDER BY BOARD_IDX DESC
+		<include refid="pagingPost"/>
 	</select>
 	
 	<insert id="insertBoard" parameterType="map" useGeneratedKeys="true" keyProperty="BOARD_IDX"  >

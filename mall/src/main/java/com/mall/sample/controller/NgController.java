@@ -37,10 +37,10 @@ public class NgController {
 	}
 	
 	@RequestMapping("/sample/selectNgBoardList")
-	public @ResponseBody Map<String, Object> selectNgBoardList(@RequestParam Map<String, String> paramMap) {
+	public @ResponseBody Map<String, Object> selectNgBoardList(@RequestParam Map<String, Object> paramMap) {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		
-		List<Map<String, String>> list = sampleService.selectBoardList(paramMap);
+		List<Map<String, Object>> list = sampleService.selectBoardList(paramMap);
 		
 		dataMap.put("list", list);	
 		return dataMap;

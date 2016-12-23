@@ -51,7 +51,7 @@
 			if(pwCheck==""){
 				
 			}else {
-				alert("<spring:message code='test.title.i18n' text='123'/>");
+				alert("<spring:message code='admin.alert.error' text='로그인에 실폐하였습니다.'/>");
 			}
 		});
 		
@@ -76,7 +76,6 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-			<h1><spring:message code="test.title.i18n"/></h1>
                         <h3 class="panel-title"><img class="img-thumbnail" width="80px" src="/images/logo.png" alt="" ></h3>
                     </div>
                     <div class="panel-body">

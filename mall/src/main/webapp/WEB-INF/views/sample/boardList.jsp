@@ -5,6 +5,7 @@
 		// 부트스트랩
 		$(":file").filestyle({classButton: "btn btn-primary"});
 		
+		fn_selectBoardList(1);
 		
 	    $("#write").on("click", function(e){ //글쓰기 버튼
 	        e.preventDefault();
@@ -50,7 +51,54 @@
     	comSubmit.submit();
     }
     
+    function fn_selectBoardList(pageNo) {
+    	var comAjax = new ComAjax();
+    	comAjax.setUrl("<c:url value='/sample/selectBoardList'/>");
+    	comAjax.setCallback("fn_selectBoardListCallback");
+    	comAjax.addParam("PAGE_INDEX", pageNo);
+    	comAjax.addParam("PAGE_ROW", 15);
+    	comAjax.ajax();
+    }
     
+    function fn_selectBoardListCallback(data) {
+    	var total = data.TOTAL;
+    	var body = $("table>tbody");
+    	body.empty();
+    	if(total == 0){
+    		var str = "<tr>" +
+    						"<td colspan='4'>조회된 결과가 없습니다. </td>" +
+    				  "</tr>";
+    		body.append(str);
+    						
+    	} else {
+    		var params = {
+    			divId : "PAGE_NAVI",
+    			pageIndex : "PAGE_INDEX",
+    			totalCount : total,
+    			eventName : "fn_selectBoardList"
+    		};
+    		gfn_renderPaging(params);
+    		
+    		var str = "";
+    		$.each(data.list, function(key, value) {
+    			str += "<tr>" + 
+    						"<td>" + value.BOARD_IDX + "</td>" +
+    						"<td class='title'>" +
+    							"<a href='#this' name='title'>" + value.TITLE + "</a>" +
+    							"<input type='hidden' name='title' value='" + value.BOARD_IDX + "'>" +
+    						"</td>" +
+    						"<td>" + value.HIT_CNT + "</td>" +
+    						"<td>" + value.REG_DATE + "</td>" +
+    					"</tr>";
+    		});
+    		body.append(str);
+    		
+    		$("a[name='title']").on("click", function(e) {
+    			e.preventDefault();
+    			fn_openBoardDetail($(this));
+    		});
+    	}
+    }
 </script>
 </head>
 <div class="container">
@@ -74,7 +122,7 @@
 		        </tr>
 		    </thead>
 		    <tbody>
-		        <c:choose>
+		        <%-- <c:choose>
 		            <c:when test="${fn:length(list) > 0}">
 		                <c:forEach items="${list }" var="row">
 		                    <tr>
@@ -93,10 +141,13 @@
 		                    <td colspan="4">조회된 결과가 없습니다.</td>
 		                </tr>
 		            </c:otherwise>
-		        </c:choose>
+		        </c:choose> --%>
 		    </tbody>
 		</table>
 	</div>
+	<div id="PAGE_NAVI"></div>
+	<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
+	
 	<br/>
 	<div class="page-footer">
 		<div style="float: left; margin: 0 auto;">

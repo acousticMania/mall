@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface SampleService {
 	
-	List<Map<String, String>> selectBoardList(Map<String, String> map);
+	List<Map<String, Object>> selectBoardList(Map<String, Object> map);
 
 	List<Map<String, String>> selectMemberList();
 
