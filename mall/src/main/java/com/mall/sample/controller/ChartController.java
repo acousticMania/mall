@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ChartController {
 
-	@RequestMapping("/chart")
+	@RequestMapping("/sample/chart")
 	public String chartView() {
 		
 		
-		return "/chart";
+		return "/sample/chart";
 	}
 }

@@ -447,24 +447,28 @@
 		var next = (parseInt((currentIndex-1)/10)+1) * 10 + 1 < totalIndexCount ? (parseInt((currentIndex-1)/10)+1) * 10 +1  : totalIndexCount;
 		
 		if(totalIndexCount > 10) {	// 전체 인덱스가 10이 넘을 경우, 맨앞, 앞 태그 작성
-			preStr += "<a href='#this' class='pad_5' onclick='_movePage(1)'>[<<]</a>" + 
-					  "<a href='#this' class='pad_5' onclick='_movePage(" + prev + ")'>[<]</a>";
+			preStr += "<li><a href='#this' class='pad_5' onclick='_movePage(1)'>[<<]</a></li>" + 
+					  "<li><a href='#this' class='pad_5' onclick='_movePage(" + prev + ")'>[<]</a></li>";
 		} else if (totalIndexCount <= 10 && totalIndexCount > 1) {	// 전체 인덱스가 10보다 작을경우, 맨앞 태그 작성
-			preStr += "<a href='#this' class='pad_5' onclick='_movePage(1)'>[<<]</a>";
+			preStr += "<li><a href='#this' class='pad_5' onclick='_movePage(1)'>[<<]</a></li>";
 		}
 		
 		if(totalIndexCount > 10) {	// 전체 인덱스가 10이 넘을 경우, 맨뒤, 뒤 태그 작성
-			postStr += "<a href='#this' class='pad_5' onclick='_movePage(" + next + ")'>[>]</a>" + 
-					   "<a href='#this' class='pad_5' onclick='_movePage(" + totalIndexCount + ")'>[>>]</a>"; 
+			postStr += "<li><a href='#this' class='pad_5' onclick='_movePage(" + next + ")'>[>]</a></li>" + 
+					   "<li><a href='#this' class='pad_5' onclick='_movePage(" + totalIndexCount + ")'>[>>]</a></li>"; 
 		} else if (totalIndexCount <= 10 && totalIndexCount > 1) {	// 전체 인덱스가 10보다 작을경우, 맨뒤 태그 작성
-			postStr += "<a href='#this' class='pad_5' onclick='_movePage(" + totalIndexCount + ")'>[>>]</a>";
+			postStr += "<li><a href='#this' class='pad_5' onclick='_movePage(" + totalIndexCount + ")'>[>>]</a></li>";
 		}
 		
 		for(var i=first; i < (first+last); i++) {
 			if(i != currentIndex) {
-				str += "<a href='#this' class='pad_5' onclick='_movePage(" + i + ")'>" + i + "</a>";
+				str += "<li>" + 
+							"<a href='#this' class='pad_5' onclick='_movePage(" + i + ")'>" + i + "</a>"+ 
+						"</li>";
 			} else {
-				str += "<b><a href='#this' class='pad_5' onclick='_movePage('" + i + ")'>" + i + "</a></b>";
+				str += "<li class='active'>" + 
+							"<a href='#this' class='pad_5' onclick='_movePage(" + i + ")'>" + i + "</a>" + 
+						"</li>";
 			}
 		}
 		
@@ -479,26 +483,5 @@
 			eval(gfv_eventName + "(value);");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	

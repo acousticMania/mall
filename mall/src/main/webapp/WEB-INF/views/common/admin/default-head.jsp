@@ -10,6 +10,7 @@
 
 <title>12번가 쇼핑몰 관리자</title>
 <link href="/images/logo.ico" rel="shortcut icon">
+<link rel="shortcut icon" href="/resources/images/favicon.ico" />
 
 <!-- Bootstrap Core CSS -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">

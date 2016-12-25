@@ -12,6 +12,7 @@
 <%-- <link rel="stylesheet" type="text/css" href="<study:url value="/resources/css/ext-all.css"/>"/> --%>
 <%-- <link rel="stylesheet" type="text/css" href="<study:url value="/resources/css/bootstrap.min.css"/>"/> --%>
 <link rel="stylesheet" type="text/css" href="<study:url value="/resources/js/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>"/>
+<link rel="shortcut icon" href="/resources/images/favicon.ico" />
 <script type="text/javascript" src="<study:url value="/resources/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"/>"></script>
 <%-- <script type="text/javascript" src="<study:url value="/resources/js/bootstrap.min.js"/>"></script> --%>
 <script type="text/javascript" src="<study:url value="/resources/js/angular-1.4.3/angular.min.js"/>"></script>

@@ -11,7 +11,7 @@
 <script type="text/javascript" src="/resources/js/Nwagon/Nwagon.js"></script>
 </head>
 <body>
-<div id="Nwagon"></div>
+<div id="Nwagon" style="text-align:center;"></div>
 <script>
 var options = {
         'legend':{

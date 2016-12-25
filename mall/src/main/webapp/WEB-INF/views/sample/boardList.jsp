@@ -85,7 +85,7 @@
     						"<td>" + value.BOARD_IDX + "</td>" +
     						"<td class='title'>" +
     							"<a href='#this' name='title'>" + value.TITLE + "</a>" +
-    							"<input type='hidden' name='title' value='" + value.BOARD_IDX + "'>" +
+    							"<input type='hidden' id='BOARD_IDX' name='BOARD_IDX' value='" + value.BOARD_IDX + "'>" +
     						"</td>" +
     						"<td>" + value.HIT_CNT + "</td>" +
     						"<td>" + value.REG_DATE + "</td>" +
@@ -122,32 +122,13 @@
 		        </tr>
 		    </thead>
 		    <tbody>
-		        <%-- <c:choose>
-		            <c:when test="${fn:length(list) > 0}">
-		                <c:forEach items="${list }" var="row">
-		                    <tr>
-		                        <td>${row.BOARD_IDX }</td>
-		                        <td class="title">
-		                        	<a href="#this" name="title">${row.TITLE }</a>
-		                        	<input type="hidden" id="BOARD_IDX" value="${row.BOARD_IDX}">
-		                       	</td>
-		                        <td>${row.HIT_CNT }</td>
-		                        <td>${row.REG_DATE }</td>
-		                    </tr>
-		                </c:forEach>
-		            </c:when>
-		            <c:otherwise>
-		                <tr>
-		                    <td colspan="4">조회된 결과가 없습니다.</td>
-		                </tr>
-		            </c:otherwise>
-		        </c:choose> --%>
 		    </tbody>
 		</table>
 	</div>
-	<div id="PAGE_NAVI"></div>
-	<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
-	
+	<div class="page-footer">
+		<ul id="PAGE_NAVI" class="pagination pagination-lg pagination-sm"></ul>
+		<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
+	</div>
 	<br/>
 	<div class="page-footer">
 		<div style="float: left; margin: 0 auto;">
