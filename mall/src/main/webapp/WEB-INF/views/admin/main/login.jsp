@@ -24,6 +24,9 @@
 	<!-- Custom Fonts -->
 	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	
+	<!-- favicon -->
+	<link rel="shortcut icon" href="/resources/images/favicon.ico" />
+	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -40,29 +43,48 @@
 		$(document).ready(function (){
 			$("#login").on("click", function(e) {
 				e.preventDefault();
-				fn_exeLogin();
+				fn_validation();
+// 				fn_exeLogin();
 			});
 			
-// 			var pwCheck = $("#pwCheck").val();
-			var pwCheck = "${pwCheck}";
+// 			var pwCheck = "${pwCheck}";
 			
-			console.log(pwCheck);
+// 			console.log(pwCheck);
 			
-			if(pwCheck==""){
+// 			if(pwCheck==""){
 				
-			}else {
-				alert("<spring:message code='admin.alert.error' text='로그인에 실폐하였습니다.'/>");
-			}
+// 			}else {
+// 				alert("<spring:message code='admin.alert.error' text='로그인에 실폐하였습니다.'/>");
+// 			}
 		});
 		
 		function fn_exeLogin() {
+			
 			var form = $("#form")[0];
 			form.action = "<c:url value='/admin/main/doLogin' />";
 			form.method = "post";
 			form.submit();
 		}
 		
-		
+		function fn_validation() {
+			if($("#email").val() == "") {
+				//다국어 적용할지 고민해봐야함 일단 한글적용 
+				//by 명석
+				alert("로그인 아이디를 입력해주세요");
+				$("#email").focus();
+			} else if($("#password").val() == "") {
+				alert("로그인 비밀번호를 입력해주세요");
+				$("#password").focus();
+				
+			}
+			
+			var form = $("#form")[0];
+// 			form.action = "<c:url value='/admin/main/main' />";
+// 			form.action = "<c:url value='/admin/main/login' />";
+			form.action = "<c:url value='/j_spring_security_check' />";
+			form.method = "post";
+			form.submit();
+		}
 	
 	</script>
 
@@ -96,6 +118,15 @@
                                 <a href="#" class="btn btn-lg btn-success btn-block" id="login">Login</a>
                             </fieldset>
                         </form>
+                        <c:if test="${not empty param.fail}">
+                        	<div>
+                        		<font color="red">
+                        			<label>Your login attemp was ont successful, try again.</label>
+                        			<label>Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</label>
+                        		</font>
+                        		<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION"/>
+                        	</div>
+                        </c:if>
                     </div>
                 </div>
             </div>

@@ -76,10 +76,17 @@ public class LoginController {
 				mv.addObject("pwCheck", "N");
 				mv.setViewName("/admin/main/login");
 			}
+		} else {
+			mv.addObject("pwCheck", "N");
+			mv.setViewName("/admin/main/login");
 		}
 		
 		mv.addObject("pwCheck", "N");
 		
 		return mv;
+	}
+	
+	public void springSecurity() {
+		
 	}
 }

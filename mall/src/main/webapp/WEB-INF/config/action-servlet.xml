@@ -25,9 +25,13 @@
 	</context:component-scan>
 	
 	<mvc:interceptors>
+<!-- 		<mvc:interceptor> -->
+<!-- 			<mvc:mapping path="/admin/main/main"/> -->
+<!-- 			<bean class="com.mall.common.intercepter.LoginCheckIntercepter"/> -->
+<!-- 		</mvc:interceptor> -->
 		<mvc:interceptor>
-			<mvc:mapping path="/admin/main/main"/>
-			<bean class="com.mall.common.intercepter.LoginCheckIntercepter"/>
+			<mvc:mapping path="/**"/>
+			<bean class="com.mall.common.intercepter.LoggerIntercepter"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

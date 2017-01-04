@@ -9,15 +9,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+import com.mall.sample.controller.SampleController;
+
 public class QueryMapper {
-	protected Logger log = LoggerFactory.getLogger(QueryMapper.class);
-    
+	private static final Logger logger = LoggerFactory.getLogger(QueryMapper.class);
+	
 	@Autowired
     protected SqlSessionTemplate sqlSessionTemplate;
      
     protected void printQueryId(String queryId) {
-        if(log.isDebugEnabled()){
-            log.debug("\t QueryId  \t:  " + queryId);
+        if(logger.isInfoEnabled()){
+        	logger.info("\t QueryId  \t:  " + queryId);
+        } else {
+        	logger.debug("\t QueryId  \t:  " + queryId);
         }
     }
      

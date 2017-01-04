@@ -12,10 +12,20 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 	
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	<bean id="dataSourceJndi" class="org.springframework.jndi.JndiObjectFactoryBean">
 	    <property name="jndiName" value="jdbc/mall"/>
 	    <property name="resourceRef" value="true" />
 	</bean>
+    
+    <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="dataSourceJndi" />
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE" />
+                <property name="sqlPrefix" value="SQL         :  &#10;&#9;&#9;"/>
+            </bean>
+        </property>
+    </bean>
     
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
@@ -26,6 +36,7 @@
             </list>
         </property>
     </bean>
+    
 
     <!-- scan for mappers and let them be autowired -->
     <!-- 클래스매핑하기위해... -->

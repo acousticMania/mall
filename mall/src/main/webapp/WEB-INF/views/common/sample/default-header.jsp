@@ -40,7 +40,7 @@
   <div class="jumbotron">
     <h1>12st</h1> 
     <p>JDK 1.8 + Tomcat 9.0 </p> 
-    <p>STS Spring 3.2.9 RELEASE + Maven + logback + Tiles3 + Mybatis + MariaDB </p> 
+    <p>STS Spring 3.2.9 RELEASE + Maven + logback + Tiles3 + Spring-security + Mybatis + MariaDB + jQuery</p> 
     <p>Encoding : UTF-8 </p> 
     <p><button type="button" class="btn btn-default">jQuery 1.9</button>
 		<button type="button" class="btn btn-primary">jQuery UI</button>

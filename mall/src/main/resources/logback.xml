@@ -1,25 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+	<property name="LOG_DIR" value="C:/project/MALL/logs" />
+	<property name="LOG_PATH_NAME" value="${LOG_DIR}/stdout.log" />
+	<property name="12ST_LOG_PATH_NAME" value="${LOG_DIR}/stdout_12st.log" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        	<!-- 로그시간 + 패키지 및 클래스명 + 메소드명 + 메소드내에 로그위치 + 로깅메시지 -->
+            <!-- <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern> -->
+            <pattern>%d{HH:mm:ss.SSS} %-6level %logger[%method:%line] - %msg%n</pattern>
         </encoder>
     </appender>
+    
+    <!-- RollingFileAppender -->
+    <!-- log가 많아지면 file하나당 최대용량 제한도 있고 로그를 파악하기 어렵다 -->
+    <appender name="ORDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH_NAME}</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+    	<!-- rollover daily -->
+        <fileNamePattern>${LOG_PATH_NAME}-%d{yyyy-MM-dd}.%i.txt.zip</fileNamePattern>
+        <timeBasedFileNamingAndTriggeringPolicy
+            class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <!-- or whenever the file size reaches 100MB -->
+        <maxFileSize>100MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+        <!-- keep 30 days' worth of history -->
+   	    <maxHistory>30</maxHistory>
+    </rollingPolicy>
+    <encoder>
+<!--       <pattern>%d{HH:mm:ss.SSS} %-4level %logger{35} - %msg%n</pattern> -->
+      <pattern>%d{HH:mm:ss.SSS} %-6level %logger[%method:%line] - %msg%n</pattern>
+    </encoder>
+    </appender>
+    
+    <!-- <filter class="ch.qos.logback.core.filter.EvaluatorFilter">      
+	        <evaluator class="ch.qos.logback.classic.boolex.GEventEvaluator"> 
+	        <expression>
+	           return message.contains("NOT_SQL_LOG");
+	        </expression>
+	        </evaluator>
+	        <OnMismatch>DENY</OnMismatch>
+	        <OnMatch>NEUTRAL</OnMatch>
+    </filter> -->
+    
 
     <!-- <logger name="sonegy.slf4j.sample" level="INFO"></logger> -->
     <!-- <logger name="org.springframework.context" level="DEBUG"></logger> -->
-    <logger name="com.study" level="DEBUG"></logger>
+    <!-- 로그를 찍고자하는 클래스정보를 넣어주면 된다 -->
+    <logger name="com.mall" level="DEBUG" additivity="false">
+    	<appender-ref ref="STDOUT" />
+    </logger>
     
-    <logger name="org.mybatis">
-	    <level value="TRACE"/>
+    <logger name="com.mall.sample">
+    	<level value="DEBUG" />
+    	<appender-ref ref="ORDER"/>
+    </logger>
+    
+    <!-- 3rdparty Loggers -->
+    <logger name="org.springframework.core">
+    	<level value="ERROR" />
+    </logger>
+   
+    <logger name="org.springframework.beans">
+    	<level value="ERROR" />
+    </logger>
+   
+    <logger name="org.springframework.context">
+    	<level value="ERROR" />
+    </logger>
+
+    <logger name="org.springframework.web">
+    	<level value="ERROR" />
+    </logger>
+    
+    <!-- <logger name="org.springframework">
+    	<appender-ref ref="ORDER" />
+    </logger> -->
+    
+    <logger name="java.sql">
+		<level value="ERROR"/>
 	</logger>
-    
-    <logger name="sql" level="DEBUG"></logger>
-    
-    <root level="DEBUG">
+	<!-- SQL문만을 로그로 남기며, PreparedStatement일 경우 관련된 argument 값으로 대체된 SQL문이 보여진다. -->
+	<logger name="jdbc.sqlonly">
+	    <level value="debug"/>
+	</logger>
+	<!-- SQL문과 해당 SQL을 실행시키는데 수행된 시간 정보(milliseconds)를 포함한다. -->
+	<logger name="jdbc.sqltiming">
+	    <level value="debug"/>
+	</logger>
+	<!-- ResultSet을 제외한 모든 JDBC 호출 정보를 로그로 남긴다. 많은 양의 로그가 생성되므로 특별히 JDBC 문제를 추적해야 할 필요가 있는 경우를 제외하고는 사용을 권장하지 않는다. -->
+	<logger name="jdbc.audit">
+	    <level value="ERROR"/>
+	</logger>
+	<!-- ResultSet을 포함한 모든 JDBC 호출 정보를 로그로 남기므로 매우 방대한 양의 로그가 생성된다. -->
+	<logger name="jdbc.resultset">
+	    <level value="ERROR"/>
+	</logger>
+	
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>

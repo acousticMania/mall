@@ -74,5 +74,17 @@
 	  <error-code>500</error-code>
 	  <location>/WEB-INF/views/common/errorCode500.jsp</location>
 	</error-page>
+	
+	<!-- 스프링시큐리티 -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- //스프링시큐리티 -->
 
 </web-app>

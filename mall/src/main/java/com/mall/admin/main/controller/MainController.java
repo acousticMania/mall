@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MainController {
 private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
-	@RequestMapping(value = "/admin/main/main", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/main/main")
 	public String main(Locale locale, Model model) {
 	    logger.info("Welcome home! The client locale is {}.", locale);
 	        
