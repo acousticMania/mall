@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.admin.user.UserDao">
+	<insert id="insertUser" parameterType="map">
+		INSERT INTO MBR_MEMBER (
+			  USER_ID
+			, PHONE
+			, USER_NM
+			, USER_PWD
+			, EMAIL
+			, ADDR
+			, COMPANY
+			, DEPARTMENT
+			, SEX
+			, BIRTH_YMD
+			, USER_TP
+			, GRADE
+			, FACEBOOK_ID
+			, GOOGLE_ID
+			, RECEIPT_YN
+			, ORDER_YN
+			, TRANS_YN
+			, LEAVE_PROG
+			, LEAVE_YMD
+			, USE_YN
+			, ENABLED
+			, AUTHORITY
+			, REG_ID
+			, REG_DATE
+			, MOD_ID
+		)
+		SELECT
+			 #{USER_ID}
+			, ''
+			, ''
+			, #{USER_PWD}
+			, #{EMAIL}
+			, ''
+			, ''
+			, ''
+			, ''
+			, ''
+			, ''
+			, ''
+			, ''
+			, ''
+			, ''
+			, ''
+			, ''
+			, ''
+			, ''
+			, 'Y'
+			, 1
+			, 'ROLE_ADMIN'
+			, #{USER_ID}
+			, NOW()
+			, ''
+	</insert>
+</mapper>
