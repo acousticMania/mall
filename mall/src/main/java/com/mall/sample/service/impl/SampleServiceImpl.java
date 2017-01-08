@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mall.common.util.FileUtil;
+import com.mall.common.spring.framework.service.FileUtil;
 import com.mall.sample.dao.SampleDao;
 import com.mall.sample.service.SampleService;
 

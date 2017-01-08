@@ -1,5 +1,5 @@
 
-package com.mall.common.util;
+package com.mall.common.spring.framework.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.mall.common.util.CommonUtil;
+
 /**
  * @설명			: 파일관련 유틸리티 (이 객체의 관리는 스프링이 담당)   
  * @작성일		: 2016. 11. 24. 오후 2:09:20
@@ -22,7 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  * @version 	: 12st v1.0
  */
 
-@Component("fileUtils")
+@Component("fileUtil")
 public class FileUtil {
 	public static final String filePath = "C:\\project\\file\\";
 	

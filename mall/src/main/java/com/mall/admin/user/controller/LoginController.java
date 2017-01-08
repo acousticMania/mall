@@ -35,12 +35,12 @@ public class LoginController {
 	@Resource
 	LoginService loginService;
 	
-	@RequestMapping(value = "/admin/main/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/user/login")
 	public String login(Locale locale, @RequestParam Map<String, String> paramMap) {
 		logger.info("Login Page : {}",locale);
 		
 				
-		return "/admin/main/login";
+		return "/admin/user/login";
 	}
 	
 	@SuppressWarnings("restriction")
@@ -84,9 +84,5 @@ public class LoginController {
 		mv.addObject("pwCheck", "N");
 		
 		return mv;
-	}
-	
-	public void springSecurity() {
-		
 	}
 }

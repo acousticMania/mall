@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mall.common.util.FileUtil;
+import com.mall.common.spring.framework.service.FileUtil;
 import com.mall.sample.service.SampleService;
 
 /**

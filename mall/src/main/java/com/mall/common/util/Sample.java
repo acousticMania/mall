@@ -19,7 +19,7 @@ public class Sample {
 //		int a = test(0);
 //		System.out.println(a);
 		
-		String password = "a1234";
+		String password = "admin";
 		password = new BASE64Encoder().encode(Hash.getSHA256(password));
 		System.out.println(password);
 		

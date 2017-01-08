@@ -46,6 +46,14 @@
 				fn_validation();
 // 				fn_exeLogin();
 			});
+
+			$("#form input").keypress(function (key) {
+				if(key.keyCode == 13) {
+					fn_validation();
+				}
+			});
+			
+			$("#join").attr("href", "<c:url value='/admin/user/doJoin' />")
 			
 // 			var pwCheck = "${pwCheck}";
 			
@@ -61,7 +69,7 @@
 		function fn_exeLogin() {
 			
 			var form = $("#form")[0];
-			form.action = "<c:url value='/admin/main/doLogin' />";
+			form.action = "<c:url value='/admin/user/doLogin' />";
 			form.method = "post";
 			form.submit();
 		}
@@ -71,7 +79,7 @@
 				//다국어 적용할지 고민해봐야함 일단 한글적용 
 				//by 명석
 				alert("로그인 아이디를 입력해주세요");
-				$("#email").focus();
+				$("#email").focus();	
 			} else if($("#password").val() == "") {
 				alert("로그인 비밀번호를 입력해주세요");
 				$("#password").focus();
@@ -82,9 +90,12 @@
 // 			form.action = "<c:url value='/admin/main/main' />";
 // 			form.action = "<c:url value='/admin/main/login' />";
 			form.action = "<c:url value='/j_spring_security_check' />";
+// 			form.action = "<c:url value='/admin/main/dologin' />";
 			form.method = "post";
 			form.submit();
 		}
+		
+			
 	
 	</script>
 
@@ -99,6 +110,7 @@
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><img class="img-thumbnail" width="80px" src="/images/logo.png" alt="" ></h3>
+                        <a href="#" id="join">회원가입</a>
                     </div>
                     <div class="panel-body">
                         <form role="form" id="form" name="form">
