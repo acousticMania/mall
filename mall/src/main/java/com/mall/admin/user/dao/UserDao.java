@@ -15,4 +15,9 @@ public class UserDao extends QueryMapper{
 		return this.insert(namespace + "insertUser", paramMap);
 	}
 
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectUser(String username) {
+		return (Map<String, Object>) this.selectOne(namespace + "selectUser", username);
+	}
+
 }

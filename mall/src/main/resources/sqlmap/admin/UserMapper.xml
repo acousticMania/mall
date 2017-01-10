@@ -56,4 +56,14 @@
 			, NOW()
 			, ''
 	</insert>
+	
+	<select id="selectUser" parameterType="string" resultType="Map">
+		SELECT
+			  EMAIL AS username
+			, USER_PWD AS password
+			, ENABLED AS enabled
+			, AUTHORITY AS authority
+		FROM MBR_MEMBER
+		WHERE EMAIL = #{username}
+	</select>
 </mapper>

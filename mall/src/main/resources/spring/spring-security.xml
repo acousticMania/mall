@@ -32,45 +32,8 @@
 			logout-url="/admin/user/logout" logout-success-url="/admin/user/login"/>
 	</security:http>
 	
-	<!-- 		authentication-success-handler-ref="userLoginSuccessHandler"
-			authentication-failure-handler-ref="userLoginFailureHandler"
-	<bean id="userLoginSuccessHandler" class="com.mall.common.handler.UserLoginSuccessHandler"/>
-	
-	<bean id="userLoginFailureHandler" class="com.mall.common.handler.UserLoginFailureHandler" /> -->
-	
-	<!-- <security:authentication-manager>
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="admin" password="admin" authorities="ROLE_ADMIN"/>
-				<security:user name="user" password="user" authorities="ROLE_USER"/>
-			</security:user-service>
-		</security:authentication-provider>
-	</security:authentication-manager> -->
-	
-	
-	
-	
-	<security:jdbc-user-service data-source-ref="dataSource" id="userSecurityService"
-		users-by-username-query="SELECT
-								 EMAIL as username 
-								, USER_PWD as password
-								, ENABLED as enabled
-							FROM
-								MBR_MEMBER
-							WHERE 
-								EMAIL = ?
-							AND USE_YN = 'Y'"
-							
-		authorities-by-username-query="
-						SELECT
-								 EMAIL as username 
-								, AUTHORITY as authority
-							FROM
-								MBR_MEMBER
-							WHERE 
-								EMAIL = ?
-							AND USE_YN = 'Y'"
-		/>
+	<bean id="userSecurityService" class="com.mall.admin.user.service.UserAuthenticationService">
+	</bean>
 	
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="userSecurityService">
