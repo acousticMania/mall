@@ -26,6 +26,14 @@
 	    	e.preventDefault();
 	    	fn_excelFileDownload();
 	    });
+		
+	    // 팝업 위치조정
+	    var layerpop = $("#layerpop");
+	    //console.log(layerpop.offset().top);
+	    //console.log(layerpop.offset().left);
+	    layerpop.offset({top:400});
+	    
+	    
 	});
 	
 	function fn_openBoardWrite(){

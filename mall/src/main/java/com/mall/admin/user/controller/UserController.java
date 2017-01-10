@@ -14,6 +14,13 @@ import com.mall.admin.user.service.UserService;
 import com.mall.common.spring.security.service.ShaEncoder;
 
 
+/**
+ * @설명			: 관리자 회원가입  
+ * @작성일		: 2017. 1. 10. 오전 10:27:55
+ * @작성자		: Seo Myeongseok(sirosms@gmail.com)
+ * @version 	: 12st.V1.0
+ */
+
 @Controller
 public class UserController {
 	

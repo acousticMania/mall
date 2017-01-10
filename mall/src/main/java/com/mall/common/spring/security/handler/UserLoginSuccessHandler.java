@@ -13,6 +13,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+/**
+ * @설명			: 스프링 시큐리티 인증 성공 후 처리
+ * @작성일		: 2017. 1. 10. 오전 10:35:34
+ * @작성자		: Seo Myeongseok(sirosms@gmail.com)
+ * @version 	: 12st.V1.0
+ */
+
 public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserLoginSuccessHandler.class);

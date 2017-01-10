@@ -6,6 +6,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * @설명			: 주문관리 
+ * @작성일		: 2017. 1. 10. 오전 10:27:13
+ * @작성자		: Seo Myeongseok(sirosms@gmail.com)
+ * @version 	: 12st.V1.0
+ */
+
 @Controller
 public class OrderController {
 

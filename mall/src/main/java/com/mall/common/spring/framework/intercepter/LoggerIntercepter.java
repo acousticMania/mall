@@ -8,6 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+/**
+ * @설명			: 로그관련 인터셉터
+ * @작성일		: 2017. 1. 10. 오전 10:32:53
+ * @작성자		: Seo Myeongseok(sirosms@gmail.com)
+ * @version 	: 12st.V1.0
+ */
+
 public class LoggerIntercepter extends HandlerInterceptorAdapter {
 	protected Logger logger = LoggerFactory.getLogger(LoggerIntercepter.class);
 	

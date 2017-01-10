@@ -10,6 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * @설명			: 관리자 메인
+ * @작성일		: 2017. 1. 10. 오전 10:26:31
+ * @작성자		: Seo Myeongseok(sirosms@gmail.com)
+ * @version 	: 12st.V1.0
+ */
+
 @Controller
 public class MainController {
 private static final Logger logger = LoggerFactory.getLogger(MainController.class);
