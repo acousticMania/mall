@@ -63,7 +63,7 @@ public class MemberController {
 	public String getTreeData( Model model,HttpServletRequest request , HttpServletResponse response) throws IOException {
 		//model.asMap(); 
 		String node = request.getParameter("node");
-		JSONObject jsonObj = new JSONObject(); 
+		JSONObject jsonObj = new JSONObject();  
 		JSONObject jsonObj2 = null; 
 		JSONArray jsonArr= new JSONArray(); 
 		List<Map<String, Object>> userList =  userService.selectUserAll();
