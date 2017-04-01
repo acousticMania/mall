@@ -61,7 +61,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/member/server3_select", method = RequestMethod.GET)
 	public String getTreeData( Model model,HttpServletRequest request , HttpServletResponse response) throws IOException {
-		//model.asMap();
+		//model.asMap(); 
 		String node = request.getParameter("node");
 		JSONObject jsonObj = new JSONObject(); 
 		JSONObject jsonObj2 = null; 
