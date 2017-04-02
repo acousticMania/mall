@@ -66,4 +66,12 @@
 		FROM MBR_MEMBER
 		WHERE EMAIL = #{username}
 	</select>
+	<select id="selectUserAll" parameterType="Map" resultType="Map">
+		SELECT
+			  USER_NM 
+			, USER_ID
+			, EMAIL
+			, GRADE
+		FROM MBR_MEMBER
+	</select>
 </mapper>
