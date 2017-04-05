@@ -37,6 +37,17 @@ public class UserController {
 		return "/admin/user/join";
 	}
 	
+	@RequestMapping("admin/user/findId")
+	public String findId() {
+		return "/admin/user/findId";
+	}
+	
+	@RequestMapping("/admin/user/findPwd")
+	public String findPwd() {
+		return "/admin/user/findPwd";
+	}
+	
+	
 	@RequestMapping("/admin/user/insertUser")
 	public String insertUser(@RequestParam Map<String, String> paramMap) {
 		String password = encoder.encoding(paramMap.get("USER_PWD")) ;

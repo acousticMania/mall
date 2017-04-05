@@ -97,26 +97,66 @@
 	<input type="hidden" id ="pwCheck" name="pwCheck" value="${pwCheck }">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-4 col-md-offset-4" style="width: 650px;" >
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">회원가입</h3>
                     </div>
                     <div class="panel-body">
                         <form role="form" id="form" name="form">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="ID" id="USER_ID" name="USER_ID" type="text" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" id="EMAIL" name="EMAIL" type="email">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" id="USER_PWD" name="USER_PWD" type="password">
-                                </div>
+                        	<table style="width: 600px; border-collapse: collapse; border-spacing: 0px;" >
+                        		<tr >
+                        			<th style="width: 150px;  vertical-align: middle; min-height: 28px; font-weight: bold;">로그인 아이디</th>
+                        			<td style="width: 450px;; padding: 10px;" ><input class="form-control" id="LOGIN_ID" name="LOGIN_ID" type="text" autofocus></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">사용자 이름</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="USER_NAME" name="USER_NAME" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">비밀번호</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="PASSWD" name="PASSWD" type="password"></td>	
+                        		</tr>
+                        		
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">비밀번호 확인</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="PASSWD_CHECK" name="PASSWD_CHECK" type="password"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">주민등록번호</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="RES_NO" name="RES_NO" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">이메일</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="EMAIL" name="EMAIL" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">이동전화</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="CELLPHONE_NO" name="CELLPHONE_NO" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">질문</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="QUESTION" name="QUESTION" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">답</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="ANSWER" name="ANSWER" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">우편번호</th>
+                        			<td style="width: 450px;; padding: 10px;"><input style="margin-right: 10px; width: 100px;"  id="ZIPCODE" name="ZIPCODE" type="text"><input style="width: 40px;" type="button" id="findAddrFn" name="findAddrFn" onclick="findAddrFn()" value="주소찾기"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">주소</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="ADDR1" name="ADDR1" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">상세주소</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="ADDR2" name="ADDR2" type="text"></td>	
+                        		</tr>
+                        	</table>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="#" class="btn btn-lg btn-success btn-block" id="join">join</a>
-                            </fieldset>
+                                <a href="#" class="btn btn-lg btn-success btn-block" id="join">회원가입</a>
                         </form>
                         <c:if test="${not empty param.fail}">
                         	<div>
