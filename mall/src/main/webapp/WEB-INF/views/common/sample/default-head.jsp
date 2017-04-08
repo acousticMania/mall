@@ -21,6 +21,15 @@
 <script type="text/javascript" src="<study:url value="/resources/js/ui-bootstrap-tpls-0.13.2.min.js"/>"></script>
 <script type="text/javascript" src="<study:url value="/resources/js/bootstrap-3.3.7-dist/js/bootstrap-filestyle.js"/>"></script>
 <%-- <script type="text/javascript" src="<study:url value="/resources/js/extjs/ext-all.js"/>"></script> --%>
+
+<!-- Extjs CSS -->
+<link href="/resources/js/ext-6.2.1/build/classic/theme-classic/resources/theme-classic-all.css" rel="stylesheet">
+<link href="/resources/js/ext-6.2.1/build/classic/theme-classic/resources/theme-classic-all_1.css" rel="stylesheet">
+<link href="/resources/js/ext-6.2.1/build/classic/theme-classic/resources/theme-classic-all_2.css" rel="stylesheet">
+
+<!-- Extjs js -->
+<script type="text/javascript" src="/resources/js/ext-6.2.1/build/ext-all.js"></script>
+
 <script type="text/javascript">
 
     $(document).ready(function() {

@@ -10,4 +10,5 @@
 	<p><button type="button" class="btn btn-success btn-lg" onclick="location.href='/admin/user/login'">admin Go</button></p>
 	<p><button type="button" class="btn btn-warning btn-lg" onclick="location.href='/sample'">sample Go!!!</button></p>
 	<p><button type="button" class="btn btn-info" onclick="location.href='/sample/chart'">chart Go!!!</button></p>
+	<p><button type="button" class="btn btn-error" onclick="location.href='/sample/extJs'">extJs Grid Go!!!</button></p>
 </div>
