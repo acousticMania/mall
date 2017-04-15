@@ -51,4 +51,18 @@ public class OrderController {
 		mv.addObject("TOTAL", totalCount);
 		return mv;
 	}
+	
+	@RequestMapping(value="/admin/order/updateOrderStatus", produces = {"application/json"})
+	public ModelAndView updateOrderStatus(@RequestParam Map<String, Object> paramMap) {
+		ModelAndView mv = new ModelAndView();
+		int cnt = orderService.updateOrderStatus(paramMap);
+//		int totalCount = orderService.selectOrderTotalCount(paramMap);
+//		logger.info("totalCount : " + totalCount);
+//		logger.info("list size : " + list.size());
+//		logger.info("list : " + list);
+		String result = "fail";
+		if(cnt > 0) result = "ok";
+		mv.addObject("result", result);
+		return mv;
+	}
 }

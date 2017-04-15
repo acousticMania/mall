@@ -134,4 +134,10 @@
 			IDX = #{IDX}
 	</delete>
 	
+	<update id="updateOrderStatus" parameterType="map">
+		UPDATE ORD_ORDER SET
+			ORD_STATUS = #{ORD_STATUS},
+		WHERE
+			ORD_NO = #{ORD_NO}
+	</update>
 </mapper>

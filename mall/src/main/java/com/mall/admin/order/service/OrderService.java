@@ -52,5 +52,10 @@ public class OrderService {
 	public void deleteOrder(Map<String, String> map) {
 		orderDao.deleteOrder(map);
 	}
+
+	public int updateOrderStatus(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return orderDao.updateOrderStatus(map);
+	}
 	
 }

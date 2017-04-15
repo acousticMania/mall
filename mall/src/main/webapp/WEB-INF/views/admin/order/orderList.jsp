@@ -12,7 +12,7 @@
 
 <script>
 $(function(){
-	$("#list1").jqGrid({
+	$("#list").jqGrid({
 		// data를 가져올 url
 		url : "/admin/order/orderListJson",
         datatype: "json",
@@ -27,7 +27,7 @@ $(function(){
         colNames:['주문번호', '주문상품', '주문자명', '주문경로', '결제수단', '금액', '주문일시', '처리상태'],
         //컬럼모델
         colModel:[
-            {name:'ORD_NO'},
+            {name:'ORD_NO', editable:true},
             {name:'ORD_PRODUCT_NM'},
             {name:'ORDERER_NM'},
             {name:'ORD_ROUTE'},
@@ -44,19 +44,19 @@ $(function(){
 		rownumbers: true, /* 행 순번 */
         rowList:[10,20,30],//몇개식 보여줄건지 선택가능하다, 배열형식이라 5,10,15,20,,,가능
         multiboxonly : true,
- 		loadonce:true,//페이지를 넘길 수 있음
+ 		//loadonce:true,//페이지를 넘길 수 있음
 		mtype : "POST", //데이터 요청방식 post
         multiselect : true,//체크박스 사라짐
         cellEdit : true,//셀의 값변경을 정함 트루하면 바껴짐
-        pager : '#PAGE_NAVI1',// 밑에 페이저 달 div 아이디
+        pager : '#PAGE_NAVI',// 밑에 페이저 달 div 아이디
         gridview : true, // 속도 향상, 대신 treeGrid, subGrid, or the afterInsertRow 옵션 사용 불가
-//         editurl :'clientArray',//값 수정후 엔터치면 지정된 url로 날라감, 지금 이값은 editurl 안써짐
-//         cellsubmit : 'clientArray' //clientArray 랑 remote가 있는데 지금 설정은 특정이벤트를 해야함 전부 저장, remote로 하면 셀                                          수정시 바로바로 저장함
+        editurl :'/admin/order/orderListJson',//값 수정후 엔터치면 지정된 url로 날라감
+//         cellsubmit : 'clientArray' //clientArray 랑 remote가 있는데 지금 설정은 특정이벤트를 해야함 전부 저장, remote로 하면 셀 수정시 바로바로 저장함
 //         shrinkToFit : true,
 //         forceFit : true,
-//         afterSaveCell : function(rowid,name,val,iRow,ICol){ // 로우 데이터 변경하고 엔터치거나 다른 셀 클릭했을때 발동
-//             alert(rowid+val+name);
-//         },
+        afterSaveCell : function(rowid,name,val,iRow,ICol){ // 로우 데이터 변경하고 엔터치거나 다른 셀 클릭했을때 발동
+            alert(rowid+val+name);
+        },
 //         onCellSelect: function(rowid,name,val,iRow,iCol){ // 해당로우의 각 셀마다이벤트 걸림
 
 //         },
@@ -72,7 +72,7 @@ $(function(){
 //         	}
 //         }
     });
-	resizeJqGridWidth('list1', 'grid_wrap1', $('#grid_wrap1').width(), true);
+	resizeJqGridWidth('list', 'grid_wrap', $('#grid_wrap').width(), true);
 	
     //jqGrid껍데기 생성
 //     $("#list").jqGrid({
@@ -169,7 +169,7 @@ function fn_selectOrderListCallback(data) {
 	                <h1 class="page-header">주문리스트</h1>
 	                <!-- 조회조건 -->
 	                <form>
-	                    <div class="form-inline">	                        
+	                    <div class="form-inline">
 	                        <select style="height: 28px;width: 100px; margin-right: 10px">
 	                            <option>주문번호</option>
 	                            <option>주문자명</option>
@@ -193,7 +193,7 @@ function fn_selectOrderListCallback(data) {
 	                        <input type="checkbox" style="margin-left: 10px"> 상품준비
 	                        <input type="checkbox" style="margin-left: 10px"> 출고준비
 	                        <input type="checkbox" style="margin-left: 10px"> 결제취소
-	                        <input type="checkbox" style="margin-left: 10px"> 출고완료                              
+	                        <input type="checkbox" style="margin-left: 10px"> 출고완료
 	                        <input type="checkbox" style="margin-left: 10px"> 주문접수
 	                        <input type="checkbox" style="margin-left: 10px"> 배송중
 	                        <input type="checkbox" style="margin-left: 10px"> 배송완료
@@ -204,7 +204,7 @@ function fn_selectOrderListCallback(data) {
 	                        <input type="checkbox" style="margin-left: 10px"> 카드
 	                        <input type="checkbox" style="margin-left: 10px"> 휴대폰
 	                        <input type="checkbox" style="margin-left: 10px"> 계좌이체
-	                        <input type="checkbox" style="margin-left: 10px"> 포인트결제                             
+	                        <input type="checkbox" style="margin-left: 10px"> 포인트결제
 	                        <input type="checkbox" style="margin-left: 10px"> 주문접수
 	                        <input type="checkbox" style="margin-left: 10px"> 배송중
 	                        <input type="checkbox" style="margin-left: 10px"> 배송완료
@@ -213,23 +213,14 @@ function fn_selectOrderListCallback(data) {
 	                    	<button type="button" class="btn btn-primary btn-sm" style="float: right;" onclick="fn_selectOrderList(1);">조회</button>
 	                    </div>
 	                </form>
-	                <div class="table-responsive" id="grid_wrap1">
-<!-- 						<table class="table table-bordered table-hover" id="list"> -->
-						<table id="list1">
-						</table>
-					</div>
-					<div class="page-footer">
-						<ul id="PAGE_NAVI1" class="pagination pagination-lg pagination-sm"></ul>
-						<input type="hidden" id="PAGE_INDEX1" name="PAGE_INDEX1" />
-					</div>
 	                <!-- 리스트 -->
-					<div class="table-responsive" id="grid_wrap">
+	                <div class="table-responsive" id="grid_wrap">
 <!-- 						<table class="table table-bordered table-hover" id="list"> -->
 						<table id="list">
 						</table>
 					</div>
 					<!-- 페이징 -->
-                  	<div class="page-footer">
+					<div class="page-footer">
 						<ul id="PAGE_NAVI" class="pagination pagination-lg pagination-sm"></ul>
 						<input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
 					</div>

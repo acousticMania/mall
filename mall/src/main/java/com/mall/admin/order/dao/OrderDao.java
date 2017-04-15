@@ -38,4 +38,16 @@ public class OrderDao extends QueryMapper {
 		delete(namespace + "deleteOrder", map);
 	}
 
+	public int updateOrderStatus(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int cnt = 0;
+		try{
+			update(namespace + "updateOrderStatus", map);
+			cnt++;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
 }
