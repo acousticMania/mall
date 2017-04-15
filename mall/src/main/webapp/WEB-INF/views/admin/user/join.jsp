@@ -63,17 +63,17 @@
 		}
 		
 		function fn_validation() {
-			if($("USER_ID").val() == "") {
+			if($("LOGIN_ID").val() == "") {
 				alert("아이디를 입력해주세요");
-				$("#USER_ID").focus();
+				$("#LOGIN_ID").focus();
 			} else if($("#EMAIL").val() == "") {
 				//다국어 적용할지 고민해봐야함 일단 한글적용 
 				//by 명석
 				alert("로그인 이메일를 입력해주세요");
 				$("#EMAIL").focus();	
-			} else if($("#USER_PWD").val() == "") {
+			} else if($("#PASSWD").val() == "") {
 				alert("로그인 비밀번호를 입력해주세요");
-				$("#USER_PWD").focus();
+				$("#PASSWD").focus();
 				
 			}
 			
@@ -87,6 +87,37 @@
 		}
 		
 			
+		function addrPop(){
+			var pop = window.open("/sample/jusoPopup","pop","width=570,height=420, scrollbars=yes"); //경로는
+		}
+		function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd,rnMgtSn, bdMgtSn){
+			 //2017년 2월 제공항목이 확대되었습니다. 원하시는 항목을 추가하여 사용하시면 됩니다.
+			document.form.addr1.value = roadAddrPart1;
+			document.form.addr2.value = roadAddrPart2;
+			document.form.zipocde.value = zipNo;
+		}
+		
+		function idDupChk(){
+			jQuery.ajax({
+				url : "/user/ajaxDupIdChk",
+				type : "post",
+				dataType : "json",
+				data : {
+					
+					LOGIN_ID : jQuery("#LOGIN_ID").val()
+				},
+				success : function(data){
+					if(data.result >= 0){
+						alert("중복된 로그인아이디 입니다.");
+					}else{
+						alert("사용가능한 아이디 이니다.");
+					}
+				},
+				error : function(){
+					//alert('ajax call error!');
+				}
+			});
+		}
 	
 	</script>
 
@@ -97,26 +128,66 @@
 	<input type="hidden" id ="pwCheck" name="pwCheck" value="${pwCheck }">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-4 col-md-offset-4" style="width: 650px;" >
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">회원가입</h3>
                     </div>
                     <div class="panel-body">
                         <form role="form" id="form" name="form">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="ID" id="USER_ID" name="USER_ID" type="text" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" id="EMAIL" name="EMAIL" type="email">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" id="USER_PWD" name="USER_PWD" type="password">
-                                </div>
+                        	<table style="width: 600px; border-collapse: collapse; border-spacing: 0px;" >
+                        		<tr >
+                        			<th style="width: 150px;  vertical-align: middle; min-height: 28px; font-weight: bold;">로그인 아이디</th>
+                        			<td style="width: 450px;; padding: 10px;" ><input style="margin-right: 10px; width: 200px;" id="LOGIN_ID" name="LOGIN_ID" type="text" autofocus><input style="width: 80px;" type="button" id="findAddrFn" name="findAddrFn" onclick="idDupChk()" value="중복체크"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">사용자 이름</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="USER_NAME" name="USER_NAME" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">비밀번호</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="PASSWD" name="PASSWD" type="password"></td>	
+                        		</tr>
+                        		
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">비밀번호 확인</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="PASSWD_CHECK" name="PASSWD_CHECK" type="password"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">주민등록번호</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="RES_NO" name="RES_NO" type="password"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">이메일</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="EMAIL" name="EMAIL" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">이동전화</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="CELLPHONE_NO" name="CELLPHONE_NO" type="number" min="7" max="11" ></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">질문</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="QUESTION" name="QUESTION" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">답</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="ANSWER" name="ANSWER" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">우편번호</th>
+                        			<td style="width: 450px;; padding: 10px;"><input style="margin-right: 10px; width: 100px;"  id="zipocde" name="zipocde" type="text"><input style="width: 40px;" type="button" id="findAddrFn" name="findAddrFn" onclick="addrPop()" value="주소찾기"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">주소</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="addr1" name="addr1" type="text"></td>	
+                        		</tr>
+                        		<tr >
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">상세주소</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="addr2" name="addr2" type="text"></td>	
+                        		</tr>
+                        	</table>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="#" class="btn btn-lg btn-success btn-block" id="join">join</a>
-                            </fieldset>
+                                <a href="#" class="btn btn-lg btn-success btn-block" id="join">회원가입</a>
                         </form>
                         <c:if test="${not empty param.fail}">
                         	<div>

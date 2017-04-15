@@ -4,57 +4,69 @@
 	<insert id="insertUser" parameterType="map">
 		INSERT INTO MBR_MEMBER (
 			  USER_ID
-			, PHONE
-			, USER_NM
-			, USER_PWD
+			, USER_NAME
+			, PASSWD
+			, USER_KIND
+			, RES_NO
+			, HOMEPHONE_NO
+			, CELLPHONE_NO
+			, ZIPCODE
+			, ADDR1
+			, ADDR2
+			, STATUS
 			, EMAIL
-			, ADDR
-			, COMPANY
-			, DEPARTMENT
-			, SEX
-			, BIRTH_YMD
-			, USER_TP
-			, GRADE
-			, FACEBOOK_ID
-			, GOOGLE_ID
-			, RECEIPT_YN
-			, ORDER_YN
-			, TRANS_YN
-			, LEAVE_PROG
-			, LEAVE_YMD
-			, USE_YN
-			, ENABLED
-			, AUTHORITY
-			, REG_ID
+			, RECOM_LOGINID
+			, USER_LEVEL
+			, SELLER_LEVEL
+			, SELLER_CREDIT_LEVEL
+			, QUESTION
+			, ANSWER
+			, BIRTHDAY
+			, ACCOUNT_NUM
+			, CORP_NUM
+			, USER_LEVEL_POINT
+			, SELLER_LEVEL_POINT
+			, SELLER_CREDITLEVEL_POINT
+			, ETC_PARAM1
+			, ETC_PARAM2
+			, ETC_PARAM3
+			, ETC_PARAM4
+			, ETC_PARAM5
 			, REG_DATE
-			, MOD_ID
+			, CHG_DATE
 		)
 		SELECT
 			 #{USER_ID}
-			, ''
-			, ''
-			, #{USER_PWD}
+			, #{USER_NAME}
+			, #{PASSWD}
+			, #{USER_KIND}
+			, #{RES_NO}
+			, #{HOMEPHONE_NO}
+			, #{CELLPHONE_NO}
+			, #{ZIPCODE}
+			, #{ADDR1}
+			, #{ADDR2}
+			, 'R'
 			, #{EMAIL}
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, 'Y'
-			, 1
-			, 'ROLE_ADMIN'
-			, #{USER_ID}
+			, #{RECOM_LOGINID}
+			, '1'
+			, '1'
+			, '1'
+			, #{QUESTION}
+			, #{ANSWER}
+			, #{BIRTHDAY}
+			, #{ACCOUNT_NUM}
+			, #{CORP_NUM}
+			, 0
+			, 0
+			, 0
+			, #{ETC_PARAM1}
+			, #{ETC_PARAM2}
+			, #{ETC_PARAM3}
+			, #{ETC_PARAM4}
+			, #{ETC_PARAM5}
 			, NOW()
-			, ''
+			, NOW()
 	</insert>
 	
 	<select id="selectUser" parameterType="string" resultType="Map">
@@ -65,5 +77,19 @@
 			, AUTHORITY AS authority
 		FROM MBR_MEMBER
 		WHERE EMAIL = #{username}
+	</select>
+	<select id="selectUserAll" parameterType="Map" resultType="Map">
+		SELECT
+			  USER_NM 
+			, USER_ID
+			, EMAIL
+			, GRADE
+		FROM MBR_MEMBER
+	</select>
+	<select id="checkLoginId" parameterType="Map" resultType="Map">
+		SELECT 
+			USER_ID
+		FROM MBR_MEMBER
+		WHERE USER_ID = #{LOGIN_ID}	
 	</select>
 </mapper>

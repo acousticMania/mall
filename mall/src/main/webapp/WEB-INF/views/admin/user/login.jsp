@@ -53,8 +53,22 @@
 				}
 			});
 			
-			$("#join").attr("href", "<c:url value='/admin/user/doJoin' />")
+			var height = 500;
+			var width = 400;
+			var top = (screen.availHeight - height) / 2;
+		    var left = (screen.availWidth - width) / 2;
+
 			
+			
+			$("#join").attr("href", "<c:url value='/admin/user/doJoin' />");
+			$("#findId").on("click", function(e) {
+				window.open("/admin/user/findId","findId","width="+width+",height="+height+",left="+left+",top="+top);
+			});
+			$("#findPwd").on("click", function(e) {
+				window.open("/admin/user/findPwd","findPwd","width="+width+",height="+height+",left="+left+",top="+top);
+			});
+			
+
 // 			var pwCheck = "${pwCheck}";
 			
 // 			console.log(pwCheck);
@@ -110,11 +124,12 @@
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><img class="img-thumbnail" width="80px" src="/images/logo.png" alt="" ></h3>
-                        <a href="#" id="join">회원가입</a>
+                        <a href="#" id="join">회원가입</a>&nbsp;/&nbsp;<a href="#" id="findId">아이디 찾기</a>&nbsp;/&nbsp;<a href="#" id="findPwd">비밀번호 찾기</a>
                     </div>
                     <div class="panel-body">
                         <form role="form" id="form" name="form">
                             <fieldset>
+                            <!-- 추후에 회원가입 로직 완료 시 LOGIN_ID로 변경 -->
                                 <div class="form-group">
                                     <input class="form-control" placeholder="E-mail" id="email" name="email" type="email" autofocus>
                                 </div>
@@ -127,7 +142,7 @@
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="#" class="btn btn-lg btn-success btn-block" id="login">Login</a>
+                                <a href="#" class="btn btn-lg btn-success btn-block" id="login">로그인</a>
                             </fieldset>
                         </form>
                         <c:if test="${not empty param.fail}">
