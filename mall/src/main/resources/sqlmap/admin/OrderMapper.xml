@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.admin.order">
+	<sql id="pagingPre">
+		SELECT PT.* FROM (
+			SELECT
+				@ROWNUM := @ROWNUM + 1 AS RNUM,
+				AA.*
+				FROM(
+	</sql>
+	
+	<sql id="pagingPost">
+			) AA, (SELECT @ROWNUM := 0) A
+		) PT
+		WHERE PT.RNUM BETWEEN #{START} AND #{END}
+	</sql>
+	
+	<select id="selectOrderList" parameterType="map" resultType="map">
+		<include refid="pagingPre"/>
+		SELECT
+		    ORD_NO,
+		    ORDERER_ID,
+		    ORDERER_NM,
+		    '' AS ORD_PRODUCT_NM,
+		    ORD_ROUTE,
+		    CASE 
+		    	WHEN PAY_METHOD = '1' THEN '신용카드'
+		    	WHEN PAY_METHOD = '2' THEN '계좌이체'
+		    	WHEN PAY_METHOD = '3' THEN '무통장입금'
+		    	WHEN PAY_METHOD = '4' THEN '카카오페이'
+		    	ELSE ''
+		    END AS PAY_METHOD_NM
+		    ,
+		    TOT_PRICE,
+		    ORD_DATE,
+		    CASE 
+		    	WHEN ORD_STATUS = '1' THEN '주문접수'
+		    	WHEN ORD_STATUS = '2' THEN '결제완료'
+		    	WHEN ORD_STATUS = '3' THEN '배송준비중'
+		    	WHEN ORD_STATUS = '4' THEN '배송처리'
+		    	WHEN ORD_STATUS = '4' THEN '배송완료'
+		    	WHEN ORD_STATUS = '4' THEN '주문취소'
+		    	WHEN ORD_STATUS = '4' THEN '취소요청'
+		    	WHEN ORD_STATUS = '4' THEN '취소완료'
+		    	WHEN ORD_STATUS = '4' THEN '교환요청'
+		    	WHEN ORD_STATUS = '4' THEN '교환완료'
+		    	WHEN ORD_STATUS = '4' THEN '미주문'
+		    	ELSE ''
+		    END AS ORD_STATUS_NM,
+		    REG_DATE
+		FROM
+		    ORD_ORDER
+<!-- 		WHERE -->
+<!-- 		    DEL_YN = 'N'     -->
+		ORDER BY ORD_NO DESC
+		<include refid="pagingPost"/>
+	</select>
+	
+	<select id="selectOrderTotalCount" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		    ORD_ORDER
+	</select>
+	
+	<insert id="insertOrder" parameterType="map" useGeneratedKeys="true" keyProperty="BOARD_IDX"  >
+		 INSERT INTO ORD_ORDER
+        (
+            TITLE, 
+            CONTENTS, 
+            HIT_CNT, 
+            DEL_YN, 
+            REG_DATE, 
+            REG_ID
+        )
+        VALUES
+        (
+            #{TITLE}, 
+            #{CONTENTS}, 
+            0, 
+            'N', 
+            NOW(), 
+            #{REG_ID}
+        )
+	</insert>
+	
+	<select id="selectOrderDetail" parameterType="map" resultType="map" >
+		SELECT
+            BOARD_IDX,
+            HIT_CNT,
+            REG_ID,
+            REG_DATE,
+            TITLE,
+            CONTENTS
+        FROM
+            ORD_ORDER
+        WHERE
+            BOARD_IDX = #{BOARD_IDX}
+	</select>
+	
+	<insert id="insertTest" parameterType="map">
+		 INSERT INTO ORD_ORDER
+        (
+        	BOARD_IDX,
+            TITLE, 
+            CONTENTS, 
+            HIT_CNT, 
+            DEL_YN, 
+            REG_DATE, 
+            REG_ID
+        )
+        VALUES
+        (
+        	1,
+            "1234", 
+            "12345", 
+            0, 
+            'N', 
+            NOW(), 
+            'Admin'
+        )
+	</insert>
+	
+	<update id="updateOrder" parameterType="map">
+		UPDATE ORD_ORDER SET
+			TITLE = #{TITLE},
+			CONTENTS = #{CONTENTS}
+		WHERE
+			BOARD_IDX = #{BOARD_IDX}
+	</update>
+	
+	<delete id="deleteOrder" parameterType="map">
+		DELETE FROM ORD_ORDER
+		WHERE 
+			IDX = #{IDX}
+	</delete>
+	
+</mapper>
