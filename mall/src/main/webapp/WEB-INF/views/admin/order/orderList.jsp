@@ -27,14 +27,14 @@ $(function(){
         colNames:['주문번호', '주문상품', '주문자명', '주문경로', '결제수단', '금액', '주문일시', '처리상태'],
         //컬럼모델
         colModel:[
-            {name:'ORD_NO', editable:true},
+            {name:'ORD_NO'},
             {name:'ORD_PRODUCT_NM'},
             {name:'ORDERER_NM'},
             {name:'ORD_ROUTE'},
             {name:'PAY_METHOD_NM'},
             {name:'TOT_PRICE'},
             {name:'ORD_DATE'},
-            {name:'ORD_STATUS_NM'}
+            {name:'ORD_STATUS_NM', editable:true, edittype:"select", editoptions:{value:"Y:등록;N:미등록"}}
         ],
 //         viewrecords:false,
         caption:'주문 목록', // 그리드 왼쪽 위에 캡션

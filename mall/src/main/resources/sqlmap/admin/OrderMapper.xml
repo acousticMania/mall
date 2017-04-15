@@ -18,38 +18,41 @@
 	<select id="selectOrderList" parameterType="map" resultType="map">
 		<include refid="pagingPre"/>
 		SELECT
-		    ORD_NO,
-		    ORDERER_ID,
-		    ORDERER_NM,
-		    '' AS ORD_PRODUCT_NM,
-		    ORD_ROUTE,
+		    ORD.ORD_NO,
+		    ORD.ORDERER_ID,
+		    ORD.ORDERER_NM,
+		    (SELECT ORD_PROD_NM 
+		       FROM ORD_PRODUCT 
+		      WHERE ORD_NO = ORD.ORD_NO 
+		      ORDER BY ORD_PROD_SEQ 
+		      LIMIT 1) AS ORD_PRODUCT_NM,
+		    ORD.ORD_ROUTE,
 		    CASE 
-		    	WHEN PAY_METHOD = '1' THEN '신용카드'
-		    	WHEN PAY_METHOD = '2' THEN '계좌이체'
-		    	WHEN PAY_METHOD = '3' THEN '무통장입금'
-		    	WHEN PAY_METHOD = '4' THEN '카카오페이'
+		    	WHEN ORD.PAY_METHOD = '1' THEN '신용카드'
+		    	WHEN ORD.PAY_METHOD = '2' THEN '계좌이체'
+		    	WHEN ORD.PAY_METHOD = '3' THEN '무통장입금'
+		    	WHEN ORD.PAY_METHOD = '4' THEN '카카오페이'
 		    	ELSE ''
-		    END AS PAY_METHOD_NM
-		    ,
-		    TOT_PRICE,
-		    ORD_DATE,
+		    END AS PAY_METHOD_NM,
+		    ORD.TOT_PRICE,
+		    ORD.ORD_DATE,
 		    CASE 
-		    	WHEN ORD_STATUS = '1' THEN '주문접수'
-		    	WHEN ORD_STATUS = '2' THEN '결제완료'
-		    	WHEN ORD_STATUS = '3' THEN '배송준비중'
-		    	WHEN ORD_STATUS = '4' THEN '배송처리'
-		    	WHEN ORD_STATUS = '4' THEN '배송완료'
-		    	WHEN ORD_STATUS = '4' THEN '주문취소'
-		    	WHEN ORD_STATUS = '4' THEN '취소요청'
-		    	WHEN ORD_STATUS = '4' THEN '취소완료'
-		    	WHEN ORD_STATUS = '4' THEN '교환요청'
-		    	WHEN ORD_STATUS = '4' THEN '교환완료'
-		    	WHEN ORD_STATUS = '4' THEN '미주문'
+		    	WHEN ORD.ORD_STATUS = '1' THEN '주문접수'
+		    	WHEN ORD.ORD_STATUS = '2' THEN '결제완료'
+		    	WHEN ORD.ORD_STATUS = '3' THEN '배송준비중'
+		    	WHEN ORD.ORD_STATUS = '4' THEN '배송처리'
+		    	WHEN ORD.ORD_STATUS = '4' THEN '배송완료'
+		    	WHEN ORD.ORD_STATUS = '4' THEN '주문취소'
+		    	WHEN ORD.ORD_STATUS = '4' THEN '취소요청'
+		    	WHEN ORD.ORD_STATUS = '4' THEN '취소완료'
+		    	WHEN ORD.ORD_STATUS = '4' THEN '교환요청'
+		    	WHEN ORD.ORD_STATUS = '4' THEN '교환완료'
+		    	WHEN ORD.ORD_STATUS = '4' THEN '미주문'
 		    	ELSE ''
 		    END AS ORD_STATUS_NM,
-		    REG_DATE
+		    ORD.REG_DATE
 		FROM
-		    ORD_ORDER
+		    ORD_ORDER ORD
 <!-- 		WHERE -->
 <!-- 		    DEL_YN = 'N'     -->
 		ORDER BY ORD_NO DESC
