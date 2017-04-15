@@ -36,9 +36,16 @@
 	</bean>
 	
 	<security:authentication-manager>
-		<security:authentication-provider user-service-ref="userSecurityService">
-			<security:password-encoder ref="passwordEncoder"/>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="admin@gmail.com" password="admin" authorities="ROLE_ADMIN"  />
+			</security:user-service>
 		</security:authentication-provider>
+		<!-- 기존 유저테이블삭제 -->
+		<!-- <security:authentication-provider user-service-ref="userSecurityService">
+			<security:password-encoder ref="passwordEncoder"/>
+		</security:authentication-provider> -->
+		<!-- //기존 유저테이블삭제 -->
 	</security:authentication-manager>
 	
 	<!-- 암호화 -->	
