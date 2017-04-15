@@ -8,24 +8,34 @@
 <meta name="description" content="12번가 쇼핑몰">
 <meta name="author" content="silrim_study">
 
+<!-- 명석 resources 통합 -->
+
 <title>12번가 쇼핑몰 관리자</title>
-<link href="/images/logo.ico" rel="shortcut icon">
+<link href="/resources/images/logo.ico" rel="shortcut icon">
 <link rel="shortcut icon" href="/resources/images/favicon.ico" />
 
 <!-- Bootstrap Core CSS -->
-<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/resources/js/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+
+<!-- Extjs CSS -->
+<link href="/resources/js/ext-6.2.1/build/classic/theme-classic/resources/theme-classic-all.css" rel="stylesheet">
+<link href="/resources/js/ext-6.2.1/build/classic/theme-classic/resources/theme-classic-all_1.css" rel="stylesheet">
+<link href="/resources/js/ext-6.2.1/build/classic/theme-classic/resources/theme-classic-all_2.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="/css/admin.css" rel="stylesheet">
-
+<link href="/resources/css/admin.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-<!-- Datepicker -->
-<link rel="stylesheet" type="text/css" href="/css/datepicker3.css" />
-<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="/js/bootstrap-datepicker.kr.js"></script>
+
+<!-- jQuery js -->
+<script type="text/javascript" src="/resources/js/jquery/jquery-1.10.2.js"></script>
+
+<!-- Extjs js -->
+<script type="text/javascript" src="/resources/js/ext-6.2.1/build/ext-all.js"></script>
+
+<!-- //명석 resources 통합 -->
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
