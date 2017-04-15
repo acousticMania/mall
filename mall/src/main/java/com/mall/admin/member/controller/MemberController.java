@@ -60,7 +60,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/member/server3_select", method = RequestMethod.GET)
-	public String getTreeData( Model model,HttpServletRequest request , HttpServletResponse response) throws IOException {
+	public void getTreeData( Model model,HttpServletRequest request , HttpServletResponse response) throws IOException {
 		//model.asMap(); 
 		String node = request.getParameter("node");
 		JSONObject jsonObj = new JSONObject();  
@@ -87,9 +87,7 @@ public class MemberController {
 		pw.flush(); 
 		pw.close();
 
-		model.addAllAttributes(jsonObj);
-	        
-	    return "/admin/member/userTreeMain";
+		
 	}
 	
 	

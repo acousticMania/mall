@@ -36,5 +36,13 @@ public class UserService {
 		
 		return userDao.selectUserAll();
 	}
+	
+	public int checkLoginId(Map<String, String> paramMap){
+		
+		int resultVal;
+		Map<String, Object> sqlData= userDao.checkLoginId(paramMap);
+		resultVal = sqlData.size();
+		return resultVal;
+	}
 
 }

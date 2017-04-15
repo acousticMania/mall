@@ -2,6 +2,7 @@ package com.mall.sample.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -155,6 +159,65 @@ public class SampleController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/common/grid_sample", method = RequestMethod.GET)
+	public void getTreeData( Model model,HttpServletRequest request , HttpServletResponse response) throws IOException {
+		//model.asMap(); 
+		String node = request.getParameter("node");
+		JSONObject jsonObj = new JSONObject();  
+		JSONObject jsonObj2 = null; 
+		JSONArray jsonArr= new JSONArray(); 
+		List<Map<String, Object>> userList =  new ArrayList<Map<String,Object>>();
+		//node는 서버에서받은 root의 id값이다. 
+		for(int i=0; i<userList.size();i++) { 
+			jsonObj2 = new JSONObject(); 
+			jsonObj2.put("text",userList.get(i).get("EMAIL")); 
+			jsonObj2.put("result",jsonObj2.toJSONString(userList.get(i)));
+			jsonObj2.put("id",userList.get(i).get("USER_ID"));
+			jsonObj2.put("leaf",true); 
+			jsonObj2.put("expanded",false);
+			jsonArr.add(jsonObj2); 
+		} //꼭 children이 아니여도 된다. children으로 준 이유는 proxy -> reader -> root값을 children으로 주었기때문 //proxy -> reader -> root 값을 하단 key값과 맞춰만 주면 된다. 
+		
+	
+		jsonObj2 = new JSONObject(); 
+		jsonObj2.put("title1","11111111"); 
+		jsonObj2.put("title2","22222222");
+		jsonArr.add(jsonObj2); 
+		
+		jsonObj.put("item", jsonArr);
+		
+		PrintWriter pw = response.getWriter(); 
+		System.out.println(jsonObj.toString()); 
+		pw.print(jsonObj);
+		pw.flush(); 
+		pw.close();
+	                
+	    
+	}
+	
+	@RequestMapping("/gripdSample")
+	public ModelAndView gripdSample(@RequestParam Map<String, Object> paramMap, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/admin/user/gridSample");
+		return mv;
+	}
+	
+	@RequestMapping("/addrSample")
+	public ModelAndView addrSample(@RequestParam Map<String, Object> paramMap, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/admin/user/addrSample");
+		return mv;
+	}
+	
+	@RequestMapping("/sample/jusoPopup")
+	public ModelAndView jusoPopup(@RequestParam Map<String, Object> paramMap, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/admin/user/jusoPopup");
+		return mv;
+	}
 	
 	
 }
