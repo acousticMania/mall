@@ -96,7 +96,7 @@
 <body>
 	<input type="hidden" id ="pwCheck" name="pwCheck" value="${pwCheck }">
     <div class="container">
-        <div class="row">
+        <div class="row"> 
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
