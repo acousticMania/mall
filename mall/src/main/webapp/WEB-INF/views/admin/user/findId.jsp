@@ -65,15 +65,15 @@
 		function fn_validation() {
 			if($("USER_ID").val() == "") {
 				alert("아이디를 입력해주세요");
-				$("#USER_ID").focus();
+				$("#LOGIN_ID").focus();
 			} else if($("#EMAIL").val() == "") {
 				//다국어 적용할지 고민해봐야함 일단 한글적용 
 				//by 명석
-				alert("로그인 이메일를 입력해주세요");
+				alert("이메일을 입력해주세요");
 				$("#EMAIL").focus();	
-			} else if($("#USER_PWD").val() == "") {
-				alert("로그인 비밀번호를 입력해주세요");
-				$("#USER_PWD").focus();
+			} else if($("#PASSWD").val() == "") {
+				alert("비밀번호를 입력해주세요");
+				$("#PASSWD").focus();
 				
 			}
 			
@@ -129,8 +129,6 @@
             </div>
         </div>
     </div>
-
-   
 
 </body>
 
