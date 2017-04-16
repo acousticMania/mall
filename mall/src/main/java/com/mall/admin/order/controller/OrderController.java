@@ -40,13 +40,31 @@ public class OrderController {
 	
 	@RequestMapping(value="/admin/order/orderListJson", produces = {"application/json"})
 	public ModelAndView orderListJson(@RequestParam Map<String, Object> paramMap) {
+		paramMap.put("PAGE_INDEX", paramMap.get("page"));
+		paramMap.put("PAGE_ROW", paramMap.get("rows"));
+		ModelAndView mv = new ModelAndView();
+		List<Map<String, Object>> list = orderService.selectOrderList(paramMap);
+		int rows = Integer.parseInt(paramMap.get("rows").toString());
+		int totalCount = orderService.selectOrderTotalCount(paramMap);
+		logger.info("totalCount : " + totalCount);
+		logger.info("list size : " + list.size());
+		logger.info("list : " + list);
+		int total_page = totalCount / rows;
+		if(totalCount % rows > 0) total_page++;
+		mv.addObject("list", list);
+		mv.addObject("TOTAL", totalCount);
+		mv.addObject("TOTAL_PAGE", total_page);
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin/order/orderListJson2", produces = {"application/json"})
+	public ModelAndView orderListJson2(@RequestParam Map<String, Object> paramMap) {
 		ModelAndView mv = new ModelAndView();
 		List<Map<String, Object>> list = orderService.selectOrderList(paramMap);
 		int totalCount = orderService.selectOrderTotalCount(paramMap);
 		logger.info("totalCount : " + totalCount);
 		logger.info("list size : " + list.size());
 		logger.info("list : " + list);
-		
 		mv.addObject("list", list);
 		mv.addObject("TOTAL", totalCount);
 		return mv;

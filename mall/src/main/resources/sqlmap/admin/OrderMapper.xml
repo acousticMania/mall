@@ -21,10 +21,10 @@
 		    ORD.ORD_NO,
 		    ORD.ORDERER_ID,
 		    ORD.ORDERER_NM,
-		    (SELECT ORD_PROD_NM 
-		       FROM ORD_PRODUCT 
+		    (SELECT ORD_GOODS_NM 
+		       FROM ORD_GOODS
 		      WHERE ORD_NO = ORD.ORD_NO 
-		      ORDER BY ORD_PROD_SEQ 
+		      ORDER BY ORD_PROD_IDX 
 		      LIMIT 1) AS ORD_PRODUCT_NM,
 		    ORD.ORD_ROUTE,
 		    CASE 
@@ -55,7 +55,8 @@
 		    ORD_ORDER ORD
 <!-- 		WHERE -->
 <!-- 		    DEL_YN = 'N'     -->
-		ORDER BY ORD_NO DESC
+<!-- 		ORDER BY ${sidx} ${sord} -->
+<!-- 		ORDER BY ORD_NO DESC -->
 		<include refid="pagingPost"/>
 	</select>
 	
