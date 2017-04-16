@@ -108,8 +108,20 @@ function date_custom(cellValue, options, rowdata, action) {
 	var id = cellValue;
 	var date = rowdata.ORD_DATE;
 	console.log('date : ' + date);
-	var date_fmt = date.
-	return date;
+	var year = date.substring(0, 4);
+	var month = date.substring(4, 6);
+	var day = date.substring(6, 8);
+	var hour = date.substring(8, 10);
+	var min = date.substring(10, 12);
+	var sec = date.substring(12, 14);
+// 	console.log('year : ' + year);
+// 	console.log('month : ' + month);
+// 	console.log('day : ' + day);
+// 	console.log('hour : ' + hour);
+// 	console.log('min : ' + min);
+// 	console.log('sec : ' + sec);
+	var date_fmt = year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
+	return date_fmt;
 // 	var html = '<button type="button" class="btn btn-primary btn-sm" style="float: right;" onclick="">적용</button>';
 }
 
