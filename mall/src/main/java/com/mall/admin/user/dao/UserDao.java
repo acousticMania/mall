@@ -1,5 +1,6 @@
 package com.mall.admin.user.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,25 @@ public class UserDao extends QueryMapper{
 		return (Map<String, Object>) this.selectOne(namespace + "selectUser", username);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectUserAll() {
+		return (List<Map<String, Object>>) this.selectList(namespace + "selectUserAll");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> checkLoginId(Map<String, String> paramMap) {
+		return (Map<String, Object>) this.selectOne(namespace + "checkLoginId" ,paramMap);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectLoginId(Map<String, String> paramMap) {
+		return (List<Map<String, Object>>) this.selectList(namespace + "findLoginId" ,paramMap);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectPassWd(Map<String, String> paramMap) {
+		return (Map<String, Object>) this.selectOne(namespace + "findPassWd" ,paramMap);
+	}
+	
+	
 }

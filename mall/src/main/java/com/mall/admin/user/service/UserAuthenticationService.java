@@ -37,15 +37,15 @@ public class UserAuthenticationService extends QueryMapper implements UserDetail
 
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
 		
-		Map<String, Object> user = userDao.selectUser(username);
-		if(user == null) throw new UsernameNotFoundException(username);
+		Map<String, Object> user = userDao.selectUser(loginId);
+		if(user == null) throw new UsernameNotFoundException(loginId);
 		logger.info(user.toString());
-		boolean bol = (Long)user.get("enabled") == 1;
+		//boolean bol = (Long)user.get("enabled") == 1;
 		List<GrantedAuthority> gaList = new ArrayList<GrantedAuthority>();
-		gaList.add(new SimpleGrantedAuthority(user.get("authority").toString()));
-		return new UserDetailsVO(user.get("username").toString(), user.get("password").toString(), bol, true, true, true, gaList);
+		gaList.add(new SimpleGrantedAuthority("permitAll"));
+		return new UserDetailsVO(user.get("loginId").toString(), user.get("password").toString(), true, true, true, true, gaList);
 	}
 
 }

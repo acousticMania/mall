@@ -66,10 +66,9 @@ public class LoginController {
 			if(userInfo.get("password").equals(new BASE64Encoder().encode(Hash.getSHA256(paramMap.get("password"))))){
 				// 세션저장
 				Map<String, String> map = new HashMap<String, String>();
-				map.put("USER_ID", userInfo.get("USER_ID"));
-				map.put("USER_PWD", userInfo.get("USER_PWD"));
+				map.put("LOGIN_ID", userInfo.get("LOGIN_ID"));
+				map.put("PASSWD", userInfo.get("PASSWD"));
 				map.put("EMAIL", userInfo.get("EMAIL"));
-				map.put("GRADE", userInfo.get("GRADE"));
 				request.getSession().setAttribute("admin", map);
 				mv.setViewName("/admin/main/main");
 			} else {
