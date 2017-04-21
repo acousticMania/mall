@@ -42,7 +42,7 @@
 		
 		function insertUser() {
 			
-			if($("login_id").val() == "") {
+			if($("#login_id").val() == "") {
 				alert("아이디를 입력해주세요");
 				$("#login_id").focus();
 				return;
@@ -50,13 +50,30 @@
 				alert("로그인 비밀번호를 입력해주세요");
 				$("#passwd").focus();
 				return;
-			}else if($("#res_no").val() == "") {
+			}else if($("#user_name").val() == "") {
 				alert("사용자명을 입력해주세요");
-				$("#res_no").focus();
+				$("#user_name").focus();
 				return;
 			}else if($("#email").val() == "") {
 				alert("이메일을 입력해주세요");
 				$("#email").focus();
+				return;
+			}
+			
+			if($("#dupChk").val() == "N"){
+				alert("아이디 중복체크를 해주세요.");
+				return;
+			}
+			
+			if($("#res_no").val().length < 13){
+				alert("주민등록번호를 정확히 입력해주세요.");
+				$("#res_no").focus();
+				return;
+			}
+			
+			if($("#res_no").val().length < 13){
+				alert("주민등록번호를 정확히 입력해주세요.");
+				$("#res_no").focus();
 				return;
 			}
 			
@@ -101,6 +118,7 @@
 						alert("중복된 로그인아이디 입니다.");
 					}else{
 						alert("사용가능한 아이디 이니다.");
+						$("#dupChk").val("Y");
 					}
 				},
 				error : function(){
@@ -108,10 +126,15 @@
 				}
 			});
 		}
+		
+		function chgLoginId(){
+			$("#dupChk").val("N");
+		}
 	
 	</script>
 </head>
 <body>
+	<input type="hidden" id="dupChk" name="" value="N">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4" style="width: 650px;" >
@@ -124,7 +147,7 @@
                         	<table style="width: 600px; border-collapse: collapse; border-spacing: 0px;" >
                         		<tr>
                         			<th style="width: 150px;  vertical-align: middle; min-height: 28px; font-weight: bold;">로그인 아이디</th>
-                        			<td style="width: 450px;; padding: 10px;" ><input style="margin-right: 10px; width: 200px;" id="login_id" name="login_id" type="text" autofocus><input style="width: 80px;" type="button" id="findAddrFn" name="findAddrFn" onclick="idDupChk()" value="중복체크"></td>	
+                        			<td style="width: 450px;; padding: 10px;" ><input style="margin-right: 10px; width: 200px;" id="login_id" name="login_id" type="text" onchange="chgLoginId()" autofocus><input style="width: 80px;" type="button" id="findAddrFn" name="findAddrFn" onclick="idDupChk()" value="중복체크"></td>	
                         		</tr>
                         		<tr>
                         			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">사용자 이름</th>
@@ -140,7 +163,7 @@
                         		</tr>
                         		<tr>
                         			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">주민등록번호</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="res_no" name="res_no" type="password"></td>	
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="res_no" name="res_no" type="text" maxlength="13"></td>	
                         		</tr>
                         		<tr>
                         			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">이메일</th>
@@ -148,7 +171,7 @@
                         		</tr>
                         		<tr>
                         			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">이동전화</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="cellphone_no" name="cellphone_no" type="text" min="7" max="11" ></td>	
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="cellphone_no" name="cellphone_no" type="text" maxlength="11" ></td>	
                         		</tr>
                         		<tr>
                         			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">질문</th>
