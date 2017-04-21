@@ -21,32 +21,32 @@ public class UserDetailsVO extends User{
 	 */
 	private static final long serialVersionUID =  SpringSecurityCoreVersion.SERIAL_VERSION_UID;;
 	
-	private String email;
+	private String loginId;
 	
-	public UserDetailsVO(String username, String password, boolean enabled, boolean accountNonExpired,
+	public UserDetailsVO(String loginId, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
 			Collection<? extends GrantedAuthority> authorities) {
-		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+		super(loginId, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserDetailsVO(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-		super(username, password, authorities);
+	public UserDetailsVO(String loginId, String password, Collection<? extends GrantedAuthority> authorities) {
+		super(loginId, password, authorities);
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getEmail() {
-		return email;
+	public String getLoginId() {
+		return loginId;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString() + "; Email:" + this.email;
+		return super.toString() + "; loginId:" + this.loginId;
 	}
 	
 	

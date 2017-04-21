@@ -3,15 +3,13 @@
 <mapper namespace="com.mall.admin.user.LoginDao">
 	<select id="selectUserInfo" parameterType="map" resultType="map">
 		SELECT
-			  USER_ID
-			, USER_PWD
+			  LOGIN_ID
+			, PASSWD
 			, EMAIL
-			, GRADE
 		FROM
-			MBR_MEMBER
+			MBR_USER
 		WHERE 
-			USER_ID = #{USER_ID}
-		AND USE_YN = 'Y' 			
+			LOGIN_ID = #{LOGIN_ID} 			
 	</select>
 
 </mapper>

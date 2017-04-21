@@ -27,12 +27,6 @@
 	<!-- favicon -->
 	<link rel="shortcut icon" href="/resources/images/favicon.ico" />
 	
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	    <![endif]-->
 	<!-- jQuery -->
     <script src="/js/jquery.js"></script>
 
@@ -40,61 +34,68 @@
     <script src="/js/bootstrap.min.js"></script>
     
 	<script type="text/javascript">
+	
 		$(document).ready(function (){
-			$("#join").on("click", function(e) {
-				e.preventDefault();
-				fn_validation();
-// 				fn_exeLogin();
-			});
-
-			$("#form input").keypress(function (key) {
-				if(key.keyCode == 13) {
-					fn_validation();
-				}
+			$("#findId").on("click", function(e) {
+				findId();
 			});
 		});
 		
-		function fn_exeLogin() {
-			
-			var form = $("#form")[0];
-			form.action = "<c:url value='/admin/user/doLogin' />";
-			form.method = "post";
-			form.submit();
-		}
-		
-		function fn_validation() {
-			if($("USER_ID").val() == "") {
-				alert("아이디를 입력해주세요");
-				$("#LOGIN_ID").focus();
+		/* function findId() {
+			if($("USER_NAME").val() == "") {
+				alert("이름을 입력해주세요");
+				$("#USER_NAME").focus();
 			} else if($("#EMAIL").val() == "") {
-				//다국어 적용할지 고민해봐야함 일단 한글적용 
-				//by 명석
 				alert("이메일을 입력해주세요");
 				$("#EMAIL").focus();	
-			} else if($("#PASSWD").val() == "") {
-				alert("비밀번호를 입력해주세요");
-				$("#PASSWD").focus();
-				
 			}
 			
 			var form = $("#form")[0];
-// 			form.action = "<c:url value='/admin/main/main' />";
-// 			form.action = "<c:url value='/admin/main/login' />";
-			form.action = "<c:url value='/admin/user/insertUser' />";
-// 			form.action = "<c:url value='/admin/main/dologin' />";
+			form.action = "<c:url value='/admin/user/findId' />";
 			form.method = "post";
 			form.submit();
+		} */
+		
+		//아이디 찾기
+		function findId(){
+			
+			if($("USER_NAME").val() == "") {
+				alert("이름을 입력해주세요");
+				$("#USER_NAME").focus();
+				return;
+			} else if($("#EMAIL").val() == "") {
+				alert("이메일을 입력해주세요");
+				$("#EMAIL").focus();
+				return;
+			}
+			
+			jQuery.ajax({
+				url : "/admin/user/findId",
+				type : "post",
+				dataType : "json",
+				data : {
+					user_name : jQuery("#user_name").val(),
+					email : jQuery("#email").val()
+				},
+				success : function(data){
+					if(data.result == "ok"){
+						alert("메일로 발송하였습니다.");
+						window.open("about:blank","_self").close();
+					}else{
+						alert("존재하는 아이디가 없습니다.");
+					}
+				},
+				error : function(){
+					alert('ajax call error!');
+				}
+			});
 		}
 		
-			
-	
+		
 	</script>
-
-
 </head>
 
 <body>
-	<input type="hidden" id ="pwCheck" name="pwCheck" value="${pwCheck }">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -106,30 +107,18 @@
                         <form role="form" id="form" name="form">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="이름" id="USER_NAME" name="USER_NAME" type="text" autofocus>
+                                    <input class="form-control" placeholder="이름" id="user_name" name="user_name" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="이메일" id="EMAIL" name="EMAIL" type="email">
+                                    <input class="form-control" placeholder="이메일" id="email" name="email" type="email">
                                 </div>
-                                <!-- Change this to a button or input when using this as a form -->
                                 <a href="#" class="btn btn-lg btn-success btn-block" id="findId">아이디찾기</a>
                             </fieldset>
                         </form>
-                        <c:if test="${not empty param.fail}">
-                        	<div>
-                        		<font color="red">
-                        			<label>Your login attemp was ont successful, try again.</label>
-                        			<label>Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</label>
-                        		</font>
-                        		<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION"/>
-                        	</div>
-                        </c:if>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
-
 </html>

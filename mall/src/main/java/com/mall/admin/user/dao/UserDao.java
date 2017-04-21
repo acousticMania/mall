@@ -28,7 +28,18 @@ public class UserDao extends QueryMapper{
 	
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> checkLoginId(Map<String, String> paramMap) {
-		return (Map<String, Object>) this.selectOne(namespace + "checkLoginId");
+		return (Map<String, Object>) this.selectOne(namespace + "checkLoginId" ,paramMap);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectLoginId(Map<String, String> paramMap) {
+		return (List<Map<String, Object>>) this.selectList(namespace + "findLoginId" ,paramMap);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectPassWd(Map<String, String> paramMap) {
+		return (Map<String, Object>) this.selectOne(namespace + "findPassWd" ,paramMap);
+	}
+	
 	
 }

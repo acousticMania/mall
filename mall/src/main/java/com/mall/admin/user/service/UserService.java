@@ -1,19 +1,13 @@
 package com.mall.admin.user.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.mall.admin.user.dao.UserDao;
-import com.mall.admin.user.vo.UserDetailsVO;
 
 @Service
 public class UserService {
@@ -41,8 +35,18 @@ public class UserService {
 		
 		int resultVal;
 		Map<String, Object> sqlData= userDao.checkLoginId(paramMap);
-		resultVal = sqlData.size();
+		resultVal = sqlData != null?sqlData.size():0;
 		return resultVal;
+	}
+	
+	public List<Map<String, Object>> selectLoginId(Map<String, String> paramMap){
+		
+		return userDao.selectLoginId(paramMap);
+	}
+	
+	public Map<String, Object> selectPassWd(Map<String, String> paramMap){
+		
+		return userDao.selectPassWd(paramMap);
 	}
 
 }
