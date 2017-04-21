@@ -72,7 +72,7 @@
 			    </li>
 			    <li><a href="javascript:;" data-toggle="collapse" data-target="#event"><i class="fa fa-fw fa-tags"></i> 이벤트<i  class="fa fa-fw fa-caret-down"></i></a>
 				    <ul id="event" class="collapse">
-					    <li><a href="/admin/event/eventList">이벤트관리</a></li>
+					    <li><a href="/admin/event/viewEventList">이벤트관리</a></li>
 					    <li><a href="#">배너관리</a></li>
 				    </ul>
 			    </li>

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <script type="text/javascript">
 Ext.onReady(function() {
-	Ext.Msg.alert("Chapter 1", "Hello World!!!");
+// 	Ext.Msg.alert("Chapter 1", "Hello World!!!");
 	
 	Ext.define('User', {
 	    extend: 'Ext.data.Model',
@@ -98,12 +98,12 @@ Ext.onReady(function() {
 		</div>
 		
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<span>총 이벤트 : <strong id="total_prd_cnt">1</strong> , 검색결과 : <strong id="total_prd_cnt">1</strong></span>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<select class="form-control input-sm">
-					<option value="10">10개씩 출력</option>
+					<option value="10">10개씩출력</option>
 					<option value="20" selected="selected">20개씩 출력</option>
 					<option value="30">30개씩 출력</option>
 					<option value="50">50개씩 출력</option>
@@ -112,7 +112,7 @@ Ext.onReady(function() {
 				</select>
 			</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary">엑셀파일저장</button>
+				<button type="button" class="btn btn-primary">이벤트등록</button>
 			</div>
 		</div>
 		<div class="row">
@@ -122,7 +122,6 @@ Ext.onReady(function() {
 		<div class="row">
 			<div>
 				<button type="button" class="btn btn-primary">선택삭제</button>
-				<button type="button" class="btn btn-primary">상태일괄변경</button>
 			</div>
 		</div>
 		<div class="page-footer">
