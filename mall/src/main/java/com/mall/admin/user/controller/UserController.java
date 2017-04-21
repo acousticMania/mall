@@ -72,10 +72,10 @@ public class UserController {
 			Map<String, Object> mailMap = new HashMap<String, Object>();
 			String content = "당신의 아이디 입니다.\n\n";
 			String title = "아이디 찾기 메일";
-			String email = mailMap.get("email").toString();
+			String email = paramMap.get("email").toString();
 			
 			for(int i = 0 ; loginIdList.size()>i ; i++){
-				content += loginIdList.get(i).get("LOGIN_ID")+"\n";
+				content += loginIdList.get(i).get("login_id")+"\n";
 			}
 			
 			mailMap.put("content", content);
