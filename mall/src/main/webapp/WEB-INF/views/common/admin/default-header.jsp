@@ -15,7 +15,7 @@
 		    <li><a href="#"><i class="fa fa-fw fa-envelope"></i> 게시물<span   class="badge">2</span></a></li>
 		    <li><a href="#"><i class="fa fa-fw fa-shopping-cart"></i> 주문<span class="badge">102</span></a></li>
 		    <li class="divider"></li>
-		    <li><a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
+		    <li><a href="/admin/user/login"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
 	    </ul>
 	    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 	    <div class="collapse navbar-collapse navbar-ex1-collapse">
