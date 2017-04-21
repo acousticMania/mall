@@ -219,5 +219,12 @@ public class SampleController {
 		return mv;
 	}
 	
+	@RequestMapping("/sample/editorTest")
+	public ModelAndView editorTest(@RequestParam Map<String, Object> paramMap, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/admin/user/editorTest");
+		return mv;
+	}
 	
 }
