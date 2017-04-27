@@ -69,7 +69,12 @@
     	</div>
     	<div class="panel-body">
     		<span>내용</span>
-    		<textarea title="내용" id="CONTENTS" name="CONTENTS" rows="20" cols="100" class="form-control" ></textarea>
+<!--     		<textarea title="내용" id="CONTENTS" name="CONTENTS" rows="20" cols="100" class="ckeditor" ></textarea> -->
+    		<textarea title="내용" id="CONTENTS" name="CONTENTS" rows="20" cols="100"></textarea>
+			<script type="text/javascript">
+					CKEDITOR.replace('CONTENTS',{enterMode:'2', shiftEnterMode:'3'});
+// 					CKFinder.SetupCKEditor(CKEDITOR.replace('CONTENTS'), '/resources/editor/ckfinder/');
+			</script>
     	</div>
         <div class="panel-body">
         	<div id="fileDiv" class="row">

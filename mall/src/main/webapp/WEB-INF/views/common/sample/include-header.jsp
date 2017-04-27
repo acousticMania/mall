@@ -8,3 +8,5 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <%-- <script type="text/javascript" src="<c:url value="/resources/js/jquery/jquery-1.10.2.js"/>"></script> --%>
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
+<script type="text/javascript" src="/resources/editor/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="/resources/editor/ckfinder/ckfinder.js"></script>
