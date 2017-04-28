@@ -69,7 +69,8 @@
     	</div>
     	<div class="panel-body">
     		<span>내용</span>
-    		<textarea title="내용" id="CONTENTS" name="CONTENTS" rows="20" cols="100" class="form-control" ></textarea>
+<!--     		<textarea title="내용" id="CONTENTS" name="CONTENTS" rows="20" cols="100" class="form-control" ></textarea> -->
+			<%@ include file="/resources/editor/daumeditor/editor.jsp"%>
     	</div>
         <div class="panel-body">
         	<div id="fileDiv" class="row">
