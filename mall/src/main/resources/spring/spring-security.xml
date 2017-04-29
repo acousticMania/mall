@@ -13,10 +13,14 @@
 		
                         
 	<security:http auto-config="true" use-expressions="true">
-		<security:intercept-url pattern="/admin/user/**" access="permitAll"/>
-<!-- 		<security:intercept-url pattern="/admin/main/**" access="permitAll"/> -->
-		<!-- <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
-		<security:intercept-url pattern="/**" access="permitAll"/>
+	<security:intercept-url pattern="/admin/user/**" access="permitAll"/>
+	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+	<security:access-denied-handler error-page="/common/accessDeniedPag" />
+	<!-- <security:intercept-url pattern="/user/**" access="ROLE_USER"/> -->
+	<!-- <security:intercept-url pattern="/**" access="permitAll"/> -->
+	<!-- <security:intercept-url pattern="/user/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
+	
+	
 		<security:form-login
 			login-page="/admin/user/login"
 			always-use-default-target="true"
@@ -39,11 +43,6 @@
 		<security:authentication-provider user-service-ref="userSecurityService">
 			<security:password-encoder ref="passwordEncoder"/>
 		</security:authentication-provider>
-		<!-- 기존 유저테이블삭제 -->
-		<!-- <security:authentication-provider user-service-ref="userSecurityService">
-			<security:password-encoder ref="passwordEncoder"/>
-		</security:authentication-provider> -->
-		<!-- //기존 유저테이블삭제 -->
 	</security:authentication-manager>
 	
 	<!-- 암호화 -->	

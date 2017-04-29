@@ -227,4 +227,12 @@ public class SampleController {
 		return mv;
 	}
 	
+	@RequestMapping("/sample/validationTest")
+	public ModelAndView validationTest(@RequestParam Map<String, Object> paramMap, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/admin/user/join_bak");
+		return mv;
+	}
+	
 }

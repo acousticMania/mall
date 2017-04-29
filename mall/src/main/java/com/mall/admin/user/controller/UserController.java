@@ -133,5 +133,16 @@ public class UserController {
 		
 		return map;
 	}
+	
+	/**
+	 * 접근권한 없을경우 페이지로 이동
+	 * @param paramMap
+	 * @return
+	 */
+	@RequestMapping("/common/accessDeniedPag")
+	public String accessDenied(@RequestParam Map<String, String> paramMap) {
+		
+		return "/common/accessDeniedPage";
+	}
 
 }

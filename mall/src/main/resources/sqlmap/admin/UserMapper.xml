@@ -34,8 +34,8 @@
 			 #{login_id}
 			, #{user_name}
 			, #{passwd}
-			, 'USER'
-			, #{res_no}
+			, 'ADMIN'
+			, ''
 			, #{homephone_no}
 			, #{cellphone_no}
 			, #{zipcode}
@@ -63,6 +63,8 @@
 		SELECT
 			  LOGIN_ID AS loginId
 			, PASSWD AS password
+			, STATUS AS status
+			, USER_KIND AS userKind
 		FROM MBR_USER
 		WHERE login_id = #{username}
 	</select>

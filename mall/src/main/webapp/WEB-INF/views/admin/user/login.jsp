@@ -29,6 +29,8 @@
 	
 	<!-- jQuery -->
     <script src="/js/jquery.js"></script>
+	
+	<script src="/resources/mall/admin/user/login.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
@@ -61,21 +63,7 @@
 			
 		});
 		
-		function fn_validation() {
-			if($("#login_id").val() == "") {
-				alert("로그인 아이디를 입력해주세요");
-				$("#login_id").focus();	
-			} else if($("#password").val() == "") {
-				alert("로그인 비밀번호를 입력해주세요");
-				$("#password").focus();
-			}
-			
-			var form = $("#form")[0];
-			form.action = "<c:url value='/j_spring_security_check' />";
-			form.method = "post";
-			form.submit();
-		}
-	
+		
 	</script>
 
 
@@ -101,7 +89,7 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" id="password" name="password" type="password">
                                 </div>
-                                <div class="checkbox">
+                                <div style="display: none;" class="checkbox">
                                     <label>
                                         <input name="remember" type="checkbox" value="Remember Me">저장하기
                                     </label>
