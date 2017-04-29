@@ -35,6 +35,20 @@
 <!-- Extjs js -->
 <script type="text/javascript" src="/resources/js/ext-6.2.1/build/ext-all.js"></script>
 
+<!-- jqGrid -->
+<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jquery-ui/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jquery-ui/jquery-ui.structure.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jquery-ui/jquery-ui.theme.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jqgrid/ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jqgrid/ui.jqgrid-bootstrap-ui.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jqgrid/ui.jqgrid-bootstrap.css" />
+<script src="/resources/jqgrid/js/jqgrid/i18n/grid.locale-en.js"></script>
+<script src="/resources/jqgrid/js/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="/resources/jqgrid/js/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- common js -->
+<script src="/resources/js/common/common.js"></script>
+
 <!-- //명석 resources 통합 -->
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

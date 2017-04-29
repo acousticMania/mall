@@ -1,15 +1,4 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jquery-ui/jquery-ui.min.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jquery-ui/jquery-ui.structure.min.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jquery-ui/jquery-ui.theme.min.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jqgrid/ui.jqgrid.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jqgrid/ui.jqgrid-bootstrap-ui.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jqgrid/ui.jqgrid-bootstrap.css" />
-<script src="/js/plugins/jqgrid/i18n/grid.locale-en.js"></script>
-<script src="/js/plugins/jqgrid/jquery.jqGrid.min.js"></script>
-<script src="/js/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="/resources/js/common/common.js"></script>
-
 <script>
 $(function(){
 	$("#list").jqGrid({
