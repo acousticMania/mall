@@ -11,4 +11,5 @@
 	<p><button type="button" class="btn btn-warning btn-lg" onclick="location.href='/sample'">sample Go!!!</button></p>
 	<p><button type="button" class="btn btn-info" onclick="location.href='/sample/chart'">chart Go!!!</button></p>
 	<p><button type="button" class="btn btn-error" onclick="location.href='/sample/extJs'">extJs Grid Go!!!</button></p>
+	<p><button type="button" class="btn btn-danger" onclick="location.href='/sample/ckeditor'">ckeditor Go!!!</button></p>
 </div>
