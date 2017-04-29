@@ -57,7 +57,7 @@
 	}
 </script>
 <div class="container">
-    <form id="frm" name="frm" enctype="multipart/form-data">
+<!--     <form id="frm" name="frm" enctype="multipart/form-data"> -->
     <div class="panel panel-success">
     	<div class="panel-body">
     		<span>제목</span>
@@ -90,6 +90,6 @@
 	        <a href="#this" class="btn btn-primary" id="list" >목록으로</a>
         </div>
     </div>
-    </form>
+<!--     </form> -->
 </div>
     <%@ include file="/WEB-INF/views/common/sample/include-body.jsp" %>

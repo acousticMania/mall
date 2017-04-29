@@ -1,4 +1,288 @@
-(function(r){var o="",D="tx_",e="uninitialized",x="loading",A="complete",i="production",w="development",u=1000,k=5;var t=/\/(\d+[a-z.]?\.[a-z0-9\-]+\.[\-\w]+)\//;var f={environment:i,service:"core",version:"",host:""};function C(E){return E.replace(/[^\/]+\/?$/,"")}function b(F){var E=r.getElementsByTagName("script");for(var G=0;G<E.length;G++){if(E[G].src.indexOf(F)>=0){return E[G]}}throw"cannot find '"+F+"' script element"}function g(F){var E=b(F);var G=E.src;return G.substring(G.indexOf("?")+1)}function z(F){var E=b(F);var G=E.src.match(t);if(G&&G.length==2){return G[1]}return""}function q(E){return f[E]||o}function m(E){var F=y.parse(g(j.NAME),"&");return F.findByName(E)}function a(E){var G=y.parse(r.cookie,/;[ ]*/);var F=G.findByName(D+E);return F?decodeURIComponent(F):F}var y=function(){this.data=[]};y.prototype={add:function(E,F){this.data.push({name:E,value:F})},findByName:function(E){var G;for(var F=0;F<this.data.length;F++){if(this.data[F]&&this.data[F].name===E){G=this.data[F].value;
-break}}return G}};y.parse=function(G,I){var E=new y();var J=G.split(I);for(var F=0;F<J.length;F++){var H=J[F].split("=");E.add(H[0],H[1])}return E};function p(F){var E=r.createElement("script");E.type="text/javascript";E.src=F;return E}function l(G){var E=r.location;if(G.match(/^(https?:|file:|)\/\//)){}else{if(G.indexOf("/")===0){G="http://"+E.host+G}else{var F=E.href;var H=F.lastIndexOf("/");G=F.substring(0,H+1)+G}}return G}function d(G,H){var E=p(G);var F=r.getElementsByTagName("head")[0]||r.documentElement;h(E,F,H);F.insertBefore(E,F.firstChild);return E}function h(E,F,G){if(G){E.onload=E.onreadystatechange=function(){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){G();if(/MSIE/i.test(navigator.userAgent)){E.onload=E.onreadystatechange=null;if(F&&E.parentNode){F.removeChild(E)}}}}}}function s(E){if(typeof E==="function"){E(Editor)}}var n=function(E){this.TIMEOUT=k*u;this.readyState=e;this.url=E.url;this.callback=E.callback||function(){};this.id=E.id;this.load()
-};n.prototype={load:function(){var G=this.url;var F=this;try{b(G)}catch(H){F.readyState=x;var E=d(G,function(){F.callback();F.readyState=A});if(F.id){E.id=F.id}}return this},startErrorTimer:function(){var E=this;setTimeout(function(){if(E.readyState!==A){E.onTimeout()}},E.TIMEOUT)},onTimeout:function(){},onLoadComplete:function(){}};var v=[],B;var j={NAME:"editor_loader.js",TIMEOUT:k*u,readyState:e,loadModule:function(F){function G(H){return !H.match(/^((https?:|file:|)\/\/|\.\.\/|\/)/)}var E=G(F)?this.getJSBasePath()+F:F;if(f.environment===w){E=E+"?dummy="+new Date().getTime()}r.write('<script type="text/javascript" src="'+E+'" charset="utf-8"><\/script>')},asyncLoadModule:function(E){return new n(E)},ready:function(E){if(this.readyState===A){s(E)}else{v.push(E)}},finish:function(){for(var E=0;E<v.length;E++){s(v[E])}v=[]},getBasePath:function(F){var G=a("base_path");if(!G){var E=b(F||j.NAME);G=C(C(E.src))}return l(G)},getJSBasePath:function(E){return this.getBasePath()+"js/"},getCSSBasePath:function(){return this.getBasePath()+"css/"
-},getPageBasePath:function(){return this.getBasePath()+"pages/"},getOption:function(E){return a(E)||m(E)||q(E)}};window.EditorJSLoader=j;function c(){var F="editor.js";f.version=z(j.NAME);var E=m("environment");if(E){f.environment=E}j.loadModule(F)}c()})(document);
+(function(document) {
+	// TODO option parameter 문서 정리
+	// TODO bookmarklet 작성
+	var DEFAULT_UNKNOWN_OPTION_VALUE = "",
+			PREFIX_COOKIE = "tx_",
+			STATUS_UNINITIALIZED = "uninitialized",
+			STATUS_LOADING = "loading",
+			STATUS_COMPLETE = "complete",
+			ENV_PRODUCTION = "production",
+			ENV_DEVELOPMENT = "development",
+			MILLISECOND = 1000,
+			DEFAULT_TIMEOUT = 5;
+	
+	var REGX_MATCH_VERSION = /\/(\d+[a-z.]?\.[a-z0-9\-]+\.[\-\w]+)\//;
+
+	var DEFAULT_OPTIONS = {
+		environment: ENV_PRODUCTION,
+        service: "core",
+		version: "",
+		host: ""
+	};
+
+	function getBasePath(url) {
+		return url.replace(/[^\/]+\/?$/, '');
+	}
+
+	function findLoaderScriptElement(filename) {
+		var scripts = document.getElementsByTagName("script");
+		for (var i = 0; i < scripts.length; i++) {
+			if (scripts[i].src.indexOf(filename) >= 0) {
+				return scripts[i];
+			}
+		}
+		throw "cannot find '" + filename + "' script element";
+	}
+
+	function readURLParam(filename) {
+		var script = findLoaderScriptElement(filename);
+		var url = script.src;
+		return url.substring(url.indexOf("?") + 1);
+	}
+	
+	function readCurrentURLVersion(filename) {
+		var script = findLoaderScriptElement(filename);
+		var urlMatch = script.src.match(REGX_MATCH_VERSION);
+		if( urlMatch && urlMatch.length == 2 ){
+			return urlMatch[1];
+		}
+		return "";
+	}
+
+	function getDefaultOption(name) {
+		return DEFAULT_OPTIONS[name] || DEFAULT_UNKNOWN_OPTION_VALUE;
+	}
+
+	function getUserOption(name) {
+		var userOptions = Options.parse(readURLParam(Loader.NAME), "&");
+		return userOptions.findByName(name);
+	}
+
+	function getCookieOption(name) {
+		var cookieOptions = Options.parse(document.cookie, /;[ ]*/);
+		var value = cookieOptions.findByName(PREFIX_COOKIE + name);
+		return value ? decodeURIComponent(value) : value;
+	}
+
+
+	var Options = function() {
+		this.data = [];
+	};
+
+	Options.prototype = {
+		add: function(name, value) {
+			this.data.push({ "name": name, "value": value });
+		},
+		findByName: function(name) {
+			var founded;
+			for (var i = 0; i < this.data.length; i++) {
+				if (this.data[i] && this.data[i].name === name) {
+					founded = this.data[i].value;
+					break;
+				}
+			}
+			return founded;
+		}
+	};
+
+	Options.parse = function(rawOptions, separator) {
+		var options = new Options();
+		var params = rawOptions.split(separator);
+		for (var i = 0; i < params.length; i++) {
+			var nameAndValue = params[i].split("=");
+			options.add(nameAndValue[0], nameAndValue[1]);
+		}
+		return options;
+	};
+	
+	
+	function createScriptDOMElement(src) {
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.src = src;
+		return script;
+	}
+
+	function absolutizeURL(url) {
+		var location = document.location;
+		if (url.match(/^(https?:|file:|)\/\//)) {
+		} else if (url.indexOf("/") === 0) {
+			url = "http://" + location.host + url;
+		} else {
+			var href = location.href;
+			var cutPos = href.lastIndexOf("/");
+			url = href.substring(0, cutPos + 1) + url;
+		}
+		return url;
+	}
+
+	function loadScriptDOMElement(src, callback) {
+		var script = createScriptDOMElement(src);
+		var head = document.getElementsByTagName("head")[0] || document.documentElement;
+		
+		addScriptLoadListener(script, head, callback);
+		
+		head.insertBefore(script, head.firstChild); // Use insertBefore instead of appendChild to circumvent an IE6 bug.
+		return script;
+	}
+	
+	function addScriptLoadListener(script, head, callback){
+		if(callback){
+			script.onload = script.onreadystatechange = function() {
+				if ( !this.readyState ||
+						this.readyState === "loaded" || 
+						this.readyState === "complete") {
+					
+					callback();
+					
+					// Handle memory leak in IE
+					if (/MSIE/i.test(navigator.userAgent)) {
+						script.onload = script.onreadystatechange = null;
+						if ( head && script.parentNode ) {
+							head.removeChild( script );
+						}
+					}
+				}
+			};
+		}
+	}
+
+	function callEditorOnLoadHandler(fn) {
+		if (typeof fn === "function") {
+			fn(Editor);
+		}
+	}
+
+	var AsyncLoader = function(config){
+		this.TIMEOUT = DEFAULT_TIMEOUT * MILLISECOND;
+		this.readyState = STATUS_UNINITIALIZED;
+		this.url = config.url;
+		this.callback = config.callback || function(){};
+		this.id = config.id;
+		this.load();
+	};
+	AsyncLoader.prototype = {
+		load: function(){
+			var url = this.url;
+			var self = this;
+			try {
+				findLoaderScriptElement(url);
+			} catch(e){
+				self.readyState = STATUS_LOADING;
+				var script = loadScriptDOMElement(url, function(){
+					self.callback();
+					self.readyState = STATUS_COMPLETE;
+				});
+				if( self.id ){
+					script.id = self.id;
+				}
+			} 
+			return this;
+		},
+		startErrorTimer: function() {
+			var self = this;
+			setTimeout(function() {
+				if (self.readyState !== STATUS_COMPLETE) {
+					self.onTimeout();
+				}
+			}, self.TIMEOUT);
+		},
+		onTimeout: function() {
+			//NOTE: retry or error log?
+		},
+		onLoadComplete: function(){
+		}
+	};
+	
+	var onLoadHandlers = [], isRetry;
+
+	//noinspection UnnecessaryLocalVariableJS
+	var Loader = {
+		NAME: "editor_loader.js",
+
+		TIMEOUT: DEFAULT_TIMEOUT * MILLISECOND,
+
+		readyState: STATUS_UNINITIALIZED,
+
+		/**
+		 * <p>개발 환경에서 페이지 로딩시 module 불러오기</p>
+		 * @param moduleName {string} e.g. trex/header.js
+		 */
+		loadModule: function(moduleName) {
+			function isModuleNameNotPath(name) {
+				return !name.match(/^((https?:|file:|)\/\/|\.\.\/|\/)/);
+			}
+			
+			var url = isModuleNameNotPath(moduleName) ? this.getJSBasePath() + moduleName : moduleName;
+			if (DEFAULT_OPTIONS.environment === ENV_DEVELOPMENT) {
+				url = url + '?dummy=' + new Date().getTime();				
+			}
+			document.write('<script type="text/javascript" src="' + url + '" charset="utf-8"></script>');
+		},
+
+		/**
+		 * <p>페이지 로딩 완료 후 module 불러오기</p>
+		 */
+		asyncLoadModule: function(config) {
+			return new AsyncLoader(config);
+		},
+
+		/**
+		 * <p>editor javascript 파일이 로딩 완료되었을 때 호출될 함수를 등록한다.</p>
+		 * @param fn {function} 실행될 함수
+		 */
+		ready: function(fn) {
+			if (this.readyState === STATUS_COMPLETE) {
+				callEditorOnLoadHandler(fn);
+			} else {
+				onLoadHandlers.push(fn);
+			}
+		},
+
+		finish: function() {
+			for (var i = 0; i < onLoadHandlers.length; i++) {
+				callEditorOnLoadHandler(onLoadHandlers[i]);
+			}
+			onLoadHandlers = [];
+		},
+
+		getBasePath: function(filename) {
+			var basePath = getCookieOption("base_path");
+			if (!basePath) {
+				var script = findLoaderScriptElement(filename || Loader.NAME);				
+				basePath = getBasePath(getBasePath(script.src));
+			}
+			return absolutizeURL(basePath);
+		},
+
+		getJSBasePath: function(filename) {
+			return this.getBasePath() + "js/";
+		},
+
+		getCSSBasePath: function() {
+			return this.getBasePath() + "css/";
+		},
+
+		getPageBasePath: function() {
+			return this.getBasePath() + "pages/";
+		},
+
+		getOption: function(name) {
+			return getCookieOption(name) || getUserOption(name) || getDefaultOption(name);
+		}
+	};
+	window.EditorJSLoader = Loader;
+
+	function initialize() {
+		var jsModuleName = "editor.js";
+		
+		DEFAULT_OPTIONS["version"] = readCurrentURLVersion(Loader.NAME);
+		var envConfig = getUserOption("environment");
+		if (envConfig) {
+			DEFAULT_OPTIONS.environment = envConfig;
+		}
+		Loader.loadModule(jsModuleName);
+	}
+
+	initialize();
+})(document);

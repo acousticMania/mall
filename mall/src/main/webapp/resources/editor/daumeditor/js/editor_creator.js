@@ -1,1 +1,18 @@
-var EditorCreator={convert:function(b,a,c){if(!b||!a||!$tom){return}$tom.applyStyles(b,{display:"none"});Trex.I.XHRequester.sendRequest("get",a,"",false,function(e){var d=document.createElement("div");d.innerHTML=e;$tom.insertNext(d,b);c&&c()})}};
+var EditorCreator = {
+    convert: function (el, template, callback) {
+        if (!el || !template || !$tom) return;
+
+        $tom.applyStyles(el, {display: 'none'});
+        Trex.I.XHRequester.sendRequest('get',
+            template,
+            '',
+            false,
+            function (html) {
+                var root = document.createElement('div');
+                root.innerHTML = html;
+                $tom.insertNext(root, el);
+                callback && callback();
+            }
+        );
+    }
+};
