@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!doctype html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Daum 에디터 - 등록화면 예제</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% pageContext.setAttribute("LF1", "\n"); %>
+<% pageContext.setAttribute("LF2", "\r"); %>
+<input id="txtaContent" name="txtaContent" style="display:none"/>
+<%-- <%@ include file="/docs/component/daum_editor/editor.jsp"%> --%>
+
     <!--
         다음오픈에디터 사용 튜토리얼은 이 페이지로 대신합니다.
         추가적인 기능 개발 및 플러그인 개발 튜토리얼은 홈페이지를 확인해주세요.
@@ -25,17 +24,104 @@
     -->
     <link rel="stylesheet" href="/resources/editor/daumeditor/css/editor.css" type="text/css" charset="utf-8"/>
     <script src="/resources/editor/daumeditor/js/editor_loader.js" type="text/javascript"></script>
-<!-- 	<script src="/resources/editor/daumeditor/js/editorImpl.js" type="text/javascript"></script> -->
+	<script src="/resources/editor/daumeditor/js/editorImpl.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+		var _editorLoad = false;
+		var editorMode = "daumEditor";
+		var docMode = "${EDITOR_MODULE}";
+		var imgMode = "${EDITOR_MODULE}";
+		var isOrginalSizeUse = "${EDITOR_ORGINAL_IMG_SIZE_USE}";
 
-</head>
-<body>
+		function _createEditor(formName , module , width , height , contents){
+			daum_editor.create(formName , module , width , height);
+
+			if(window._replaceMacro){
+				contents = _replaceMacro(contents);
+			}
+			_setEditorHtml(contents);
+			_editorLoad = true;
+/*
+			var setting = {
+				"uploadUrl":CONTEXT_ROOT + "image.do",
+				"filePostName":"image.attachImg",
+				"params":{"cmd":"swfUploadImage","docMode":""},
+				"fileSize":"10240",
+				"uploadLimit":2,
+				"fileFormatLimit":"*.jpg;*.gif;*.png",//*.jpg;*.gif;*.png
+				"fileFormatNames" : "Image files",//Image files
+				"completeFunc":"fileUploadComplete",
+				"buttonImgUrl" : CONTEXT_ROOT+"/docs/component/swfupload/images/filesearch.jpg",
+				"buttonHolderPlace":"spanButtonPlaceHolder",
+				"buttonWidth":"73",
+				"buttonHeight":"22",
+				"useImageButton":true
+			};
+			swfu = new loadSwfUpload(setting);
+*/
+		}
+		function _getEditorBodyHTML(){ return daum_editor.getHtml(); }
+		function _getEditorHtml(isHtml){ return daum_editor.getHtml(); }
+		function _getEditorText(){ return daum_editor.getText(); }
+		function _validForm(msg){ return daum_editor.validForm(msg); }
+		function _addHtmlToEditor(sHtml){ daum_editor.insertContent(sHtml); }
+		function _setEditorHtml(sHtml){ daum_editor.setHtml(sHtml); }
+		function _getEditorElement(id){ return daum_editor.getElementById(id); }
+		function _setEditorElementHtml(no,id,html){ return daum_editor.setElementHtml(id, html); }
+		function _getEditorBody(){ return daum_editor.getDocument(); }
+		function fnInsertMacroHTMLContent(macroName){ _addHtmlToEditor("(_" + macroName + "_)"); }
+
+
+		//본문이미지 업로드 후 처리
+		function fileUploadComplete(serverData){
+			var realFileName = serverData.realFileName;
+			var fileName = serverData.fileName;
+			var fileUrl = serverData.fileUrl;
+			var fileSize = serverData.fileSize;
+			var fileFullUrl = serverData.fileFullUrl;
+
+			var info = realFileName + "|" + fileName + "|" + fileUrl + "|" + fileSize;
+
+			docPage = CONTEXT_ROOT + "image.do";
+			_ajaxRequest( "cmd=insertImage&image.imgInfo=" +info + "&image.docMode="+docMode,
+			               docPage, _responseSelectImage);
+			function _responseSelectImage(ajaxObjects){
+				var ret = ajaxObjects.responseText.evalJSON() ;
+				_showReturnMessage(ret.message);
+				if(_isSuccessful(ret.code)){
+					_addImageToEditor(ret.imgSeq, '${IMAGE_URL}' + ret.fileFullUrl + ret.realFileName);
+				}
+			}
+		}
+
+		//이미지 본문에 삽입
+		function _addImageToEditor(imgSeq, url){
+			var html = '<img src="' + url + '"';
+			if(imgSeq)  html +=' id="brdConImg' + imgSeq + '"';
+			html += '/>';
+			_addHtmlToEditor(html);
+		}
+		//이미지 업로드 페이지를 통해 사이즈 조절 후 본문에 이미지 삽입
+		function _addImageToDaumEditor(imgSeq, url, w, h, b, a){
+			if(b==null || b=='') b= '0';
+			var html = '<div><a target="_blank" href="' + url + '"><img src="' + url + '"';
+			if(imgSeq)  html +=' id="brdConImg' + imgSeq + '"';
+			if(w != '') html +=' width="' + w + 'px"';
+			if(h != '') html +=' height="' + h + 'px"';
+			if(b != '') html +=' border="' + b + 'px"';
+			if(a != '') html +=' alt="' + a + '"';
+			html += '/></a><div>';
+			_addHtmlToEditor(html);
+		}
+	</script>
+
 <div class="body">
 	<!-- 에디터 시작 -->
 	<!--
 		@decsription
 		등록하기 위한 Form으로 상황에 맞게 수정하여 사용한다. Form 이름은 에디터를 생성할 때 설정값으로 설정한다.
 	-->
-	<form name="tx_editor_form" id="tx_editor_form" action="http://posttestserver.com/post.php" method="post" accept-charset="utf-8">
+<!-- 	<form name="tx_editor_form" id="tx_editor_form" action="http://posttestserver.com/post.php" method="post" accept-charset="utf-8"> -->
 		<!-- 에디터 컨테이너 시작 -->
 		<div id="tx_trex_container" class="tx-editor-container">
 			<!-- 사이드바 -->
@@ -456,125 +542,47 @@
 				<!-- 첨부박스 끝 -->
 		</div>
 		<!-- 에디터 컨테이너 끝 -->
-	</form>
+<!-- 	</form> -->
 </div>
-<!-- 에디터 끝 -->
+
+
 <script type="text/javascript">
-	var config = {
-		txHost: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) http://xxx.xxx.com */
-		txPath: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) /xxx/xxx/ */
-		txService: 'sample', /* 수정필요없음. */
-		txProject: 'sample', /* 수정필요없음. 프로젝트가 여러개일 경우만 수정한다. */
-		initializedId: "", /* 대부분의 경우에 빈문자열 */
-		wrapper: "tx_trex_container", /* 에디터를 둘러싸고 있는 레이어 이름(에디터 컨테이너) */
-		form: 'tx_editor_form'+"", /* 등록하기 위한 Form 이름 */
-		txIconPath: "/resources/editor/daumeditor/images/icon/editor/", /*에디터에 사용되는 이미지 디렉터리, 필요에 따라 수정한다. */
-		txDecoPath: "/resources/editor/daumeditor/images/deco/contents/", /*본문에 사용되는 이미지 디렉터리, 서비스에서 사용할 때는 완성된 컨텐츠로 배포되기 위해 절대경로로 수정한다. */
-		canvas: {
-			styles: {
-				color: "#123456", /* 기본 글자색 */
-				fontFamily: "굴림", /* 기본 글자체 */
-				fontSize: "10pt", /* 기본 글자크기 */
-				backgroundColor: "#fff", /*기본 배경색 */
-				lineHeight: "1.5", /*기본 줄간격 */
-				padding: "8px" /* 위지윅 영역의 여백 */
-			},
-			showGuideArea: false
-		},
-		events: {
-			preventUnload: false
-		},
-		sidebar: {
-			attachbox: {
-				show: true,
-				confirmForDeleteAll: true
-			}
-		},
-		size: {
-			contentWidth: 700 /* 지정된 본문영역의 넓이가 있을 경우에 설정 */
+var v = '<c:out value="${fn:replace(fn:replace(EDITOR_CONTENT, LF1, \"\"), LF2, \"\")}" escapeXml="true"/>';
+v = v.replace(/&lt;/gi,"<");
+v = v.replace(/&gt;/gi,">");
+v = v.replace(/&quot;/gi,"\"");
+v = v.replace(/&2l2t2;/gi,"&lt;");
+v = v.replace(/&2g2t2;/gi,"&gt;");
+v = v.replace(/&#034;/gi,"\"");
+v = v.replace(/&amp;/gi,"&");
+var content = v;
+
+if(v.indexOf("<script") != -1){
+	var tmp1 = v.substring(0,v.indexOf("<script"));
+	var tmp2 = v.substring(v.indexOf("/script>")+8, v.length);
+	content = tmp1 + tmp2;
+}
+
+<c:choose>
+	<c:when test="${not empty EDITOR_HEIGHT}">
+		_createEditor(getFormName() , "${EDITOR_MODULE}" , "", "${EDITOR_HEIGHT}", content);
+	</c:when>
+	<c:otherwise>
+		_createEditor(getFormName() , "12st" , "", "300", content);
+	</c:otherwise>
+</c:choose>
+
+function getFormName(){
+	var forms = document.getElementsByTagName("form");
+	var formName = "";
+	if(forms.length == 1){
+		formName = forms[0].name;
+	}else{
+		for(i=0; i<forms.length; i++){
+			// 이부분은 elements 가 없으면 스크립트단에서 undefind 로 나올 수 있음
+			if(forms[i].elements['txtaContent']) {  formName = forms[i].name; }
 		}
-	};
-
-	EditorJSLoader.ready(function(Editor) {
-		var editor = new Editor(config);
-	});
-	
+	}
+	return formName;
+}
 </script>
-
-<!-- Sample: Saving Contents -->
-<script type="text/javascript">
-	/* 예제용 함수 */
-	function saveContent() {
-		Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
-	}
-
-	/**
-	 * Editor.save()를 호출한 경우 데이터가 유효한지 검사하기 위해 부르는 콜백함수로
-	 * 상황에 맞게 수정하여 사용한다.
-	 * 모든 데이터가 유효할 경우에 true를 리턴한다.
-	 * @function
-	 * @param {Object} editor - 에디터에서 넘겨주는 editor 객체
-	 * @returns {Boolean} 모든 데이터가 유효할 경우에 true
-	 */
-	function validForm(editor) {
-		// Place your validation logic here
-
-		// sample : validate that content exists
-		var validator = new Trex.Validator();
-		var content = editor.getContent();
-		if (!validator.exists(content)) {
-			alert('내용을 입력하세요');
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Editor.save()를 호출한 경우 validForm callback 이 수행된 이후
-	 * 실제 form submit을 위해 form 필드를 생성, 변경하기 위해 부르는 콜백함수로
-	 * 각자 상황에 맞게 적절히 응용하여 사용한다.
-	 * @function
-	 * @param {Object} editor - 에디터에서 넘겨주는 editor 객체
-	 * @returns {Boolean} 정상적인 경우에 true
-	 */
-	function setForm(editor) {
-        var i, input;
-        var form = editor.getForm();
-        var content = editor.getContent();
-
-        // 본문 내용을 필드를 생성하여 값을 할당하는 부분
-        var textarea = document.createElement('textarea');
-        textarea.name = 'content';
-        textarea.value = content;
-        form.createField(textarea);
-
-        /* 아래의 코드는 첨부된 데이터를 필드를 생성하여 값을 할당하는 부분으로 상황에 맞게 수정하여 사용한다.
-         첨부된 데이터 중에 주어진 종류(image,file..)에 해당하는 것만 배열로 넘겨준다. */
-        var images = editor.getAttachments('image');
-        for (i = 0; i < images.length; i++) {
-            // existStage는 현재 본문에 존재하는지 여부
-            if (images[i].existStage) {
-                // data는 팝업에서 execAttach 등을 통해 넘긴 데이터
-                alert('attachment information - image[' + i + '] \r\n' + JSON.stringify(images[i].data));
-                input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'attach_image';
-                input.value = images[i].data.imageurl;  // 예에서는 이미지경로만 받아서 사용
-                form.createField(input);
-            }
-        }
-
-        var files = editor.getAttachments('file');
-        for (i = 0; i < files.length; i++) {
-            input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'attach_file';
-            input.value = files[i].data.attachurl;
-            form.createField(input);
-        }
-        return true;
-	}
-</script>
-</body>
-</html>

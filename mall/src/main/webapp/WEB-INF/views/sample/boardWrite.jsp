@@ -1,5 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/sample/include-header.jsp" %>
+<%@ include file="/WEB-INF/views/common/uploadbrowserChk.jsp"%>
+<!-- i18n -->
+<%-- <script type="text/javascript" src="${BASE_JS}/i18n/${USER_LOCALE}/resource/commonMessages.js"></script> --%>
+<script type="text/javascript" src="/resources/i18n/ko/commonMessages.js"></script>
+
+<%-- 파일업로드 관련 --%>
+<% if (ieVerChk) { %>
+<link rel="stylesheet" href="/resources/component/html5upload/css/jquery.fileupload-ui.css"></link>
+<script type="text/javascript" src="/resources/framework/12st.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/load-image.min.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/jquery.fileupload-ui-custom.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/message_ko.js"></script>
+<script type="text/javascript" src="/resources/framework/upload/upload3.js"></script>
+<script type="text/javascript" src="/resources/framework/upload/upload-ui.js"></script>
+<% } %>
+
 <script type="text/javascript">
 	var count = 1;
 
@@ -57,7 +76,7 @@
 	}
 </script>
 <div class="container">
-<!--     <form id="frm" name="frm" enctype="multipart/form-data"> -->
+    <form id="frm" name="frm" enctype="multipart/form-data">
     <div class="panel panel-success">
     	<div class="panel-body">
     		<span>제목</span>
@@ -90,6 +109,6 @@
 	        <a href="#this" class="btn btn-primary" id="list" >목록으로</a>
         </div>
     </div>
-<!--     </form> -->
+    </form>
 </div>
     <%@ include file="/WEB-INF/views/common/sample/include-body.jsp" %>
