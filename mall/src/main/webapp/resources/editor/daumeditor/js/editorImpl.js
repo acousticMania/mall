@@ -48,8 +48,10 @@ var daum_editor = {
 				attacher: {
 					'image' : {
 						features: {left:250, top:65, width:450, height:400},
-//						popPageUrl: CONTEXT_ROOT + 'view/file/editor/imgUpload?editorType=old'
-						popPageUrl: '/common/upload/image_daumEdit.jsp'
+//						popPageUrl: '/common/editor/imgUpload'
+						popPageUrl: '/common/editor/imgUpload?editorType=old'
+//						popPageUrl: frameworkProperties.context + 'views/common/upload/image_daumEdit.jsp'
+//						popPageUrl: '/common/upload/image_daumEdit'
 					}
 				}
 			},

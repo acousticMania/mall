@@ -8,6 +8,7 @@
 <%-- 파일업로드 관련 --%>
 <% if (ieVerChk) { %>
 <link rel="stylesheet" href="/resources/component/html5upload/css/jquery.fileupload-ui.css"></link>
+<script type="text/javascript" src="/resources/js/mustache/mustache.js"></script>
 <script type="text/javascript" src="/resources/framework/12st.js"></script>
 <script type="text/javascript" src="/resources/component/html5upload/js/vendor/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="/resources/component/html5upload/js/jquery.iframe-transport.js"></script>
@@ -19,7 +20,16 @@
 <script type="text/javascript" src="/resources/framework/upload/upload-ui.js"></script>
 <% } %>
 
+<c:set var="CONTEXT_ROOT" value="${pageContext.request.contextPath}" />
+
 <script type="text/javascript">
+var frameworkProperties = {
+	context: '${CONTEXT_ROOT}'
+}
+</script>
+
+<script type="text/javascript">
+
 	var count = 1;
 
 	$(document).ready(function(){
