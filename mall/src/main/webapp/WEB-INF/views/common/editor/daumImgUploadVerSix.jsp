@@ -12,13 +12,14 @@
 <head>
 <title>에디터 이미지 업로드</title>
 <link rel="stylesheet" href="/resources/component/html5upload/css/jquery.fileupload-ui.css"></link>
+<link rel="stylesheet" href="/resources/framework/css/basic.css"></link>
 
 <script type="text/javascript" src="/resources/js/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="/resources/i18n/ko/commonMessages.js"></script>
 
 <script type="text/javascript" src="/resources/js/mustache/mustache.js"></script>
-<!-- <script type="text/javascript" src="/resources/framework/12st.js"></script> -->
-<script type="text/javascript" src="/resources/framework/naon.js"></script>
+<script type="text/javascript" src="/resources/framework/twest.js"></script>
+<!-- <script type="text/javascript" src="/resources/framework/naon.js"></script> -->
 <script type="text/javascript" src="/resources/component/html5upload/js/vendor/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="/resources/component/html5upload/js/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="/resources/component/html5upload/js/load-image.min.js"></script>

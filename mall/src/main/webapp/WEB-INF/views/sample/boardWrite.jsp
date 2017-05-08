@@ -9,7 +9,8 @@
 <% if (ieVerChk) { %>
 <link rel="stylesheet" href="/resources/component/html5upload/css/jquery.fileupload-ui.css"></link>
 <script type="text/javascript" src="/resources/js/mustache/mustache.js"></script>
-<script type="text/javascript" src="/resources/framework/12st.js"></script>
+<!-- <script type="text/javascript" src="/resources/framework/naon.js"></script> -->
+<script type="text/javascript" src="/resources/framework/twest.js"></script>
 <script type="text/javascript" src="/resources/component/html5upload/js/vendor/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="/resources/component/html5upload/js/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="/resources/component/html5upload/js/load-image.min.js"></script>

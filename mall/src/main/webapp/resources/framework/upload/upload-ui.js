@@ -44,7 +44,7 @@ $.widget("ui.naonUpload", {
 	init : function(){
 		// 접속한 웹브라우저가 IE9이하일 경우 파일첨부 드래그 안내글 숨김.
 		if(!window._uploadIeVerChecked) {
-			var ieVer = naon.util.ieVersion();
+			var ieVer = twest.util.ieVersion();
 
 			if (ieVer > 0 && ieVer < 10) {
 				if($('body')) $('body').addClass('ie');
@@ -92,7 +92,7 @@ $.widget("ui.naonUpload", {
 	innerType : function(){
 		var me = this;
 		var isIeVerChecked = false;
-		var ieVer = naon.util.ieVersion();
+		var ieVer = twest.util.ieVersion();
 		if (ieVer > 0 && ieVer < 10) {
 			isIeVerChecked = true;
 		}

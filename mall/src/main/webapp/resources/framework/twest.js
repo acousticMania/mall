@@ -100,7 +100,7 @@
     //var twest = (function() {
 
        /**
-        * 나온 패키지
+        * 12st 패키지
         */
         var twest = function() {
             //return new twest.fn.init();
