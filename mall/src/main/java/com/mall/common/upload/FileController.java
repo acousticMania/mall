@@ -19,8 +19,8 @@ public class FileController {
 
 	@RequestMapping("/common/editor/imgUpload")
 	public String imgUpload() {
-		return "/common/editor/daumImgUploadBootstrap";
-//		return "/common/editor/daumImgUploadVerSix";
+//		return "/common/editor/daumImgUploadBootstrap";
+		return "/common/editor/daumImgUploadVerSix";
 	}
 
 	@RequestMapping("/common/editor/upload")

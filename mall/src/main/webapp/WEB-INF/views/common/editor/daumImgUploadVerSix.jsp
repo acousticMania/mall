@@ -7,6 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%-- <%@ taglib prefix="naon" uri="http://gw.naonsoft.com/jsp/gwtl/naon"%> --%>
 <%-- <%@ include file="/WEB-INF/views/common/sample/include-header.jsp" %> --%>
+<%@ include file="/WEB-INF/views/common/sample/default-head.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>

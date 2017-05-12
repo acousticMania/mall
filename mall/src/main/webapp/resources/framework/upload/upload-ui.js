@@ -1071,9 +1071,9 @@ $.widget("ui.naonUpload", {
 					+'		{{#isFileType}}<i class="ico ico_atch">{{/isFileType}}{{^isFileType}}<i class="ico ico_camera">{{/isFileType}}</i> <span>' + common_button_myPC/*내 PC*/ + '</span>'
 					+'		<input type="file" name="files[]" {{^isSingleType}}multiple{{/isSingleType}} title = "' + common_button_myPC/*내 PC*/ + '">'
 					+'	</div> '
-					+'	{{#filebox_upload_use_yn}}<button type="button" title="' + common_button_fileBox/*파일함*/ + '" class="btn" id="filebox"><span>' + common_button_fileBox/*파일함*/ + '</span></button> {{/filebox_upload_use_yn}}'
+					/*+'	{{#filebox_upload_use_yn}}<button type="button" title="' + common_button_fileBox/*파일함*/ /*+ '" class="btn" id="filebox"><span>' + common_button_fileBox /*파일함*/ /*+ '</span></button> {{/filebox_upload_use_yn}}'
 					/*+'	<button type="button" class="btn">구글 드라이브</button>'*/
-					+'	<button type="reset" title="' + common_button_reset/*초기화*/ + '" class="btn cancel"><i class="ico ico_rfsh"><span>취소</span></i></button>'
+					+'	<button type="reset" title="' + common_button_reset/*초기화*/ + '" class="btn cancel"><span class="glyphicon glyphicon-repeat"></span><i class="ico ico_rfsh"><span>취소</span></i></button>'
 					+'	<button type="button" title="삭제" class="btn delete" style="display:none;"><i class="ico ico_rfsh"><span>삭제</span></i></button>'
 					+'	<span class="fileupload-loading"></span>'
 					+'</div>'
