@@ -33,7 +33,6 @@
 <script type="text/javascript" defer="defer">
 /*5.2와 6.0 통합버전*/
 $(function() {
-	debugger;
 	var pageType = '${param.editorType}';
 	var editorName = '${param.editorName}';
 	if(pageType=="old"){
