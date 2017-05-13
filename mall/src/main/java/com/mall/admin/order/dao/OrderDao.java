@@ -17,6 +17,11 @@ public class OrderDao extends QueryMapper {
 		return (List<Map<String, Object>>) selectPagingList(namespace + "selectOrderList", map);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectSearchOrderList(Map<String, Object> map) {
+		return (List<Map<String, Object>>) selectPagingList(namespace + "selectSearchOrderList", map);
+	}
+	
 	public int selectOrderTotalCount(Map<String, Object> map) {
 		return (Integer) selectOne(namespace + "selectOrderTotalCount", map);
 	}

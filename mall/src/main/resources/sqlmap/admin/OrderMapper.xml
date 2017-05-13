@@ -41,18 +41,65 @@
 		    	WHEN ORD.ORD_STATUS = '2' THEN '결제완료'
 		    	WHEN ORD.ORD_STATUS = '3' THEN '배송준비중'
 		    	WHEN ORD.ORD_STATUS = '4' THEN '배송처리'
-		    	WHEN ORD.ORD_STATUS = '4' THEN '배송완료'
-		    	WHEN ORD.ORD_STATUS = '4' THEN '주문취소'
-		    	WHEN ORD.ORD_STATUS = '4' THEN '취소요청'
-		    	WHEN ORD.ORD_STATUS = '4' THEN '취소완료'
-		    	WHEN ORD.ORD_STATUS = '4' THEN '교환요청'
-		    	WHEN ORD.ORD_STATUS = '4' THEN '교환완료'
-		    	WHEN ORD.ORD_STATUS = '4' THEN '미주문'
+		    	WHEN ORD.ORD_STATUS = '5' THEN '배송완료'
+		    	WHEN ORD.ORD_STATUS = '6' THEN '주문취소'
+		    	WHEN ORD.ORD_STATUS = '7' THEN '취소요청'
+		    	WHEN ORD.ORD_STATUS = '8' THEN '취소완료'
+		    	WHEN ORD.ORD_STATUS = '9' THEN '교환요청'
+		    	WHEN ORD.ORD_STATUS = '10' THEN '교환완료'
+		    	WHEN ORD.ORD_STATUS = '11' THEN '미주문'
 		    	ELSE ''
 		    END AS ORD_STATUS_NM,
 		    ORD.REG_DATE
 		FROM
 		    ORD_ORDER ORD
+<!-- 		WHERE -->
+<!-- 		    DEL_YN = 'N'     -->
+<!-- 		ORDER BY ${sidx} ${sord} -->
+<!-- 		ORDER BY ORD_NO DESC -->
+		<include refid="pagingPost"/>
+	</select>
+	
+	
+	<select id="selectSearchOrderList" parameterType="map" resultType="map">
+		<include refid="pagingPre"/>
+		SELECT
+		    ORD.ORD_NO,
+		    ORD.ORDERER_ID,
+		    ORD.ORDERER_NM,
+		    (SELECT ORD_GOODS_NM 
+		       FROM ORD_GOODS
+		      WHERE ORD_NO = ORD.ORD_NO 
+		      ORDER BY ORD_PROD_IDX 
+		      LIMIT 1) AS ORD_PRODUCT_NM,
+		    ORD.ORD_ROUTE,
+		    CASE 
+		    	WHEN ORD.PAY_METHOD = '1' THEN '신용카드'
+		    	WHEN ORD.PAY_METHOD = '2' THEN '계좌이체'
+		    	WHEN ORD.PAY_METHOD = '3' THEN '무통장입금'
+		    	WHEN ORD.PAY_METHOD = '4' THEN '카카오페이'
+		    	ELSE ''
+		    END AS PAY_METHOD_NM,
+		    ORD.TOT_PRICE,
+		    ORD.ORD_DATE,
+		    CASE 
+		    	WHEN ORD.ORD_STATUS = '1' THEN '주문접수'
+		    	WHEN ORD.ORD_STATUS = '2' THEN '결제완료'
+		    	WHEN ORD.ORD_STATUS = '3' THEN '배송준비중'
+		    	WHEN ORD.ORD_STATUS = '4' THEN '배송처리'
+		    	WHEN ORD.ORD_STATUS = '5' THEN '배송완료'
+		    	WHEN ORD.ORD_STATUS = '6' THEN '주문취소'
+		    	WHEN ORD.ORD_STATUS = '7' THEN '취소요청'
+		    	WHEN ORD.ORD_STATUS = '8' THEN '취소완료'
+		    	WHEN ORD.ORD_STATUS = '9' THEN '교환요청'
+		    	WHEN ORD.ORD_STATUS = '10' THEN '교환완료'
+		    	WHEN ORD.ORD_STATUS = '11' THEN '미주문'
+		    	ELSE ''
+		    END AS ORD_STATUS_NM,
+		    ORD.REG_DATE
+		FROM
+		    ORD_ORDER ORD
+	    WHERE ORD_NO = #{ORD_NO} AND ORD_STATUS = #{ORD_STATUS} AND PAY_METHOD = #{PAY_METHOD} AND DATE_FORMAT(ORD_DATE, '%Y-%m-%d') BETWEEN  #{ORD_DATE_BEFORE} AND #{ORD_DATE_AFTER}
 <!-- 		WHERE -->
 <!-- 		    DEL_YN = 'N'     -->
 <!-- 		ORDER BY ${sidx} ${sord} -->

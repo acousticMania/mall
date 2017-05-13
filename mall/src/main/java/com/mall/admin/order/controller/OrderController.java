@@ -29,19 +29,21 @@ import com.mall.sample.service.SampleService;
 public class OrderController {
 
 	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
-	
+
 	@Resource
 	private OrderService orderService;
-	
+
 	@RequestMapping(value="/admin/order/orderList")
 	public String orderList(@RequestParam Map<String, Object> paramMap) {
 		return "/admin/order/orderList.tiles";
 	}
-	
+
 	@RequestMapping(value="/admin/order/orderListJson", produces = {"application/json"})
 	public ModelAndView orderListJson(@RequestParam Map<String, Object> paramMap) {
 		paramMap.put("PAGE_INDEX", paramMap.get("page"));
 		paramMap.put("PAGE_ROW", paramMap.get("rows"));
+		
+		
 		ModelAndView mv = new ModelAndView();
 		List<Map<String, Object>> list = orderService.selectOrderList(paramMap);
 		int rows = Integer.parseInt(paramMap.get("rows").toString());
@@ -56,11 +58,19 @@ public class OrderController {
 		mv.addObject("TOTAL_PAGE", total_page);
 		return mv;
 	}
-	
+
 	@RequestMapping(value="/admin/order/orderListJson2", produces = {"application/json"})
 	public ModelAndView orderListJson2(@RequestParam Map<String, Object> paramMap) {
 		ModelAndView mv = new ModelAndView();
-		List<Map<String, Object>> list = orderService.selectOrderList(paramMap);
+		//System.out.println("출력"+paramMap.get("ORD_NO"));
+		//System.out.println("출력2"+paramMap.get("ORD_DATE_BEFORE"));
+		//System.out.println("출력3"+paramMap.get("ORD_DATE_AFTER"));
+
+		logger.info("출력1"+paramMap.get("ORD_NO"));
+		logger.info("출력2"+paramMap.get("ORD_DATE_BEFORE"));
+		logger.info("출력3"+paramMap.get("ORD_DATE_AFTER"));
+
+		List<Map<String, Object>> list = orderService.selectSearchOrderList(paramMap);
 		int totalCount = orderService.selectOrderTotalCount(paramMap);
 		logger.info("totalCount : " + totalCount);
 		logger.info("list size : " + list.size());
@@ -69,15 +79,15 @@ public class OrderController {
 		mv.addObject("TOTAL", totalCount);
 		return mv;
 	}
-	
+
 	@RequestMapping(value="/admin/order/updateOrderStatus", produces = {"application/json"})
 	public ModelAndView updateOrderStatus(@RequestParam Map<String, Object> paramMap) {
 		ModelAndView mv = new ModelAndView();
 		int cnt = orderService.updateOrderStatus(paramMap);
-//		int totalCount = orderService.selectOrderTotalCount(paramMap);
-//		logger.info("totalCount : " + totalCount);
-//		logger.info("list size : " + list.size());
-//		logger.info("list : " + list);
+		//		int totalCount = orderService.selectOrderTotalCount(paramMap);
+		//		logger.info("totalCount : " + totalCount);
+		//		logger.info("list size : " + list.size());
+		//		logger.info("list : " + list);
 		String result = "fail";
 		if(cnt > 0) result = "ok";
 		mv.addObject("result", result);

@@ -27,6 +27,11 @@ public class OrderService {
 		return orderDao.selectOrderList(map);
 	}
 	
+	public List<Map<String, Object>> selectSearchOrderList(Map<String, Object> map) {
+		return orderDao.selectSearchOrderList(map);
+	}
+	
+	
 	public int selectOrderTotalCount(Map<String, Object> map) {
 		return orderDao.selectOrderTotalCount(map);
 	}
