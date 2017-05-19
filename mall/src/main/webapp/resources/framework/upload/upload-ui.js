@@ -1,12 +1,12 @@
 
-$.widget("ui.naonUpload", {
+$.widget("ui.twestUpload", {
 	uploadManager : null,
 	totalSize : 0,
 	totalNumberOfFile : 0,
 	uploadComponentName : 'uploadComponent', 
 	
 	options : {
-		dialogName : 'naonUploadLayer_',
+		dialogName : 'twestUploadLayer_',
 		uploadComponentNameSpace : 'uploadComponentTarget_',
 		allowId : '',
 		type : 1,
@@ -56,7 +56,7 @@ $.widget("ui.naonUpload", {
 			this.uploadManager.init();
 		}else{
 			try{
-				this.uploadManager = $('#'+this.options.allowId).naonUpload('getUploadManager');
+				this.uploadManager = $('#'+this.options.allowId).twestUpload('getUploadManager');
 			}catch(e){
 				this.uploadManager = UploadManager.instance();
 				this.uploadManager.init();

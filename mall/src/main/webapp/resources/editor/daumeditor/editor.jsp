@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% pageContext.setAttribute("LF1", "\n"); %>
 <% pageContext.setAttribute("LF2", "\r"); %>
-<input id="txtaContent" name="txtaContent" style="display:none"/>
+<!-- <input id="txtaContent" name="txtaContent" style="display:none"/> -->
 <%-- <%@ include file="/docs/component/daum_editor/editor.jsp"%> --%>
 
     <!--
@@ -112,6 +112,17 @@
 			if(a != '') html +=' alt="' + a + '"';
 			html += '/></a><div>';
 			_addHtmlToEditor(html);
+		}
+		
+		function _getTxtaContent(){
+			var h = document.getElementById("txtaContent").value;
+			h = h.replace(/&lt;/gi,"<");
+			h = h.replace(/&gt;/gi,">");
+			h = h.replace(/&quot;/gi,"\"");
+			h = h.replace(/&2l2t2;/gi,"&lt;");
+			h = h.replace(/&2g2t2;/gi,"&gt;");
+			h = h.replace(/&2q2u2o2t2;/gi,"&quot;");
+			return h.replace(/&amp;/gi,"&");
 		}
 	</script>
 
@@ -568,7 +579,7 @@ if(v.indexOf("<script") != -1){
 		_createEditor(getFormName() , "${EDITOR_MODULE}" , "", "${EDITOR_HEIGHT}", content);
 	</c:when>
 	<c:otherwise>
-		_createEditor(getFormName() , "12st" , "", "300", content);
+		_createEditor(getFormName() , "daumEditor" , "", "300", content);
 	</c:otherwise>
 </c:choose>
 

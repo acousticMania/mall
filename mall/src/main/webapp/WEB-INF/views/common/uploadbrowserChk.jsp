@@ -45,9 +45,9 @@
 		var uri = '${BASE_URI}';
 
 		if (uri.indexOf('appEditByFormlet.jsp') != -1 || uri.indexOf('appChgByFormlet.jsp') != -1) {
-			jQuery('#fileupload1').naonUpload('appendFiles', fileInfoList);
+			jQuery('#fileupload1').twestUpload('appendFiles', fileInfoList);
 		} else {
-			jQuery('#fileupload1').naonUpload('appendFiles', fileInfoList);
+			jQuery('#fileupload1').twestUpload('appendFiles', fileInfoList);
 		}
 	}
 

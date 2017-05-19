@@ -14,6 +14,12 @@
 <title>에디터 이미지 업로드</title>
 <link rel="stylesheet" href="/resources/component/html5upload/css/jquery.fileupload-ui.css"></link>
 <link rel="stylesheet" href="/resources/framework/css/basic.css"></link>
+<script type="text/javascript">
+var frameworkProperties = {
+	context: '${pageContext.request.contextPath}',
+	serverUrl : 'http://localhost'
+};
+</script>
 
 <script type="text/javascript" src="/resources/js/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="/resources/i18n/ko/commonMessages.js"></script>
@@ -40,7 +46,7 @@ $(function() {
 		    if (navigator.userAgent.indexOf("MSIE") > 0) {
 		     $('body').addClass('ie');
 		     }
-		    $('#editorImgUpload').naonUpload({
+		    $('#editorImgUpload').twestUpload({
 				type : 1,
 				buttonType : 'default',
 				uploadUrl: '/common/editor/upload',
@@ -53,12 +59,11 @@ $(function() {
 				uploadType: 'image',
 				fileInfo:  [],
 				uploadedCallback : function(){
-					debugger;
 					var htmls = [];
-					var fileList  = $('#editorImgUpload').naonUpload('getFileInfos');
+					var fileList  = $('#editorImgUpload').twestUpload('getFileInfos');
 					for(var i=0 ; i <fileList.length;i++){
 						var file = fileList[i];				
-						var afileUrl = "/common/editor/fileView?module="+opener.imgMode+"&fileUrl="+file.fileUrl+"&fileName="+file.localFileName;
+						var afileUrl = frameworkProperties.serverUrl+frameworkProperties.context+"/common/editor/fileView?module="+opener.imgMode+"&fileUrl="+encodeURIComponent(file.fileUrl)+"&fileName="+encodeURIComponent(file.localFileName);
 						if(opener.imgMode == 'brd'){
 							 opener.addImageInfo({
 								localFileName: file.localFileName,
@@ -80,7 +85,7 @@ $(function() {
 
 			//업로드 호출.
 			$('#uploadBtn').click(function(){
-				$('#editorImgUpload').naonUpload('upload');
+				$('#editorImgUpload').twestUpload('upload');
 			});
 			$('#daumImgUpload_close').click(function(){
 				self.close();
@@ -96,7 +101,7 @@ $(function() {
 		     $('body').addClass('ie');
 		     }
 		    var peditor = _opener._getNgwEditor(editorName);
-		    $('#editorImgUpload').naonUpload({
+		    $('#editorImgUpload').twestUpload({
 				type : 1,
 				buttonType : 'default',
 				uploadUrl: '${pageContext.request.contextPath}/service/file/upload',
@@ -110,7 +115,7 @@ $(function() {
 				fileInfo:  [],
 				uploadedCallback : function(){
 					var htmls = [];
-					var fileList  = $('#editorImgUpload').naonUpload('getFileInfos');
+					var fileList  = $('#editorImgUpload').twestUpload('getFileInfos');
 					for(var i=0 ; i <fileList.length;i++){
 						var file = fileList[i];				
 						var afileUrl = frameworkProperties.serverUrl+"${pageContext.request.contextPath}/service/file/fileView?module="+peditor.attr.module+"&fileUrl="+file.fileUrl+"&fileName="+file.localFileName;		
@@ -133,7 +138,7 @@ $(function() {
 
 			//업로드 호출.
 			$('#uploadBtn').click(function(){
-				$('#editorImgUpload').naonUpload('upload');
+				$('#editorImgUpload').twestUpload('upload');
 			});
 			$('#daumImgUpload_close').click(function(){
 				self.close();

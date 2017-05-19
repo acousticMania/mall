@@ -65,6 +65,17 @@ var frameworkProperties = {
 	}
 	 
 	function fn_insertBoard(){
+		if (!_editorLoad) {
+			$("#contents").value = _getTxtaContent();
+			return;
+		}
+		
+		var sHtml = _getEditorHtml();
+		if (sHtml == '') return;
+		if (editorMode != 'tagfree' && editorMode != 'script')
+//			_getImgSeqList(sHtml);
+		$("#contents").val(sHtml);
+		
 	    var comSubmit = new ComSubmit("frm");
 	    comSubmit.setUrl("<c:url value='/sample/insertBoard' />");
 	    comSubmit.submit();
@@ -100,6 +111,12 @@ var frameworkProperties = {
     	<div class="panel-body">
     		<span>내용</span>
 <!--     		<textarea title="내용" id="CONTENTS" name="CONTENTS" rows="20" cols="100" class="form-control" ></textarea> -->
+			<c:set var="EDITOR_MODULE" value="daumEditor" />
+			<c:set var="EDITOR_HEIGHT" value="150" />
+			<c:set var="EDITOR_CONTENT" value="" />
+			
+			
+			<input type="hidden" id="contents" name="contents" value=""/>
 			<%@ include file="/resources/editor/daumeditor/editor.jsp"%>
     	</div>
         <div class="panel-body">

@@ -23,7 +23,7 @@ import com.naon.framework.util.StringUtil;
 @Service
 public class FileService {
 
-	private static final String filePath = "D:\\project\\file\\";
+	private static final String filePath = "C:\\project\\file\\";
 	private static final String BASE_DIR = "uploadDir";
 	private static final String TEMP_DIR = "temp";
 	private static final String PATTERN = "\\"+File.separator+"\\.\\.\\"+File.separator;
