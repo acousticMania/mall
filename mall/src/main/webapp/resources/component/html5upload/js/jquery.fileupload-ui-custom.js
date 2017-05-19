@@ -82,7 +82,7 @@
                 for (i=0; file=o.files[i]; i++) {
                     rowArray.push('<tr class="template-download ">');
                     if (o.options.uploadType === 'image') {
-                        imgUrl = file.thumbUrl || (frameworkProperties.context+'/inc/file/fileView?fileUrl='+ file.url + '&fileName=' + file.fileName);
+                        imgUrl = file.thumbUrl || ('/common/editor/fileView?fileUrl='+ file.url + '&fileName=' + file.fileName);
                         rowArray.push('<td class="preview"><img src="'+ imgUrl +'" width="80" height="60"></td>');
                     } else {
                         rowArray.push('<td class="preview"></td>');

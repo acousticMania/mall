@@ -43,7 +43,7 @@ $(function() {
 		    $('#editorImgUpload').naonUpload({
 				type : 1,
 				buttonType : 'default',
-				uploadUrl: '${pageContext.request.contextPath}/common/editor/upload',
+				uploadUrl: '/common/editor/upload',
 				module: opener.imgMode,
 				subModule: 'image',
 				allowedExtension: 'jpg,jpeg,png,gif',
@@ -53,11 +53,12 @@ $(function() {
 				uploadType: 'image',
 				fileInfo:  [],
 				uploadedCallback : function(){
+					debugger;
 					var htmls = [];
 					var fileList  = $('#editorImgUpload').naonUpload('getFileInfos');
 					for(var i=0 ; i <fileList.length;i++){
 						var file = fileList[i];				
-						var afileUrl = frameworkProperties.serverUrl+"${pageContext.request.contextPath}/service/file/fileView?module="+opener.imgMode+"&fileUrl="+file.fileUrl+"&fileName="+file.localFileName;
+						var afileUrl = "/common/editor/fileView?module="+opener.imgMode+"&fileUrl="+file.fileUrl+"&fileName="+file.localFileName;
 						if(opener.imgMode == 'brd'){
 							 opener.addImageInfo({
 								localFileName: file.localFileName,
