@@ -17,6 +17,12 @@
 	    <property name="cacheSeconds" value="60"/>
 	    <property name="fallbackToSystemLocale" value="true"/> <!-- false = message.properties만적용됨 -->
     </bean>
+    
+    <bean id="msAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+        <constructor-arg>
+            <ref local="messageSource" />
+        </constructor-arg>
+    </bean>
    
     <bean id="localeResolver"
     	class="org.springframework.web.servlet.i18n.CookieLocaleResolver" >
