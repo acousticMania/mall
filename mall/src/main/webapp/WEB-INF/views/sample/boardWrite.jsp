@@ -74,7 +74,7 @@ var frameworkProperties = {
 		if (sHtml == '') return;
 		if (editorMode != 'tagfree' && editorMode != 'script')
 //			_getImgSeqList(sHtml);
-		$("#contents").val(sHtml);
+		$("#CONTENTS").val(sHtml);
 		
 	    var comSubmit = new ComSubmit("frm");
 	    comSubmit.setUrl("<c:url value='/sample/insertBoard' />");
@@ -110,13 +110,7 @@ var frameworkProperties = {
     	</div>
     	<div class="panel-body">
     		<span>내용</span>
-<!--     		<textarea title="내용" id="CONTENTS" name="CONTENTS" rows="20" cols="100" class="form-control" ></textarea> -->
-			<c:set var="EDITOR_MODULE" value="daumEditor" />
-			<c:set var="EDITOR_HEIGHT" value="150" />
-			<c:set var="EDITOR_CONTENT" value="" />
-			
-			
-			<input type="hidden" id="contents" name="contents" value=""/>
+			<input type="hidden" id="CONTENTS" name="CONTENTS" value=""/>
 			<%@ include file="/resources/editor/daumeditor/editor.jsp"%>
     	</div>
         <div class="panel-body">
