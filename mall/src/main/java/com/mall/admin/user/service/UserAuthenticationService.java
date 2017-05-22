@@ -35,17 +35,30 @@ public class UserAuthenticationService extends QueryMapper implements UserDetail
 	
 
 
-
+	/**
+	 * 사용자 접근권한 설정
+	 */
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
 		
-		Map<String, Object> user = userDao.selectUser(username);
-		if(user == null) throw new UsernameNotFoundException(username);
+		Map<String, Object> user = userDao.selectUser(loginId);
+		if(user == null) throw new UsernameNotFoundException(loginId);
 		logger.info(user.toString());
-		boolean bol = (Long)user.get("enabled") == 1;
+		boolean bol = user.get("status").equals("R");
+		String userKind = (String)user.get("userKind");
+		
+		// 권한별 권한 리스트 추가
 		List<GrantedAuthority> gaList = new ArrayList<GrantedAuthority>();
-		gaList.add(new SimpleGrantedAuthority(user.get("authority").toString()));
-		return new UserDetailsVO(user.get("username").toString(), user.get("password").toString(), bol, true, true, true, gaList);
+		if(userKind.equals("ADMIN")){
+			gaList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}else if(userKind.equals("SELLER")){
+			gaList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}else{
+			gaList.add(new SimpleGrantedAuthority("permitAll"));
+		}
+		
+		// 사용자에 따라 권한 리스트 추가
+		return new UserDetailsVO(user.get("loginId").toString(), user.get("password").toString(), bol, true, true, true, gaList);
 	}
 
 }

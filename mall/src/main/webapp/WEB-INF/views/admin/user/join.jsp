@@ -20,84 +20,32 @@
 	<!-- Custom CSS -->
 	<link href="/css/admin.css" rel="stylesheet">
 	
-	
 	<!-- Custom Fonts -->
 	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	
 	<!-- favicon -->
 	<link rel="shortcut icon" href="/resources/images/favicon.ico" />
-	
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	    <![endif]-->
-	<!-- jQuery -->
-    <script src="/js/jquery.js"></script>
 
+	<!-- jQuery -->
+	<link rel="stylesheet" href="/resources/js/validation/css/screen.css" />
+    <script src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/resources/js/validation/jquery.validate.min.js"></script>
+	
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
     
-	<script type="text/javascript">
-		$(document).ready(function (){
-			$("#join").on("click", function(e) {
-				e.preventDefault();
-				fn_validation();
-// 				fn_exeLogin();
-			});
-
-			$("#form input").keypress(function (key) {
-				if(key.keyCode == 13) {
-					fn_validation();
-				}
-			});
-		});
-		
-		function fn_exeLogin() {
-			
-			var form = $("#form")[0];
-			form.action = "<c:url value='/admin/user/doLogin' />";
-			form.method = "post";
-			form.submit();
-		}
-		
-		function fn_validation() {
-			if($("USER_ID").val() == "") {
-				alert("아이디를 입력해주세요");
-				$("#USER_ID").focus();
-			} else if($("#EMAIL").val() == "") {
-				//다국어 적용할지 고민해봐야함 일단 한글적용 
-				//by 명석
-				alert("로그인 이메일를 입력해주세요");
-				$("#EMAIL").focus();	
-			} else if($("#USER_PWD").val() == "") {
-				alert("로그인 비밀번호를 입력해주세요");
-				$("#USER_PWD").focus();
-				
-			}
-			
-			var form = $("#form")[0];
-// 			form.action = "<c:url value='/admin/main/main' />";
-// 			form.action = "<c:url value='/admin/main/login' />";
-			form.action = "<c:url value='/admin/user/insertUser' />";
-// 			form.action = "<c:url value='/admin/main/dologin' />";
-			form.method = "post";
-			form.submit();
-		}
-		
-			
-	
-	</script>
-
-
+    <script src="/resources/mall/admin/user/join.js"></script>
 </head>
-
 <body>
+<<<<<<< HEAD
 	<input type="hidden" id ="pwCheck" name="pwCheck" value="${pwCheck }">
     <div class="container">
         <div class="row"> 
             <div class="col-md-4 col-md-offset-4">
+=======
+	<input type="hidden" id="dupChk" name="" value="N">
+            <div class="col-md-4 col-md-offset-4" style="width: 650px; margin-top: 20px;" >
+>>>>>>> refs/remotes/origin/develop-1.0
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">회원가입</h3>
@@ -105,6 +53,7 @@
                     <div class="panel-body">
                         <form role="form" id="form" name="form">
                         	<table style="width: 600px; border-collapse: collapse; border-spacing: 0px;" >
+<<<<<<< HEAD
                         		<tr >
                         			<th style="width: 150px;  vertical-align: middle; min-height: 28px; font-weight: bold;">로그인 아이디</th>
                         			<td style="width: 450px;; padding: 10px;" ><input style="margin-right: 10px; width: 200px;" id="LOGIN_ID" name="LOGIN_ID" type="text" autofocus><input style="width: 80px;" type="button" id="findAddrFn" name="findAddrFn" onclick="idDupChk()" value="중복체크"></td>	
@@ -158,24 +107,57 @@
                                 <!-- Change this to a button or input when using this as a form -->
                                 <a href="#" class="btn btn-lg btn-success btn-block" id="join">join</a>
                             </fieldset>
+=======
+                        		<tr>
+                        			<th style="width: 150px;  vertical-align: middle; min-height: 28px; font-weight: bold;">로그인 아이디</th>
+                        			<td style="width: 450px;; padding: 10px;" ><input class="form-control" placeholder="아이디를 입력해주세요." style="margin-right: 10px; padding-left:10px; width: 180px;" id="login_id" name="login_id" type="text" onchange="chgLoginId()" autofocus><input style="width: 80px; margin-left: 10px;" type="button" id="findAddrFn" name="findAddrFn" onclick="idDupChk()" value="중복체크"></td>	
+                        		</tr>
+                        		<tr>
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">사용자 이름</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="user_name" placeholder="이름을 입력해주세요." name="user_name" type="text"></td>	
+                        		</tr>
+                        		<tr>
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">비밀번호</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" placeholder="비밀번호를 입력해주세요." id="passwd" name="passwd" type="password"></td>	
+                        		</tr>
+                        		<tr>
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">비밀번호 확인</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" placeholder="비밀번호를 다시한번 입력해주세요." id="passwd_check" name="passwd_check" type="password"></td>	
+                        		</tr>
+                        		<tr>
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">이메일</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" placeholder="이메일을 입력해주세요." id="email" name="email" type="text"></td>	
+                        		</tr>
+                        		<tr>
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">이동전화</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="cellphone_no" name="cellphone_no" placeholder="휴대폰 번호(-제외)" type="text" maxlength="11" ></td>	
+                        		</tr>
+                        		<tr>
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">질문</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" placeholder="질문을 입력해주세요." id="question" name="question" type="text"></td>	
+                        		</tr>
+                        		<tr>
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">답</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" placeholder="답변을 입력해주세요." id="answer" name="answer" type="text"></td>	
+                        		</tr>
+                        		<tr>
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">우편번호</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" style="margin-right: 10px; width: 100px;"  id="zipocde" name="zipocde" type="text"><input style="width: 60px; margin-left: 10px;" type="button" id="findAddrFn" name="findAddrFn" onclick="addrPop()" value="주소찾기"></td>	
+                        		</tr>
+                        		<tr>
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">주소</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="addr1" name="addr1" type="text"></td>	
+                        		</tr>
+                        		<tr>
+                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">상세주소</th>
+                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="addr2" name="addr2" type="text"></td>	
+                        		</tr>
+                        	</table>
+                                <input class="btn btn-lg btn-success btn-block" type="submit" id="join" value="회원가입">
+>>>>>>> refs/remotes/origin/develop-1.0
                         </form>
-                        <c:if test="${not empty param.fail}">
-                        	<div>
-                        		<font color="red">
-                        			<label>Your login attemp was ont successful, try again.</label>
-                        			<label>Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</label>
-                        		</font>
-                        		<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION"/>
-                        	</div>
-                        </c:if>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-   
-
 </body>
-
 </html>

@@ -2,68 +2,104 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mall.admin.user.UserDao">
 	<insert id="insertUser" parameterType="map">
-		INSERT INTO MBR_MEMBER (
-			  USER_ID
-			, PHONE
-			, USER_NM
-			, USER_PWD
+		INSERT INTO MBR_USER (
+			  LOGIN_ID
+			, USER_NAME
+			, PASSWD
+			, USER_KIND
+			, RES_NO
+			, HOMEPHONE_NO
+			, CELLPHONE_NO
+			, ZIPCODE
+			, ADDR1
+			, ADDR2
+			, STATUS
 			, EMAIL
-			, ADDR
-			, COMPANY
-			, DEPARTMENT
-			, SEX
-			, BIRTH_YMD
-			, USER_TP
-			, GRADE
-			, FACEBOOK_ID
-			, GOOGLE_ID
-			, RECEIPT_YN
-			, ORDER_YN
-			, TRANS_YN
-			, LEAVE_PROG
-			, LEAVE_YMD
-			, USE_YN
-			, ENABLED
-			, AUTHORITY
-			, REG_ID
+			, RECOM_LOGINID
+			, USER_LEVEL
+			, SELLER_LEVEL
+			, SELLER_CREDIT_LEVEL
+			, QUESTION
+			, ANSWER
+			, BIRTHDAY
+			, ACCOUNT_NUM
+			, CORP_NUM
+			, USER_LEVEL_POINT
+			, SELLER_LEVEL_POINT
+			, SELLER_CREDITLEVEL_POINT
 			, REG_DATE
-			, MOD_ID
+			, CHG_DATE
 		)
 		SELECT
-			 #{USER_ID}
+			 #{login_id}
+			, #{user_name}
+			, #{passwd}
+			, 'ADMIN'
 			, ''
-			, ''
-			, #{USER_PWD}
-			, #{EMAIL}
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, ''
-			, 'Y'
-			, 1
-			, 'ROLE_ADMIN'
-			, #{USER_ID}
+			, #{homephone_no}
+			, #{cellphone_no}
+			, #{zipcode}
+			, #{addr1}
+			, #{addr2}
+			, 'R'
+			, #{email}
+			, #{recom_loginid}
+			, '1'
+			, '1'
+			, '1'
+			, #{question}
+			, #{answer}
+			, #{birthday}
+			, #{account_num}
+			, #{corp_num}
+			, 0
+			, 0
+			, 0
 			, NOW()
-			, ''
+			, NOW()
 	</insert>
 	
 	<select id="selectUser" parameterType="string" resultType="Map">
 		SELECT
-			  EMAIL AS username
-			, USER_PWD AS password
-			, ENABLED AS enabled
-			, AUTHORITY AS authority
-		FROM MBR_MEMBER
-		WHERE EMAIL = #{username}
+			  LOGIN_ID AS loginId
+			, PASSWD AS password
+			, STATUS AS status
+			, USER_KIND AS userKind
+		FROM MBR_USER
+		WHERE login_id = #{username}
+	</select>
+	<select id="selectUserAll" parameterType="Map" resultType="Map">
+		SELECT
+			  USER_NM 
+			, USER_ID
+			, EMAIL
+			, GRADE
+		FROM MBR_USER
+	</select>
+	<select id="checkLoginId" parameterType="map" resultType="map">
+		SELECT 
+			LOGIN_ID
+		FROM MBR_USER
+		WHERE LOGIN_ID = #{login_id}	
+	</select>
+	<select id="findLoginId" parameterType="map" resultType="map">
+		SELECT 
+			login_id,
+			user_name,
+			email
+		FROM MBR_USER
+		WHERE USER_NAME = #{user_name}
+		AND   EMAIL     = #{email}	
+	</select>
+	<select id="findPassWd" parameterType="map" resultType="map">
+		SELECT 
+			user_name,
+			login_id,
+			passwd,
+			email
+		FROM MBR_USER
+		WHERE LOGIN_ID = #{login_id}
+		AND   ANSWER   = #{answer}
+		AND   EMAIL     = #{email}	
 	</select>
 </mapper>

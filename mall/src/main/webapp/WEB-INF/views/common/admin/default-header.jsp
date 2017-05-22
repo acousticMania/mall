@@ -15,7 +15,7 @@
 		    <li><a href="#"><i class="fa fa-fw fa-envelope"></i> 게시물<span   class="badge">2</span></a></li>
 		    <li><a href="#"><i class="fa fa-fw fa-shopping-cart"></i> 주문<span class="badge">102</span></a></li>
 		    <li class="divider"></li>
-		    <li><a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
+		    <li><a href="/admin/user/login"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
 	    </ul>
 	    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 	    <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -72,7 +72,7 @@
 			    </li>
 			    <li><a href="javascript:;" data-toggle="collapse" data-target="#event"><i class="fa fa-fw fa-tags"></i> 이벤트<i  class="fa fa-fw fa-caret-down"></i></a>
 				    <ul id="event" class="collapse">
-					    <li><a href="/admin/event/eventList">이벤트관리</a></li>
+					    <li><a href="/admin/event/viewEventList">이벤트관리</a></li>
 					    <li><a href="#">배너관리</a></li>
 				    </ul>
 			    </li>

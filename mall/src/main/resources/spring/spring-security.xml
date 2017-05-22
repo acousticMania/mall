@@ -13,16 +13,20 @@
 		
                         
 	<security:http auto-config="true" use-expressions="true">
-		<security:intercept-url pattern="/admin/user/**" access="permitAll"/>
-<!-- 		<security:intercept-url pattern="/admin/main/**" access="permitAll"/> -->
-		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-		<security:intercept-url pattern="/**" access="permitAll"/>
+	<security:intercept-url pattern="/admin/user/**" access="permitAll"/>
+	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+	<security:access-denied-handler error-page="/common/accessDeniedPag" />
+	<!-- <security:intercept-url pattern="/user/**" access="ROLE_USER"/> -->
+	<!-- <security:intercept-url pattern="/**" access="permitAll"/> -->
+	<!-- <security:intercept-url pattern="/user/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
+	
+	
 		<security:form-login
 			login-page="/admin/user/login"
 			always-use-default-target="true"
 			default-target-url="/admin/main/main"
 			authentication-failure-url="/admin/main/login?fail=true"
-			username-parameter="email"
+			username-parameter="login_id"
 			password-parameter="password"
 			/>
 		<security:session-management invalid-session-url="/admin/user/login" >

@@ -8,7 +8,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<ol class="breadcrumb">
-							<li class="active"><i class="fa fa-user"></i> 회원</li>
+							<li class="active"><i class="fa fa-user" onclick="orgPop()" style="cursor: pointer;" ></i> 회원</li>
 							<li class="active"> 회원관리</li>
 						</ol>
 					</div> 
@@ -123,3 +123,10 @@
 
 		</div>
 		<!-- /#page-wrapper -->
+		
+<script>
+	function orgPop(){
+		window.open("/admin/extTest","orgPop","width=400,height=600");
+		
+	}
+</script>

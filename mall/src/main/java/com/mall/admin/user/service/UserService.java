@@ -1,5 +1,6 @@
 package com.mall.admin.user.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,6 +24,29 @@ public class UserService {
 	 */
 	public void insertUser(Map<String, String> paramMap) {
 		userDao.insertUser(paramMap);
+	}
+	
+	public List<Map<String, Object>> selectUserAll(){
+		
+		return userDao.selectUserAll();
+	}
+	
+	public int checkLoginId(Map<String, String> paramMap){
+		
+		int resultVal;
+		Map<String, Object> sqlData= userDao.checkLoginId(paramMap);
+		resultVal = sqlData != null?sqlData.size():0;
+		return resultVal;
+	}
+	
+	public List<Map<String, Object>> selectLoginId(Map<String, String> paramMap){
+		
+		return userDao.selectLoginId(paramMap);
+	}
+	
+	public Map<String, Object> selectPassWd(Map<String, String> paramMap){
+		
+		return userDao.selectPassWd(paramMap);
 	}
 
 }

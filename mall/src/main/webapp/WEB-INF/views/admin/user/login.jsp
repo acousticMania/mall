@@ -27,14 +27,10 @@
 	<!-- favicon -->
 	<link rel="shortcut icon" href="/resources/images/favicon.ico" />
 	
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	    <![endif]-->
 	<!-- jQuery -->
     <script src="/js/jquery.js"></script>
+	
+	<script src="/resources/mall/admin/user/login.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
@@ -44,7 +40,6 @@
 			$("#login").on("click", function(e) {
 				e.preventDefault();
 				fn_validation();
-// 				fn_exeLogin();
 			});
 
 			$("#form input").keypress(function (key) {
@@ -53,50 +48,22 @@
 				}
 			});
 			
-			$("#join").attr("href", "<c:url value='/admin/user/doJoin' />")
+			var height = 500;
+			var width = 400;
+			var top = (screen.availHeight - height) / 2;
+		    var left = (screen.availWidth - width) / 2;	
 			
-// 			var pwCheck = "${pwCheck}";
+			$("#join").attr("href", "<c:url value='/admin/user/doJoin' />");
+			$("#findId").on("click", function(e) {
+				window.open("/admin/user/findIdView","findIdView","width="+width+",height="+height+",left="+left+",top="+top);
+			});
+			$("#findPwd").on("click", function(e) {
+				window.open("/admin/user/findPwdView","findPwdView","width="+width+",height="+height+",left="+left+",top="+top);
+			});
 			
-// 			console.log(pwCheck);
-			
-// 			if(pwCheck==""){
-				
-// 			}else {
-// 				alert("<spring:message code='admin.alert.error' text='로그인에 실폐하였습니다.'/>");
-// 			}
 		});
 		
-		function fn_exeLogin() {
-			
-			var form = $("#form")[0];
-			form.action = "<c:url value='/admin/user/doLogin' />";
-			form.method = "post";
-			form.submit();
-		}
 		
-		function fn_validation() {
-			if($("#email").val() == "") {
-				//다국어 적용할지 고민해봐야함 일단 한글적용 
-				//by 명석
-				alert("로그인 아이디를 입력해주세요");
-				$("#email").focus();	
-			} else if($("#password").val() == "") {
-				alert("로그인 비밀번호를 입력해주세요");
-				$("#password").focus();
-				
-			}
-			
-			var form = $("#form")[0];
-// 			form.action = "<c:url value='/admin/main/main' />";
-// 			form.action = "<c:url value='/admin/main/login' />";
-			form.action = "<c:url value='/j_spring_security_check' />";
-// 			form.action = "<c:url value='/admin/main/dologin' />";
-			form.method = "post";
-			form.submit();
-		}
-		
-			
-	
 	</script>
 
 
@@ -110,24 +77,25 @@
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><img class="img-thumbnail" width="80px" src="/images/logo.png" alt="" ></h3>
-                        <a href="#" id="join">회원가입</a>
+                        <a href="#" id="join">회원가입</a>&nbsp;/&nbsp;<a href="#" id="findId">아이디 찾기</a>&nbsp;/&nbsp;<a href="#" id="findPwd">비밀번호 찾기</a>
                     </div>
                     <div class="panel-body">
                         <form role="form" id="form" name="form">
                             <fieldset>
+                            <!-- 추후에 회원가입 로직 완료 시 LOGIN_ID로 변경 -->
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" id="email" name="email" type="email" autofocus>
+                                    <input class="form-control" placeholder="login_id" id="login_id" name="login_id" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" id="password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Password" id="password" name="password" type="password">
                                 </div>
-                                <div class="checkbox">
+                                <div style="display: none;" class="checkbox">
                                     <label>
                                         <input name="remember" type="checkbox" value="Remember Me">저장하기
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="#" class="btn btn-lg btn-success btn-block" id="login">Login</a>
+                                <a href="#" class="btn btn-lg btn-success btn-block" id="login">로그인</a>
                             </fieldset>
                         </form>
                         <c:if test="${not empty param.fail}">
@@ -144,9 +112,6 @@
             </div>
         </div>
     </div>
-
-   
-
 </body>
 
 </html>
