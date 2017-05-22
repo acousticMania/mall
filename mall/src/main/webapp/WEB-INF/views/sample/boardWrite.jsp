@@ -111,7 +111,7 @@ var frameworkProperties = {
     	<div class="panel-body">
     		<span>내용</span>
 			<input type="hidden" id="CONTENTS" name="CONTENTS" value=""/>
-			<%@ include file="/resources/editor/daumeditor/editor.jsp"%>
+			<%@ include file="/resources/editor/daumeditor/editor.jsp"%> 
     	</div>
         <div class="panel-body">
         	<div id="fileDiv" class="row">

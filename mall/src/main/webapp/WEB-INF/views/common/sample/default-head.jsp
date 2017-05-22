@@ -7,6 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <title>2016_Study</title>
+
+<script type="text/javascript" src="/resources/extjs/ext-all.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/extjs//theme-classic/resources/theme-classic-all.css"/>
+<script type="text/javascript" src="/resources/extjs/theme-classic/theme-classic.js"></script>
+
 <script type="text/javascript" src="<study:url value="/resources/js/jquery/jquery-1.10.2.js"/>"></script>
 <%-- <script type="text/javascript" src="<study:url value="/resources/js/jquery-1.9.1.min.js"/>"></script> --%>
 <%-- <link rel="stylesheet" type="text/css" href="<study:url value="/resources/css/ext-all.css"/>"/> --%>
@@ -29,15 +34,6 @@
 
 <!-- Extjs js -->
 <script type="text/javascript" src="/resources/js/ext-6.2.1/build/ext-all.js"></script>
-
-
-<!-- 파일업로드 관련 -->
-
-
-
-
-
-
 
 <script type="text/javascript">
 
