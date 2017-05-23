@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.sys.code.dao">
+	<select id="selectGrpCodeList" parameterType="map" resultType="map">
+		SELECT
+			  grp_cd
+			, sys_type
+			, use_yn
+			, name
+		FROM
+			CMM_GRP_CODE , CMM_CODE_RESOURCE
+		WHERE 
+			1=1
+			AND TABLE_ID = 'cmm_grp_code'
+			AND REF_ID = grp_cd
+			AND locale = 'ko'
+			AND ${searchTrg} like CONCAT('%',#{searchKeyword},'%')
+			
+			 			
+	</select>
+	
+	<insert id="insertGrpCode" parameterType="map">
+		INSERT INTO CMM_GRP_CODE 
+		VALUES(#{grp_cd},#{sys_type},#{use_yn},'','','',now(),now())
+	</insert>
+
+	<insert id="insertCodeResource" parameterType="map">
+		INSERT INTO CMM_CODE_RESOURCE VALUES(#{table_id},#{ref_id},'ko',#{name},#{description},'','','','','',now(),now())
+	</insert>
+	
+	<insert id="insertCode" parameterType="map">
+		INSERT INTO CMM_CODE VALUES(#{cd_sys_id},#{grp_cd},#{cd},#{use_yn},'','','',now(),now())
+	</insert>
+	
+	
+	<select id="selectCodeList" parameterType="map" resultType="map">
+		SELECT
+			  cd_sys_id
+			, cd
+			, use_yn
+			, name as cd_name
+			, grp_cd
+			, description 
+		FROM
+			CMM_CODE , CMM_CODE_RESOURCE
+		WHERE 
+			1=1
+			AND TABLE_ID = 'cmm_code'
+			AND REF_ID = cd_sys_id
+			AND locale = 'ko'
+			AND grp_cd = #{grp_cd}
+	</select>
+	
+	<select id="selectGrpCode" parameterType="map" resultType="map">
+		SELECT
+			  grp_cd
+			, use_yn
+			, name as grp_cd_nm
+			, description 
+			, sys_type
+		FROM
+			CMM_GRP_CODE , CMM_CODE_RESOURCE
+		WHERE 
+			1=1
+			AND TABLE_ID = 'cmm_grp_code'
+			AND REF_ID = grp_cd
+			AND locale = 'ko'
+			AND grp_cd = #{grp_cd}
+	</select>
+	
+	<select id="selectCode" parameterType="map" resultType="map">
+		SELECT
+			  cd_sys_id
+			, cd
+			, use_yn
+			, name as cd_name
+			, grp_cd
+			, description 
+		FROM
+			CMM_CODE , CMM_CODE_RESOURCE
+		WHERE 
+			1=1
+			AND TABLE_ID = 'cmm_code'
+			AND REF_ID = cd_sys_id
+			AND locale = 'ko'
+			AND grp_cd = #{grp_cd}
+			AND cd     = #{cd}
+	</select>
+	
+	<update id="editCode" parameterType="map">
+		UPDATE CMM_CODE
+		SET use_yn = #{use_yn}
+		WHERE grp_cd = #{grp_cd}
+		AND   cd = #{cd}
+	</update>
+	
+	<update id="editGrpCode" parameterType="map">
+		UPDATE CMM_GRP_CODE
+		SET use_yn = #{use_yn}
+		,   sys_type = #{sys_type}
+		WHERE grp_cd = #{grp_cd}
+	</update>
+	
+	<update id="editCodeResource" parameterType="map">
+		UPDATE CMM_CODE_RESOURCE
+		SET name = #{name}
+			,description = #{description}
+		WHERE ref_id = #{ref_id}
+		AND   table_id = #{table_id}
+		AND locale = 'ko'
+	</update>
+</mapper>

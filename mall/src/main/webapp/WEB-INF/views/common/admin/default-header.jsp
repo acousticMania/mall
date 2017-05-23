@@ -25,6 +25,8 @@
 				    <ul id="site-config" class="collapse">
 					    <li><a href="#">그룹관리</a></li>
 					    <li><a href="#">권한관리</a></li>
+					    <li><a href="/admin/system/grpCodeList">그룹코드관리</a></li>
+					    <li><a href="/admin/system/codeList">코드관리</a></li>
 				    </ul>
 			    </li>
 			    <li><a href="javascript:;" data-toggle="collapse" data-target="#member"><i class="fa fa-fw fa-user"></i> 회원<i class="fa fa-fw fa-caret-down"></i></a>
