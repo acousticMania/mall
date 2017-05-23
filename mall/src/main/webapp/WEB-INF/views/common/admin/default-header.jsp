@@ -41,7 +41,7 @@
 			    </li>
 			    <li><a href="javascript:;" data-toggle="collapse" data-target="#goods"><i class="fa fa-fw fa-leaf"></i> 상품<i class="fa fa-fw fa-caret-down"></i></a>
 				    <ul id="goods" class="collapse">
-					    <li><a href="./goodsReg">상품등록 설정</a></li>
+					    <li><a href="/admin/goods/goodsList">상품조회</a></li>
 					    <li><a href="/admin/goods/catalog">일반상품</a></li>
 					    <li><a href="./package">패키지상품</a></li>
 				    </ul>

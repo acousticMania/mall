@@ -28,4 +28,9 @@ public class GoodsController {
         
     return "/admin/goods/catalog.tiles";
 	}
+	
+	@RequestMapping("/admin/goods/goodsList")
+	public String openGoodsList() {
+		return "/admin/goods/goodsList.tiles";
+	}
 }
