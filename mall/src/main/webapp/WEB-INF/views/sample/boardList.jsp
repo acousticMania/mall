@@ -61,7 +61,7 @@
     
     function fn_selectBoardList(pageNo) {
     	var comAjax = new ComAjax();
-    	comAjax.setUrl("<c:url value='/sample/selectBoardList'/>");
+    	comAjax.setUrl("<c:url value='/sample/selectBoardList.json'/>");
     	comAjax.setCallback("fn_selectBoardListCallback");
     	comAjax.addParam("PAGE_INDEX", pageNo);
     	comAjax.addParam("PAGE_ROW", 15);

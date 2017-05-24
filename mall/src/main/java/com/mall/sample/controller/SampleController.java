@@ -144,19 +144,33 @@ public class SampleController {
 		}
 	}
 	
-	@RequestMapping(value="/sample/selectBoardList", produces = {"application/json"})
-	public ModelAndView selectBoardList(@RequestParam Map<String, Object> paramMap) {
+//	@RequestMapping(value="/sample/selectBoardList", produces = {"application/json"})
+//	public ModelAndView selectBoardList(@RequestParam Map<String, Object> paramMap) {
+//		ModelAndView mv = new ModelAndView();
+//		
+//		List<Map<String, Object>> list = sampleService.selectBoardList(paramMap);
+//		mv.addObject("list", list);
+//		if(list.size() >0){
+//			mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+//		} else {
+//			mv.addObject("TOTAL", 0);
+//		}
+//		
+//		return mv;
+//	}
+
+	@RequestMapping("/sample/selectBoardList")
+	public void selectBoardList(@RequestParam Map<String, Object> paramMap, Model model) {
 		ModelAndView mv = new ModelAndView();
 		
 		List<Map<String, Object>> list = sampleService.selectBoardList(paramMap);
-		mv.addObject("list", list);
+		model.addAttribute("list", list);
 		if(list.size() >0){
-			mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+			model.addAttribute("TOTAL", list.get(0).get("TOTAL_COUNT"));
 		} else {
-			mv.addObject("TOTAL", 0);
+			model.addAttribute("TOTAL", 0);
 		}
 		
-		return mv;
 	}
 	
 	@RequestMapping(value = "/common/grid_sample", method = RequestMethod.GET)
