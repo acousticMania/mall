@@ -37,15 +37,8 @@
     <script src="/resources/mall/admin/user/join.js"></script>
 </head>
 <body>
-<<<<<<< HEAD
-	<input type="hidden" id ="pwCheck" name="pwCheck" value="${pwCheck }">
-    <div class="container">
-        <div class="row"> 
-            <div class="col-md-4 col-md-offset-4">
-=======
 	<input type="hidden" id="dupChk" name="" value="N">
             <div class="col-md-4 col-md-offset-4" style="width: 650px; margin-top: 20px;" >
->>>>>>> refs/remotes/origin/develop-1.0
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">회원가입</h3>
@@ -53,61 +46,6 @@
                     <div class="panel-body">
                         <form role="form" id="form" name="form">
                         	<table style="width: 600px; border-collapse: collapse; border-spacing: 0px;" >
-<<<<<<< HEAD
-                        		<tr >
-                        			<th style="width: 150px;  vertical-align: middle; min-height: 28px; font-weight: bold;">로그인 아이디</th>
-                        			<td style="width: 450px;; padding: 10px;" ><input style="margin-right: 10px; width: 200px;" id="LOGIN_ID" name="LOGIN_ID" type="text" autofocus><input style="width: 80px;" type="button" id="findAddrFn" name="findAddrFn" onclick="idDupChk()" value="중복체크"></td>	
-                        		</tr>
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">사용자 이름</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="USER_NAME" name="USER_NAME" type="text"></td>	
-                        		</tr>
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">비밀번호</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="PASSWD" name="PASSWD" type="password"></td>	
-                        		</tr>
-                        		
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">비밀번호 확인</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="PASSWD_CHECK" name="PASSWD_CHECK" type="password"></td>	
-                        		</tr>
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">주민등록번호</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="RES_NO" name="RES_NO" type="password"></td>	
-                        		</tr>
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">이메일</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="EMAIL" name="EMAIL" type="text"></td>	
-                        		</tr>
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">이동전화</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="CELLPHONE_NO" name="CELLPHONE_NO" type="number" min="7" max="11" ></td>	
-                        		</tr>
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">질문</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="QUESTION" name="QUESTION" type="text"></td>	
-                        		</tr>
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">답</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="ANSWER" name="ANSWER" type="text"></td>	
-                        		</tr>
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">우편번호</th>
-                        			<td style="width: 450px;; padding: 10px;"><input style="margin-right: 10px; width: 100px;"  id="zipocde" name="zipocde" type="text"><input style="width: 40px;" type="button" id="findAddrFn" name="findAddrFn" onclick="addrPop()" value="주소찾기"></td>	
-                        		</tr>
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">주소</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="addr1" name="addr1" type="text"></td>	
-                        		</tr>
-                        		<tr >
-                        			<th style="width: 150px; vertical-align: middle; min-height: 28px; font-weight: bold;">상세주소</th>
-                        			<td style="width: 450px;; padding: 10px;"><input class="form-control" id="addr2" name="addr2" type="text"></td>	
-                        		</tr>
-                        	</table>
-                                <!-- Change this to a button or input when using this as a form -->
-                                <a href="#" class="btn btn-lg btn-success btn-block" id="join">join</a>
-                            </fieldset>
-=======
                         		<tr>
                         			<th style="width: 150px;  vertical-align: middle; min-height: 28px; font-weight: bold;">로그인 아이디</th>
                         			<td style="width: 450px;; padding: 10px;" ><input class="form-control" placeholder="아이디를 입력해주세요." style="margin-right: 10px; padding-left:10px; width: 180px;" id="login_id" name="login_id" type="text" onchange="chgLoginId()" autofocus><input style="width: 80px; margin-left: 10px;" type="button" id="findAddrFn" name="findAddrFn" onclick="idDupChk()" value="중복체크"></td>	
@@ -154,7 +92,6 @@
                         		</tr>
                         	</table>
                                 <input class="btn btn-lg btn-success btn-block" type="submit" id="join" value="회원가입">
->>>>>>> refs/remotes/origin/develop-1.0
                         </form>
                     </div>
                 </div>
