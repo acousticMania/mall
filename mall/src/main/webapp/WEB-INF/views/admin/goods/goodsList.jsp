@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/views/common/admin/include-header.jsp" %>
 <script src="/resources/js/common/common.js"></script>
 <script src="/resources/mall/admin/goods/goodsList.js"></script>
 
@@ -33,27 +34,26 @@ $(function() {
 								<label>상품분류</label>
 							</div>
 							<div class="col-sm-4">
-								<select class="form-control input-sm">
-									<option>1차분류</option>
-									<option>스킨케어</option>
-									<option>메이크업</option>
-									<option>바디케어</option>
+								<select id="god_grp1" name="god_grp1" class="form-control input-sm">
+									<c:forEach var="list" items="${listGodGrp}">
+										<option value="<c:out value="${list.GD_GRP_NM}"/>">1차분류</option>
+									</c:forEach>
 								</select>
 							</div>
 							<div class="col-sm-4">
-								<select class="form-control input-sm">
+								<select id="god_grp2" name="god_grp2" class="form-control input-sm">
 									<option>2차분류</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-sm-6" style="text-align: center;padding-right: 0px;">
 							<div class="col-sm-4">
-								<select class="form-control input-sm">
+								<select id="god_grp3" name="god_grp3" class="form-control input-sm">
 									<option>3차분류</option>
 								</select>
 							</div>
 							<div class="col-sm-4">
-								<select class="form-control input-sm">
+								<select id="god_grp4" name="god_grp4" class="form-control input-sm">
 									<option>4차분류</option>
 								</select>
 							</div>
