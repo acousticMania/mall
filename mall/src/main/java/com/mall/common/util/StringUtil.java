@@ -1,5 +1,5 @@
 
-package com.naon.framework.util;
+package com.mall.common.util;
 
 import java.net.URLEncoder;
 import java.text.NumberFormat;

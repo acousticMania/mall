@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/admin/include-header.jsp" %>
 <script src="/resources/js/common/common.js"></script>
 <script src="/resources/mall/admin/goods/goodsList.js"></script>
