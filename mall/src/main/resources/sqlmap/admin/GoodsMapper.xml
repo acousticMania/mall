@@ -12,4 +12,17 @@
 			,USE_YN
 		FROM GOD_GOODS
 	</select>
+	
+	<select id="selectGoodsGrpList" parameterType="string" resultType="map" >
+		SELECT GD_GRP_ID
+		     , PARENT_GD_GRP_ID
+		     , GD_GRP_NM
+		     , DEPTH
+		     , ORDERS
+		     , GRP_TP
+		     , USE_YN
+		FROM GOD_GRP
+		WHERE PARENT_GD_GRP_ID = #{parentGdGrpId};
+	</select>
+	
 </mapper>

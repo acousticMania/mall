@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/admin/include-header.jsp" %>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jquery-ui/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jquery-ui/jquery-ui.structure.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jquery-ui/jquery-ui.theme.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jqgrid/ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jqgrid/ui.jqgrid-bootstrap-ui.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/plugins/jqgrid/ui.jqgrid-bootstrap.css" />
+<script src="/js/plugins/jqgrid/i18n/grid.locale-en.js"></script>
+<script src="/js/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="/resources/js/common/common.js"></script>
 <script src="/resources/mall/admin/goods/goodsList.js"></script>
 
@@ -7,6 +16,8 @@
 $(function() {
 	$(document).ready(function(){
 		init();
+		searchInit();
+		eventInit();
 	});
 });
 </script>
@@ -17,8 +28,8 @@ $(function() {
 		<div class="row">
 			<div class="col-lg-12">
 				<ol class="breadcrumb">
-					<li class="active"><i class="fa fa-user"></i> 상품</li>
-					<li class="active">일반상품</li>
+					<li class="active"><i class="fa fa-leaf"></i> 상품</li>
+					<li class="active">상품조회</li>
 				</ol>
 			</div>
 		</div>
@@ -35,9 +46,7 @@ $(function() {
 							</div>
 							<div class="col-sm-4">
 								<select id="god_grp1" name="god_grp1" class="form-control input-sm">
-									<c:forEach var="list" items="${listGodGrp}">
-										<option value="<c:out value="${list.GD_GRP_NM}"/>">1차분류</option>
-									</c:forEach>
+									<option>1차분류</option>
 								</select>
 							</div>
 							<div class="col-sm-4">

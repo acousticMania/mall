@@ -4,7 +4,122 @@ var width = 500;
 var top = (screen.availHeight - height) / 2;
 var left = (screen.availWidth - width) / 2;	
 
-// 화면 로딩시 실행function
+
+function searchInit() {
+	$.ajax({
+		url : '/admin/goods/selectGoodsGrpList.json',
+		type : "POST",
+		data : this.param,
+		async : false,
+		success : function(data, status) {
+			fn_selectGoodsOneGrpList(data);
+		}
+		
+	
+	});
+}
+
+function eventInit() {
+	this.param = "";
+// 불필요한 코드 제거
+// jQuery 모듈화 구현해야함.
+//		var id = $(this).attr('id');
+//		$(document).on('click', id, function(){ 
+//			  alert('hi!'); 
+//		});
+	$("#god_grp1").change(function() {
+		
+		$("#god_grp1 option:selected").each(function() {
+			this.param = this.param + "&" + "gdGrpId" + "=" +$(this).val();
+			$.ajax({
+				url : '/admin/goods/selectGoodsGrpList.json',
+				type : "POST",
+				data : this.param,
+				async : false,
+				success : function(data, status) {
+					fn_selectGoodsTwoGrpList(data);
+				}
+			});
+		});
+	});
+	
+	$("#god_grp2").change(function() {
+		
+		$("#god_grp2 option:selected").each(function() {
+			this.param = this.param + "&" + "gdGrpId" + "=" +$(this).val();
+			$.ajax({
+				url : '/admin/goods/selectGoodsGrpList.json',
+				type : "POST",
+				data : this.param,
+				async : false,
+				success : function(data, status) {
+					fn_selectGoodsThreeGrpList(data);
+				}
+			});
+		});
+	});
+	
+	$("#god_grp3").change(function() {
+		
+		$("#god_grp3 option:selected").each(function() {
+			this.param = this.param + "&" + "gdGrpId" + "=" +$(this).val();
+			$.ajax({
+				url : '/admin/goods/selectGoodsGrpList.json',
+				type : "POST",
+				data : this.param,
+				async : false,
+				success : function(data, status) {
+					fn_selectGoodsFourGrpList(data);
+				}
+			});
+		});
+	});
+}
+
+
+
+function fn_selectGoodsOneGrpList(data) {
+	var body = $("#god_grp1");
+	
+	fn_goodsGrpListBodyAppend(body, data);
+}
+
+function fn_selectGoodsTwoGrpList(data) {
+	var body = $("#god_grp2");
+	body.empty();
+	var str = "";
+	str += "<option>2차분류</option>"
+	
+	fn_goodsGrpListBodyAppend(body, data, str);
+}
+
+function fn_selectGoodsThreeGrpList(data) {
+	var body = $("#god_grp3");
+	body.empty();
+	var str = "";
+	str += "<option>3차분류</option>"
+	
+	fn_goodsGrpListBodyAppend(body, data,str);
+}
+
+function fn_selectGoodsFourGrpList(data) {
+	var body = $("#god_grp4");
+	body.empty();
+	var str = "";
+	str += "<option>4차분류</option>"
+		
+		fn_goodsGrpListBodyAppend(body, data,str);
+}
+
+function fn_goodsGrpListBodyAppend(body, data, str) {
+	$.each(data.goodsGrpList, function(key, value) {
+		str += "<option value='"+ value.GD_GRP_ID + "'>" + value.GD_GRP_NM +"</option>"
+	});
+	body.append(str);
+}
+
+
+//화면 로딩시 실행function
 function init(){
 		$("#goodsTable").jqGrid({
 			// data를 가져올 url
