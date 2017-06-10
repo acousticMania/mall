@@ -1,5 +1,13 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
+<script>
+	$(document).on("click", ".order_status", function() {
+		var ORD_NO = $(this).data('id');
+		//var ORD_STATUS = $(this).val('');
+		//alert(ORD_STATUS);
+		$(".modal-body #ORD_NO").val(ORD_NO);
+		//$(".ORD_STATUS select").val(ORD_STATUS);
+	});
+</script>
 <script>
 	$(function() {
 		$("#list").jqGrid(
@@ -20,7 +28,7 @@
 					},
 					//컬럼명들
 					colNames : [ '주문번호', '주문상품', '주문자명', '주문경로', '결제수단', '금액',
-							'주문일시', '처리상태' ],
+							'주문일시', '처리상태', '기능' ],
 					//컬럼모델
 					colModel : [ {
 						name : 'ORD_NO'
@@ -41,11 +49,17 @@
 						formatter : date_custom
 					}, {
 						name : 'ORD_STATUS_NM',
-						editable : true,
-						edittype : "select",
-						editoptions : {
-							value : "Y:등록;N:미등록"
-						}
+						index : 'IDX',
+						width : 80,
+						align : "center",
+						formatter : modalPopup
+
+					}, {
+						name : 'ORD_NO',
+						index : 'IDX',
+						width : 80,
+						align : "center",
+						formatter : modifyButton
 					} ],
 					viewrecords : true,
 					caption : '주문 목록', // 그리드 왼쪽 위에 캡션
@@ -155,13 +169,68 @@
 		}).trigger('resize');
 	}
 
-	function fn_selectOrderList(pageNo) {
-		var comAjax = new ComAjax();
+	function modifyButton(cellvalue, options, rowObject) {
+		return '<a class="btn btn-default btn-sm" type="" href=/admin/order/orderView?ORD_NO='
+				+ rowObject.ORD_NO + ' role="button" >상세보기</a>';
+	};
+
+	function modalPopup(cellvalue, options, rowObject) {
+		return '<p>'
+				+ rowObject.ORD_STATUS_NM
+				+ '<a class="btn btn-default btn-xs order_status" data-toggle="modal" href="#order_status_popup" data-id="'
+		+ rowObject.ORD_NO + '">변경</a></p>';
+	};
+
+	function fn_selectOrderSearchList(pageNo) {
+
+		var formData = $("#order_form").serialize();
+		var data = new Array();
+		$("input:checkbox[name=ORD_STATUS]:checked").each(function(i) {
+			data.push($(this).val());
+		});
+		$("input:checkbox[name=PAY_METHOD]:checked").each(function(i) {
+			data.push($(this).val());
+		});
+		//formData.push({name:'paramName', value:'paramValue'});
+
+		alert(formData);
+
+		$.ajax({
+			url : "/admin/order/orderSearchListJson",
+			type : "post",
+			data : formData,
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			dataType : "json",
+			success : function(xmlStr) {
+				console.log(xmlStr.length)
+				fn_selectOrderSearchListCallback(xmlStr);
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:" + error);
+			}
+		// 서버로부터 응답 데이터 실패시 로직 처리
+		});
+
+		/* var comAjax = new ComAjax();
+		var ORD_STATUS; 
+		var PAY_METHOD; 
+		
+		$("input:checkbox[name=ORD_STATUS]:checked").each(function() {
+				ORD_STATUS = $(this).val();
+				console.log("ORD_STATUS"+ORD_STATUS);
+			});
+		
+		$("input:checkbox[name=PAY_METHOD]:checked").each(function() {
+			PAY_METHOD = $(this).val();
+			console.log("PAY_METHOD"+PAY_METHOD);
+		});
+		
 		//     	comAjax.setUrl("<c:url value='orderListJson'/>");
-		var ORD_STATUS = $('input:checkbox[name=ORD_STATUS]').val();
-//		alert(ORD_STATUS);
-		var PAY_METHOD = $('input:checkbox[name=PAY_METHOD]').val();
-	//	alert(PAY_METHOD);
+		
+		//			alert(ORD_STATUS);
+		
+		//	alert(PAY_METHOD);
 		var ORD_NO = $("[name=ORD_NO]").val();
 		//alert(ORD_NO);
 		var ORD_DATE_BEFORE = $('[name=ORD_DATE_BEFORE]').val();
@@ -177,7 +246,7 @@
 		comAjax.addParam("ORD_DATE_BEFORE", ORD_DATE_BEFORE);
 		comAjax.addParam("ORD_DATE_AFTER", ORD_DATE_AFTER);
 		comAjax.addParam("ORD_NO", ORD_NO);
-		comAjax.ajax();
+		comAjax.ajax(); */
 
 		/*
 		$.ajax({
@@ -194,19 +263,26 @@
 		}
 		});
 		 */
+		/*
+		
+		 */
 	}
 
-	function fn_selectOrderListCallback(data) {
+	function fn_selectOrderSearchListCallback(data) {
+		//최초 modelAndView로 올때에는 data.list.length 형태
+		//현재 list로 오는 경우 data.length
+
 		var total = data.TOTAL;
 		// console.log("total length : " + total);
-		console.log("data length : " + data.list.length);
-		console.log("total : " + total);
+		//console.log("data length : " + data.list.length);
+		//console.log("total : " + total);
 		$("#list").clearGridData();
 		// 스크립트 변수에 담겨있는 json데이터의 길이만큼 
-		for (var i = 0; i < data.list.length; i++) {
+		for (var i = 0; i < data.length; i++) {
 			//jqgrid의 addRowData를 이용하여 각각의 row에 gridData변수의 데이터를 add한다
-			$("#list").jqGrid('addRowData', i + 1, data.list[i]);
+			$("#list").jqGrid('addRowData', i + 1, data[i]);
 		}
+
 		var params = {
 			divId : "PAGE_NAVI",
 			pageIndex : "PAGE_INDEX",
@@ -237,7 +313,7 @@
 			<div class="col-lg-12 col-md-6">
 				<h1 class="page-header">주문리스트</h1>
 				<!-- 조회조건 -->
-				<form>
+				<form id="order_form" action="" method="post">
 
 					<div class="table-responsive">
 						<table class="table table-bordered table-striped">
@@ -247,24 +323,24 @@
 								<tr>
 									<th scope="row">주문상태</th>
 									<td colspan="3"><input type="checkbox" name="ORD_STATUS"
-										style="margin-left: 10px" value="1"> 주문접수 <input
+										style="margin-left: 10px" value="1" checked="checked">
+										주문접수 <input type="checkbox" name="ORD_STATUS"
+										style="margin-left: 10px" value="2"> 결제완료 <input
 										type="checkbox" name="ORD_STATUS" style="margin-left: 10px"
-										value="2"> 결제완료 <input type="checkbox"
-										name="ORD_STATUS" style="margin-left: 10px" value="3">
-										배송준비중 <input type="checkbox" name="ORD_STATUS"
-										style="margin-left: 10px" value="4"> 배송처리 <input
+										value="3"> 배송준비중 <input type="checkbox"
+										name="ORD_STATUS" style="margin-left: 10px" value="4">
+										배송처리 <input type="checkbox" name="ORD_STATUS"
+										style="margin-left: 10px" value="5"> 배송완료 <input
 										type="checkbox" name="ORD_STATUS" style="margin-left: 10px"
-										value="5"> 배송완료 <input type="checkbox"
-										name="ORD_STATUS" style="margin-left: 10px" value="6">
-										주문취소 <input type="checkbox" name="ORD_STATUS"
-										style="margin-left: 10px" value="7"> 취소요청 <input
+										value="6"> 주문취소 <input type="checkbox"
+										name="ORD_STATUS" style="margin-left: 10px" value="7">
+										취소요청 <input type="checkbox" name="ORD_STATUS"
+										style="margin-left: 10px" value="8"> 취소완료 <input
 										type="checkbox" name="ORD_STATUS" style="margin-left: 10px"
-										value="8"> 취소완료 <input type="checkbox"
-										name="ORD_STATUS" style="margin-left: 10px" value="9">
-										교환요청 <input type="checkbox" name="ORD_STATUS"
-										style="margin-left: 10px" value="10"> 교환완료 <input
-										type="checkbox" name="ORD_STATUS" style="margin-left: 10px"
-										value="11"> 미주문</td>
+										value="9"> 교환요청 <input type="checkbox"
+										name="ORD_STATUS" style="margin-left: 10px" value="10">
+										교환완료 <input type="checkbox" name="ORD_STATUS"
+										style="margin-left: 10px" value="11"> 미주문</td>
 								</tr>
 								<tr>
 									<th scope="row">기간</th>
@@ -281,27 +357,31 @@
 								</tr>
 								<tr>
 									<th scope="row">조건검색</th>
-									<td class="form-inline"><select class="input-sm ">
-											<option>주문번호</option>
-											<option>주문자명</option>
-											<option>입금자명</option>
-											<option>아이디</option>
-									</select> <input type="text" name="ORD_NO" class="form-control">
+									<td class="form-inline"><select class="input-sm "
+										name="searchType">
+											<option value="ORD_NO">주문번호</option>
+											<option value="ORDERER_NM">주문자명</option>
+											<option value="DEPOSIT_NM">입금자명</option>
+											<option value="ORDEDER_ID">아이디</option>
+									</select> <input type="text" name="KEYWORD" class="form-control">
 									</td>
 
 									<th scope="row">결제방식</th>
 									<td><input type="checkbox" name="PAY_METHOD"
-										style="margin-left: 10px" value="1"> 신용카드 <input
+										style="margin-left: 10px" value="1" checked="checked">
+										신용카드 <input type="checkbox" name="PAY_METHOD"
+										style="margin-left: 10px" value="2"> 계좌이체 <input
 										type="checkbox" name="PAY_METHOD" style="margin-left: 10px"
-										value="2"> 계좌이체 <input type="checkbox"
-										name="PAY_METHOD" style="margin-left: 10px" value="3">
-										무통장입금 <input type="checkbox" name="PAY_METHOD"
-										style="margin-left: 10px" value="4"> 카카오페이</td>
+										value="3"> 무통장입금 <input type="checkbox"
+										name="PAY_METHOD" style="margin-left: 10px" value="4">
+										카카오페이</td>
 								</tr>
 								<tr>
 									<th scope="row">주문경로</th>
-									<td colspan="3">
-									</td>
+									<td colspan="3"><label class="radio-inline"> <input
+											type="radio" name="ORD_ROUTE" value="PC">PC
+									</label> <label class="radio-inline"><input type="radio"
+											name="ORD_ROUTE" value="MOBILE">MOBILE</label></td>
 								</tr>
 
 							</tbody>
@@ -309,8 +389,9 @@
 					</div>
 					<div class="form-inline" align="center">
 						<button type="button" class="btn btn-sm btn-default"
-							onclick="fn_selectOrderList(1);">조회</button>
-						<button type="button" class="btn btn-sm btn-default">전체목록</button>
+							onclick="fn_selectOrderSearchList(1);">조회</button>
+						<button type="button" class="btn btn-sm btn-default"
+							onclick="location.reload(true);">전체목록</button>
 					</div>
 					<p></p>
 				</form>
@@ -333,3 +414,53 @@
 	<!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+
+
+<%-- 모달영역 --%>
+<div class="modal" class="order_status" id="order_status_popup">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h4 class="modal-title">|주문처리상태 변경</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row form-group" style="margin-top: 20px;">
+					<input type="hidden" name="ORD_NO" id="ORD_NO" value="1">
+
+					<div style="text-align: center;" class="col-md-12">
+						<h5 class="col-md-5 col-md-offset-1 ">상태선택</h5>
+						<div class="col-md-4 ">
+							<select name="ORD_STATUS" class="form-control ORD_STATUS">
+								<option value="">주문접수</option>
+								<option value="">결제완료</option>
+								<option value="">배송준비중</option>
+								<option value="">배송처리</option>
+								<option value="">배송완료</option>
+								<option value="">주문취소</option>
+								<option value="">취소요청</option>
+								<option value="">취소완료</option>
+								<option value="">교환요청</option>
+								<option value="">교환완료</option>
+								<option value="">미주문</option>
+							</select>
+						</div>
+
+					</div>
+
+					<p class="text-center col-md-8 col-md-offset-2 "
+						style="margin-top: 20px;">※주문취소 및 환불완료 된 주문은 상태가 변경되지 않으며, 그
+						외의 처리상태는 주문상태가 변경됩니다.</p>
+					<div class="col-md-12"
+						style="text-align: center; margin-top: 20px;">
+						<a href="#" class="btn btn-primary">확인</a> <a href="#"
+							data-dismiss="modal" class="btn">닫기</a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer"></div>
+		</div>
+	</div>
+</div>
+

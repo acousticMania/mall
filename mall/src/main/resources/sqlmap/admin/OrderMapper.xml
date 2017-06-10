@@ -15,6 +15,24 @@
 		WHERE PT.RNUM BETWEEN #{START} AND #{END}
 	</sql>
 	
+	
+	<sql id="search">
+      <if test="searchType != null and KEYWORD != null and KEYWORD == ''" > 
+        <if test="searchType == 'ORD_NO'.toString()">
+          ORD_NO = #{KEYWORD}
+        </if>
+        <if test="searchType == 'ORDERER_NM'.toString()">
+          ORDERER_NM like CONCAT('%', #{KEYWORD}, '%')
+        </if>
+        <if test="searchType == 'DEPOSIT_NM'.toString()">
+          DEPOSIT_NM like CONCAT('%', #{KEYWORD}, '%')
+        </if>     
+        <if test="searchType == 'ORDEDER_ID'.toString()">
+          ORDEDER_ID = #{KEYWORD}
+        </if>                    
+     </if>  
+    </sql>
+	
 	<select id="selectOrderList" parameterType="map" resultType="map">
 		<include refid="pagingPre"/>
 		SELECT
@@ -61,7 +79,7 @@
 	</select>
 	
 	
-	<select id="selectSearchOrderList" parameterType="map" resultType="map">
+	<select id="selectOrderSearchList" parameterType="map" resultType="map">
 		<include refid="pagingPre"/>
 		SELECT
 		    ORD.ORD_NO,
@@ -99,7 +117,25 @@
 		    ORD.REG_DATE
 		FROM
 		    ORD_ORDER ORD
-	    WHERE ORD_NO = #{ORD_NO} AND ORD_STATUS = #{ORD_STATUS} AND PAY_METHOD = #{PAY_METHOD} AND DATE_FORMAT(ORD_DATE, '%Y-%m-%d') BETWEEN  #{ORD_DATE_BEFORE} AND #{ORD_DATE_AFTER}
+	    WHERE 
+	
+	    <!--https://okky.kr/article/273701-->
+	    <if test='ORD_STATUS != null'>
+	    <foreach  item="ORD_STATUSList" collection="ORD_STATUS" index="index" open="(" close=")"  separator="OR">
+           ORD_STATUS = #{ORD_STATUSList}
+        </foreach>
+        </if>
+	    AND 
+	    <if test='PAY_METHOD != null'>
+	    <foreach  item="PAY_METHODList" collection="PAY_METHOD" index="index" open="(" close=")" separator="OR">
+            PAY_METHOD = #{PAY_METHODList}
+        </foreach>
+        </if>
+	    AND (DATE_FORMAT(ORD_DATE, '%Y-%m-%d') BETWEEN  #{ORD_DATE_BEFORE} AND #{ORD_DATE_AFTER})
+	    AND (ORD_ROUTE = #{ORD_ROUTE})
+	    OR 
+	    (<include refid="search"></include>)
+	    
 <!-- 		WHERE -->
 <!-- 		    DEL_YN = 'N'     -->
 <!-- 		ORDER BY ${sidx} ${sord} -->
@@ -136,16 +172,21 @@
 	
 	<select id="selectOrderDetail" parameterType="map" resultType="map" >
 		SELECT
-            BOARD_IDX,
-            HIT_CNT,
-            REG_ID,
-            REG_DATE,
-            TITLE,
-            CONTENTS
+            *
         FROM
             ORD_ORDER
         WHERE
-            BOARD_IDX = #{BOARD_IDX}
+            ORD_NO =  #{ORD_NO}
+	</select>
+	
+	
+	<select id="selectGoodsList" parameterType="map" resultType="map" >
+		SELECT
+            *
+        FROM
+            ORD_GOODS
+        WHERE
+            ORD_NO =  #{ORD_NO}
 	</select>
 	
 	<insert id="insertTest" parameterType="map">

@@ -27,8 +27,8 @@ public class OrderService {
 		return orderDao.selectOrderList(map);
 	}
 	
-	public List<Map<String, Object>> selectSearchOrderList(Map<String, Object> map) {
-		return orderDao.selectSearchOrderList(map);
+	public List<Map<String, Object>> selectOrderSearchList(Map<String, Object> map) {
+		return orderDao.selectOrderSearchList(map);
 	}
 	
 	
@@ -42,11 +42,11 @@ public class OrderService {
 		orderDao.insertOrder(map);
 	}
 	
-	public Map<String, Object> selectOrderDetail(Map<String, String> map) throws Exception {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		Map<String, String> tempMap = orderDao.selectOrderDetail(map);
-		resultMap.put("map", tempMap);
-		return resultMap;
+	public Map<String, Object> selectOrderDetail(Map<String, Object> map) throws Exception {
+		//Map<String, Object> resultMap = new HashMap<String, Object>();
+		/*Map<String, String> tempMap = orderDao.selectOrderDetail(map);
+		resultMap.put("map", tempMap);*/
+		return orderDao.selectOrderDetail(map);
 	}
 	
 	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
@@ -62,5 +62,11 @@ public class OrderService {
 		// TODO Auto-generated method stub
 		return orderDao.updateOrderStatus(map);
 	}
+
+	public List<Map<String, Object>> selectGoodsList(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return orderDao.selectGoodsList(paramMap);
+	}
+
 	
 }

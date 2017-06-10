@@ -18,8 +18,8 @@ public class OrderDao extends QueryMapper {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectSearchOrderList(Map<String, Object> map) {
-		return (List<Map<String, Object>>) selectPagingList(namespace + "selectSearchOrderList", map);
+	public List<Map<String, Object>> selectOrderSearchList(Map<String, Object> map) {
+		return (List<Map<String, Object>>) selectPagingList(namespace + "selectOrderSearchList", map);
 	}
 	
 	public int selectOrderTotalCount(Map<String, Object> map) {
@@ -31,8 +31,8 @@ public class OrderDao extends QueryMapper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Map<String, String> selectOrderDetail(Map<String, String> map) throws Exception {
-		return (Map<String, String>) selectOne(namespace + "selectOrderDetail", map);
+	public Map<String, Object> selectOrderDetail(Map<String, Object> map) throws Exception {
+		return (Map<String, Object>) selectOne(namespace + "selectOrderDetail", map);
 	}
 
 	public void updateOrder(Map<String, Object> map) {
@@ -53,6 +53,10 @@ public class OrderDao extends QueryMapper {
 			e.printStackTrace();
 		}
 		return cnt;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectGoodsList(Map<String, Object> map) {
+		return (List<Map<String, Object>>) selectList(namespace + "selectGoodsList", map);
 	}
 
 }
