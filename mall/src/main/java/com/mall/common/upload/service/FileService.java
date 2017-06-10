@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mall.common.spring.framework.service.FileUtil;
 import com.mall.common.util.CommonUtil;
-import com.naon.framework.util.StringUtil;
+import com.mall.common.util.StringUtil;
 
 @Service
 public class FileService {

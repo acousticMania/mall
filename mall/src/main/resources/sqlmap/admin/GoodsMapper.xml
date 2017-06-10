@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.admin.goods.GoodsDao">
+	<select id="selectGoodsList" resultType="map">
+		SELECT 
+		  	 GOODS_ID
+			,GOODS_NM
+			,PRICE
+			,POINT_AMT
+			,QUANTITY
+			,ORDERS
+			,USE_YN
+		FROM GOD_GOODS
+	</select>
+	
+	<select id="selectGoodsGrpList" parameterType="string" resultType="map" >
+		SELECT GD_GRP_ID
+		     , PARENT_GD_GRP_ID
+		     , GD_GRP_NM
+		     , DEPTH
+		     , ORDERS
+		     , GRP_TP
+		     , USE_YN
+		FROM GOD_GRP
+		WHERE PARENT_GD_GRP_ID = #{parentGdGrpId};
+	</select>
+	
+</mapper>

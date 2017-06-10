@@ -17,10 +17,6 @@
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/js/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
 
-<!-- Extjs CSS -->
-<link href="/resources/js/ext-6.2.1/build/classic/theme-classic/resources/theme-classic-all.css" rel="stylesheet">
-<link href="/resources/js/ext-6.2.1/build/classic/theme-classic/resources/theme-classic-all_1.css" rel="stylesheet">
-<link href="/resources/js/ext-6.2.1/build/classic/theme-classic/resources/theme-classic-all_2.css" rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="/resources/css/admin.css" rel="stylesheet">
@@ -32,19 +28,6 @@
 <!-- jQuery js -->
 <script type="text/javascript" src="/resources/js/jquery/jquery-1.10.2.js"></script>
 
-<!-- Extjs js -->
-<script type="text/javascript" src="/resources/js/ext-6.2.1/build/ext-all.js"></script>
-
-<!-- jqGrid -->
-<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jquery-ui/jquery-ui.min.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jquery-ui/jquery-ui.structure.min.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jquery-ui/jquery-ui.theme.min.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jqgrid/ui.jqgrid.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jqgrid/ui.jqgrid-bootstrap-ui.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/resources/jqgrid/css/jqgrid/ui.jqgrid-bootstrap.css" />
-<script src="/resources/jqgrid/js/jqgrid/i18n/grid.locale-en.js"></script>
-<script src="/resources/jqgrid/js/jqgrid/jquery.jqGrid.min.js"></script>
-<script src="/resources/jqgrid/js/jquery-ui/jquery-ui.min.js"></script>
 
 <!-- common js -->
 <script src="/resources/js/common/common.js"></script>
