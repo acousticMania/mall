@@ -11,4 +11,8 @@ public class ExtJsController {
 		return "/sample/extJs";
 	}
 	
+	public void main() {
+		
+	}
+	
 }

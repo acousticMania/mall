@@ -1,6 +1,9 @@
 
 package com.mall.common.util;
 
+import javax.annotation.Resource;
+
+import com.mall.common.spring.security.service.ShaEncoder;
 import com.mall.common.util.crypto.Hash;
 
 import sun.misc.BASE64Encoder;
@@ -14,13 +17,21 @@ import sun.misc.BASE64Encoder;
 
 public class Sample {
 	
+	@Resource
+	private static ShaEncoder encoder;
+	
 	public static void main(String[] arg) {
 		//재귀함수 테스트
 //		int a = test(0);
 //		System.out.println(a);
 		
+//		ShaEncoder encoder = new ShaEncoder();
+		
 		String password = "admin";
-		password = new BASE64Encoder().encode(Hash.getSHA256(password));
+		
+		password = encoder.encoding(password);
+		
+//		password = new BASE64Encoder().encode(Hash.getSHA256(password));
 		System.out.println(password);
 		
 		

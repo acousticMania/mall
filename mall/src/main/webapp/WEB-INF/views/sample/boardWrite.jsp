@@ -1,6 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/sample/include-header.jsp" %>
+<%@ include file="/WEB-INF/views/common/uploadbrowserChk.jsp"%>
+<!-- i18n -->
+<%-- <script type="text/javascript" src="${BASE_JS}/i18n/${USER_LOCALE}/resource/commonMessages.js"></script> --%>
+<script type="text/javascript" src="/resources/i18n/ko/commonMessages.js"></script>
+
+<%-- 파일업로드 관련 --%>
+<% if (ieVerChk) { %>
+<link rel="stylesheet" href="/resources/component/html5upload/css/jquery.fileupload-ui.css"></link>
+<script type="text/javascript" src="/resources/js/mustache/mustache.js"></script>
+<!-- <script type="text/javascript" src="/resources/framework/naon.js"></script> -->
+<script type="text/javascript" src="/resources/framework/twest.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/load-image.min.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/jquery.fileupload-ui-custom.js"></script>
+<script type="text/javascript" src="/resources/component/html5upload/js/message_ko.js"></script>
+<script type="text/javascript" src="/resources/framework/upload/upload3.js"></script>
+<script type="text/javascript" src="/resources/framework/upload/upload-ui.js"></script>
+<% } %>
+
+<c:set var="CONTEXT_ROOT" value="${pageContext.request.contextPath}" />
+
 <script type="text/javascript">
+var frameworkProperties = {
+	context: '${CONTEXT_ROOT}'
+}
+</script>
+
+<script type="text/javascript">
+
 	var count = 1;
 
 	$(document).ready(function(){
@@ -35,6 +65,17 @@
 	}
 	 
 	function fn_insertBoard(){
+		if (!_editorLoad) {
+			$("#contents").value = _getTxtaContent();
+			return;
+		}
+		
+		var sHtml = _getEditorHtml();
+		if (sHtml == '') return;
+		if (editorMode != 'tagfree' && editorMode != 'script')
+//			_getImgSeqList(sHtml);
+		$("#CONTENTS").val(sHtml);
+		
 	    var comSubmit = new ComSubmit("frm");
 	    comSubmit.setUrl("<c:url value='/sample/insertBoard' />");
 	    comSubmit.submit();
@@ -69,7 +110,8 @@
     	</div>
     	<div class="panel-body">
     		<span>내용</span>
-    		<textarea title="내용" id="CONTENTS" name="CONTENTS" rows="20" cols="100" class="form-control" ></textarea>
+			<input type="hidden" id="CONTENTS" name="CONTENTS" value=""/>
+			<%@ include file="/resources/editor/daumeditor/editor.jsp"%> 
     	</div>
         <div class="panel-body">
         	<div id="fileDiv" class="row">
