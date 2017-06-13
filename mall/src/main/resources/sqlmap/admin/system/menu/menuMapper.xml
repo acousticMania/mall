@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.system.menu.dao">
+	<select id="selectMenuTree" parameterType="map" resultType="map">
+		SELECT
+			  menu.menu_id
+			, sys.name as menu_name
+			, menu.use_yn
+			, menu.tree_id
+			, menu.up_tree_id
+			, menu.depth
+			, menu.sort_no
+			, menu.menu_kind
+			, sys.description
+			, menu.etc_param1
+			, menu.etc_param2
+			, menu.etc_param3
+			, menu.default_menu_id
+			, menu.action_url
+			, (select count('x') 
+			   from PTL_MENU subMenu 
+			   where subMenu.up_tree_id like menu.tree_id) as cnt
+		FROM
+			PTL_MENU menu , CMM_SYS_RESOURCE sys
+		WHERE 
+			1=1
+			AND TABLE_ID = 'ptl_menu'
+			AND REF_ID = menu_id
+			AND locale = 'ko'
+			AND up_tree_id = #{up_tree_id}
+			
+			 			
+	</select>
+	<select id="selectMenuByMenuId" parameterType="map" resultType="map">
+		SELECT
+			  menu.menu_id
+			, menu.use_yn
+			, menu.tree_id
+			, menu.up_tree_id
+			, menu.depth
+			, menu.sort_no
+			, menu.menu_kind
+			, menu.etc_param1
+			, menu.etc_param2
+			, menu.etc_param3
+			, menu.default_menu_id
+			, menu.action_url
+			, (SELECT MAX(RIGHT(menu2.tree_id,5)) FROM PTL_MENU menu2
+			   WHERE menu2.up_tree_id = menu.tree_id) as cnt
+		FROM
+			PTL_MENU menu
+		WHERE 
+			1=1
+			AND menu.menu_id = #{menu_id}
+			
+			 			
+	</select>
+	<select id="selectUpMenuTree" parameterType="map" resultType="map">
+		SELECT
+			  menu.menu_id
+			, menu.use_yn
+			, menu.tree_id
+			, menu.up_tree_id
+			, menu.depth
+			, menu.sort_no
+			, menu.menu_kind
+			, menu.etc_param1
+			, menu.etc_param2
+			, menu.etc_param3
+			, menu.default_menu_id
+			, menu.action_url
+			, CASE 
+			  WHEN menu.tree_id = '*'
+			  THEN 	0
+			  ELSE  (SELECT 
+			  				CASE 
+			  				WHEN MAX(RIGHT(menu2.tree_id,5)) IS NULL 
+			  				THEN 0
+			  			    ELSE MAX(RIGHT(menu2.tree_id,5)) 
+			  			    END 
+			  		FROM PTL_MENU menu2
+			   		WHERE menu2.up_tree_id = menu.tree_id)	
+			  END AS cnt
+			
+		FROM
+			PTL_MENU menu
+		WHERE 
+			1=1
+			AND menu.tree_id = #{up_tree_id}
+			
+			 			
+	</select>
+	
+	<insert id="insertMenu" parameterType="map" >
+		INSERT INTO PTL_MENU
+		VALUES(
+				#{menu_id},
+				#{menu_kind},
+				#{tree_id},
+				#{up_tree_id},
+				CASE 
+					WHEN #{up_tree_id} = '*'
+					THEN 1
+				ELSE 
+				(select depth+1 from PTL_MENU menu2 where menu2.tree_id = #{up_tree_id})
+				END,
+				CASE 
+					WHEN #{sort_no} = 99
+					THEN NULL
+				ELSE #{sort_no}
+				END,
+				'',
+				#{use_yn},
+				#{etc_param1},
+				#{etc_param2},
+				#{etc_param3},
+				now(),
+				now(),
+				#{action_url}
+				)
+	</insert>
+	
+	<insert id="insertMenuResource" parameterType="map" >
+		INSERT INTO CMM_SYS_RESOURCE
+		VALUES(#{table_id},#{ref_id},'ko',#{name},#{description},now(),now())
+	</insert>
+	<update id="updateMenu" parameterType="map" >
+		UPDATE PTL_MENU
+		SET sort_no = #{sort_no}
+		, action_url = #{action_url}
+		, use_yn = #{use_yn}
+		, menu_kind = #{menu_kind}
+		, default_menu_id = ''
+		, etc_param1 = #{etc_param1}
+		, etc_param2 = #{etc_param2}
+		, etc_param3 = #{etc_param3}
+		WHERE menu_id = #{menu_id} 
+	</update>
+	<update id="updateMenuResource" parameterType="map" >
+		UPDATE CMM_SYS_RESOURCE
+		SET name = #{name}
+		, description = #{description}
+		WHERE table_id = #{table_id}
+		AND   locale = 'ko'
+		AND   ref_id = #{ref_id}
+	</update>
+	<select id="selectMenuList" parameterType="String" resultType="map">
+		SELECT
+			  menu.menu_id
+			, sys.name as menu_name
+			, menu.use_yn
+			, menu.tree_id
+			, menu.up_tree_id
+			, menu.depth
+			, menu.sort_no
+			, menu.menu_kind
+			, sys.description
+			, menu.etc_param1
+			, menu.etc_param2
+			, menu.etc_param3
+			, menu.default_menu_id
+			, menu.action_url
+			, (select count('x') 
+			   from PTL_MENU subMenu 
+			   where subMenu.up_tree_id like menu.tree_id) as cnt
+		FROM
+			PTL_MENU menu , CMM_SYS_RESOURCE sys
+		WHERE 
+			1=1
+			AND TABLE_ID = 'ptl_menu'
+			AND REF_ID = menu_id
+			AND locale = 'ko'
+			AND use_yn = 'Y'
+			AND tree_id like concat(#{menuType},"_%")
+		ORDER BY tree_id,depth,sort_no desc
+			 			
+	</select>
+	
+	<delete id="deleteMenu" parameterType="map">
+		DELETE FROM PTL_MENU 
+		WHERE MENU_ID IN(
+							SELECT subTab.MENU_ID
+							FROM(
+								SELECT MENU_ID 
+								 FROM PTL_MENU
+								 WHERE TREE_ID LIKE CONCAT(
+								 				   (SELECT TREE_ID 
+													FROM PTL_MENU
+													WHERE MENU_ID = #{menu_id}),"%")
+							) as subTab
+						)
+	</delete>
+	<delete id="deleteMenuResource" parameterType="map">
+		DELETE FROM CMM_SYS_RESOURCE 
+		WHERE REF_ID IN (SELECT MENU_ID 
+						 FROM PTL_MENU
+						 WHERE TREE_ID LIKE CONCAT(
+						 				   (SELECT TREE_ID 
+											FROM PTL_MENU
+											WHERE MENU_ID = #{menu_id}),+"%")
+						)
+		AND   TABLE_ID = 'ptl_menu'
+	</delete>
+</mapper>
