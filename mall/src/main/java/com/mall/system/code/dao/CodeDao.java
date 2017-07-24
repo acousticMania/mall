@@ -10,7 +10,7 @@ import com.mall.common.util.QueryMapper;
 @Repository
 public class CodeDao extends QueryMapper{
 
-	private String namespace = "com.mall.sys.code.dao.";
+	private String namespace = "com.mall.system.code.dao.";
 	
 	public List<Map<String, String>> selectGrpCodeList(Map<String, String> paramMap) {
 		return (List<Map<String, String>>)this.selectList(namespace + "selectGrpCodeList", paramMap);
@@ -40,15 +40,15 @@ public class CodeDao extends QueryMapper{
 		this.insert(namespace + "insertCode", paramMap);
 	}
 	
-	public void editCode(Map<String, String> paramMap) {
+	public void updateCode(Map<String, String> paramMap) {
 		this.insert(namespace + "editCode", paramMap);
 	}
 	
-	public void editGrpCode(Map<String, String> paramMap) {
+	public void updateGrpCode(Map<String, String> paramMap) {
 		this.insert(namespace + "editGrpCode", paramMap);
 	}
 	
-	public void editCodeResource(Map<String, String> paramMap) {
+	public void updateCodeResource(Map<String, String> paramMap) {
 		this.insert(namespace + "editCodeResource", paramMap);
 	}
 	

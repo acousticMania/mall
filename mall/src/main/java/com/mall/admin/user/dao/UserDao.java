@@ -41,5 +41,11 @@ public class UserDao extends QueryMapper{
 		return (Map<String, Object>) this.selectOne(namespace + "findPassWd" ,paramMap);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public void updatePassWd(Map<String, String> paramMap) {
+		this.update(namespace + "updatePassWd" ,paramMap);
+	}
+	
+	
 	
 }

@@ -44,14 +44,14 @@
                      	</select>
 					</span>
 					<span style="margin-right: 10px; width: 200px;"><input style="width: 200px; height: 27px;" type="text" id="searchKeyword" name="searchKeyword"></span>
-					<span style="width: 100px;"><button style="width: 100px;" type="button" class="btn btn-info" onclick="search()" id="onsearch" name="onsearch"> 검색</button></span>
+					<span style="width: 100px;"><input class="btn btn-lg btn-success"  type="button" value="검색" onclick="search()" id="onsearch" name="onsearch"></span>
 				</div>
 				<div class="row">
 					<div style="margin-bottom: 20px;" title="버튼영역">
 						<table style="width: 100%;" >
 							<tr>
 								<td align="left" width="70%"></td>
-								<td align="right" width="30%"><span style="margin-right: 50px;"><input type="button" value="그룹코드추가" onclick="writeGrpCode()"></span></td>
+								<td align="right" width="30%"><span style="margin-right: 50px;"><input class="btn btn-lg btn-success"  type="button" value="그룹코드추가" onclick="writeGrpCode()"></span></td>
 							</tr>
 						</table>
 					</div>

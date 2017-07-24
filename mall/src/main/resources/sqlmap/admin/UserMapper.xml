@@ -102,4 +102,10 @@
 		AND   ANSWER   = #{answer}
 		AND   EMAIL     = #{email}	
 	</select>
+	<update id="updatePassWd" parameterType="map">
+		UPDATE MBR_USER
+		SET passwd = #{passwd}
+		WHERE login_id = #{login_id}
+	</update>
+	
 </mapper>

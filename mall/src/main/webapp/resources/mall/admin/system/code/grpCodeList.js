@@ -7,7 +7,7 @@ var left = (screen.availWidth - width) / 2;
 //그룹코드 추가 화면
 function writeGrpCode(){
 	
-	var url = "/admin/system/code/writeGrpCode?";
+	var url = "/admin/system/code/writeGrpCodePop?";
 	
 	var params = {
 		editMode : "add" //에디터 모드 구분 값
@@ -62,7 +62,7 @@ function query(searchKeyword,searchTrg){
 	$.jgrid.gridUnload('#grpCodeTable');
 	$("#grpCodeTable").jqGrid({
 		// data를 가져올 url
-		url : "/admin/system/ajaxGrpCodeList",
+		url : "/admin/system/selectGrpCodeList",
         datatype: "json",
         //그리드 높이
         height: 250,

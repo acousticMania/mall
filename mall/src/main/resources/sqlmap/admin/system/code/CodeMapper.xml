@@ -21,15 +21,49 @@
 	
 	<insert id="insertGrpCode" parameterType="map">
 		INSERT INTO CMM_GRP_CODE 
-		VALUES(#{grp_cd},#{sys_type},#{use_yn},'','','',now(),now())
+		VALUES(
+				#{grp_cd},
+				#{sys_type},
+				#{use_yn},
+				'',
+				'',
+				'',
+				now(),
+				now()
+			)
 	</insert>
 
 	<insert id="insertCodeResource" parameterType="map">
-		INSERT INTO CMM_CODE_RESOURCE VALUES(#{table_id},#{ref_id},'ko',#{name},#{description},'','','','','',now(),now())
+		INSERT INTO CMM_CODE_RESOURCE 
+		VALUES(
+				#{table_id},
+				#{ref_id},
+				'ko',
+				#{name},
+				#{description},
+				'',
+				'',
+				'',
+				'',
+				'',
+				now(),
+				now()
+			)
 	</insert>
 	
 	<insert id="insertCode" parameterType="map">
-		INSERT INTO CMM_CODE VALUES(#{cd_sys_id},#{grp_cd},#{cd},#{use_yn},'','','',now(),now())
+		INSERT INTO CMM_CODE 
+		VALUES(
+				#{cd_sys_id},
+				#{grp_cd},
+				#{cd},
+				#{use_yn},
+				'',
+				'',
+				'',
+				now(),
+				now()
+			)
 	</insert>
 	
 	

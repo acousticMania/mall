@@ -13,13 +13,13 @@
 
 
 	<!-- Bootstrap Core CSS -->
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Custom CSS -->
-	<link href="/css/admin.css" rel="stylesheet">
+	<link href="/resources/css/admin.css" rel="stylesheet">
 	
 	<!-- Custom Fonts -->
-	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	
 	<!-- favicon -->
 	<link rel="shortcut icon" href="/resources/images/favicon.ico" />
@@ -67,7 +67,7 @@
 						<table style="width: 100%; " >
 							<tr>
 								<td align="left" width="70%"></td>
-								<td align="right" width="30%"><span style="margin-right: 40px;"><input type="button" value="일반코드추가" onclick="writeCodePop()"></span></td>
+								<td align="right" width="30%"><span style="margin-right: 40px;"><input class="btn btn-lg btn-success btn-block" type="button" value="일반코드추가" onclick="writeCodePop()"></span></td>
 							</tr>
 						</table>
 					</div>

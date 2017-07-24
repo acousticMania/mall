@@ -49,4 +49,9 @@ public class UserService {
 		return userDao.selectPassWd(paramMap);
 	}
 
+	
+	public void updatePassWd(Map<String, String> paramMap){
+		
+		userDao.updatePassWd(paramMap);
+	}
 }

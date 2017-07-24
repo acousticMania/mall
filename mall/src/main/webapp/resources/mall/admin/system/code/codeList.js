@@ -10,7 +10,7 @@ function init(){
 
 		$("#grpCdTable").jqGrid({
 			// data를 가져올 url
-			url : "/admin/system/ajaxGrpCodeList",
+			url : "/admin/system/selectGrpCodeList",
 	        datatype: "json",
 	        //그리드 높이
 	        height: 250,
@@ -55,7 +55,6 @@ function init(){
 	        onCellSelect: function (rowId, index, contents, event){
 	        	var cm = $(this).jqGrid	('getGridParam','colModel');
 	        	if(cm[index].name = "grp_cd"){
-	        		alert($("#grpCdTable").jqGrid('getRowData', rowId).grp_cd)
 	        		listCode($("#grpCdTable").jqGrid('getRowData', rowId).grp_cd);
 	        		
 	        	}
@@ -74,7 +73,7 @@ function listCode(grp_cd){
 	$("#grp_cd").val(grp_cd);
 	$("#cdTable").jqGrid({
 		// data를 가져올 url
-		url : "/admin/system/ajaxCodeList",
+		url : "/admin/system/selectCodeList",
         datatype: "json",
         //그리드 높이
         height: 250,
@@ -182,7 +181,7 @@ function addCode(){
 	}
 	
 	jQuery.ajax({
-		url : "/admin/system/code/ajaxAddCode",
+		url : "/admin/system/code/insertCode",
 		type : "post",
 		dataType : "json",
 		async:false,
@@ -215,7 +214,7 @@ function editCode(){
 	}
 	
 	jQuery.ajax({
-		url : "/admin/system/code/ajaxEditCode",
+		url : "/admin/system/code/updateCode",
 		type : "post",
 		dataType : "json",
 		data : {

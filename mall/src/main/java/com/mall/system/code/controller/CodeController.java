@@ -28,8 +28,8 @@ public class CodeController {
 	 * @param paramMap
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/system/grpCodeList")
-	public ModelAndView grpCodeList(@RequestParam Map<String, String> paramMap){
+	@RequestMapping(value = "/admin/system/oepnGrpCodeList")
+	public ModelAndView oepnGrpCodeList(@RequestParam Map<String, String> paramMap){
 		ModelAndView mv = new ModelAndView();
 		paramMap.put("grp_cd", "CODE_TYPE");
 		List<Map<String, String>> codeList = codeService.selectGrpCodeList(paramMap);
@@ -43,12 +43,12 @@ public class CodeController {
 	}
 	
 	/**
-	 * 그룹코드 조회 ajax
+	 * 그룹코드 조회
 	 * @param paramMap
 	 * @return
 	 */
-	@RequestMapping(value="/admin/system/ajaxGrpCodeList", produces = {"application/json"})
-	public Map<String, Object> ajaxGrpCodeList(@RequestParam Map<String, String> paramMap) {
+	@RequestMapping(value="/admin/system/selectGrpCodeList", produces = {"application/json"})
+	public Map<String, Object> selectGrpCodeList(@RequestParam Map<String, String> paramMap) {
 		
 		//node는 서버에서받은 root의 id값이다. 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -68,29 +68,11 @@ public class CodeController {
 	}
 
 	/**
-	 * 그룹코드 추가 화면
-	 * @return
-	 */
-	@RequestMapping(value = "/admin/system/code/writeGrpCode")
-	public ModelAndView writeGrpCode(@RequestParam Map<String, String> paramMap){
-		ModelAndView mv = new ModelAndView();
-		paramMap.put("grp_cd", "CODE_TYPE");
-		List<Map<String, String>> codeType = codeService.selectCodeList(paramMap);
-		paramMap.put("grp_cd","");
-		
-		mv.addObject("sys_type", codeType);
-		mv.addObject("codeInfo",paramMap);
-		mv.setViewName("/admin/system/code/writeGrpCodePop");
-		
-		return mv;
-	}
-	
-	/**
 	 * 그룹코드 추가	
 	 * @return
 	 */
-	@RequestMapping(value="/admin/system/code/ajaxAddGrpCode", produces = {"application/json"})
-	public Map<String, Object> ajaxAddGrpCode(@RequestParam Map<String, String> paramMap){
+	@RequestMapping(value="/admin/system/code/insertGrpCode", produces = {"application/json"})
+	public Map<String, Object> insertGrpCode(@RequestParam Map<String, String> paramMap){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		codeService.insertGrpCode(paramMap);
@@ -108,22 +90,12 @@ public class CodeController {
 		return map;
 	}
 	
-	
 	/**
-	 * 그룹코드 수정
+	 * 일반코드 조회 - 화면조회 호출
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/system/code/editGrpCode")
-	public String editGrpCode(){
-		return "/admin/system/code/writeGrpCodePop";
-	}
-	
-	/**
-	 * 일반코드 조회
-	 * @return
-	 */
-	@RequestMapping(value = "/admin/system/codeList")
-	public ModelAndView codeList(@RequestParam Map<String, String> paramMap){
+	@RequestMapping(value = "/admin/system/openCodeList")
+	public ModelAndView openCodeList(@RequestParam Map<String, String> paramMap){
 		ModelAndView mv = new ModelAndView();
 		List<Map<String, String>> codeList = codeService.selectCodeList(paramMap);
 		List<Map<String, String>> grpCodeList = codeService.selectGrpCodeList(paramMap);
@@ -137,12 +109,12 @@ public class CodeController {
 	
 
 	/**
-	 * 일반코드 조회 ajax
+	 * 일반코드 조회 - ajax 호출
 	 * @param paramMap
 	 * @return
 	 */
-	@RequestMapping(value="/admin/system/ajaxCodeList", produces = {"application/json"})
-	public Map<String, Object> ajaxCodeLis(@RequestParam Map<String, String> paramMap) {
+	@RequestMapping(value="/admin/system/selectCodeList", produces = {"application/json"})
+	public Map<String, Object> selectCodeList(@RequestParam Map<String, String> paramMap) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		List<Map<String, String>> codeList = codeService.selectCodeList(paramMap);	
@@ -198,8 +170,8 @@ public class CodeController {
 	 * @param paramMap
 	 * @return
 	 */
-	@RequestMapping(value="/admin/system/code/ajaxAddCode", produces = {"application/json"})
-	public Map<String, Object> ajaxAddCode(@RequestParam Map<String, String> paramMap) {
+	@RequestMapping(value="/admin/system/code/insertCode", produces = {"application/json"})
+	public Map<String, Object> insertCode(@RequestParam Map<String, String> paramMap) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		codeService.insertCode(paramMap);
@@ -218,11 +190,11 @@ public class CodeController {
 	 * @param paramMap
 	 * @return
 	 */
-	@RequestMapping(value="/admin/system/code/ajaxEditCode", produces = {"application/json"})
-	public ModelAndView ajaxEditCode(@RequestParam Map<String, String> paramMap){
+	@RequestMapping(value="/admin/system/code/updateCode", produces = {"application/json"})
+	public ModelAndView updateCode(@RequestParam Map<String, String> paramMap){
 		ModelAndView mv = new ModelAndView();
 		
-		codeService.editCode(paramMap);
+		codeService.updateCode(paramMap);
 		
 		List<Map<String, String>> codeList = codeService.selectCodeList(paramMap);
 			
@@ -268,15 +240,15 @@ public class CodeController {
 	}
 	
 	/**
-	 * 그룹코드 수정화면
+	 * 그룹코드 수정
 	 * @param paramMap
 	 * @return
 	 */
-	@RequestMapping(value="/admin/system/code/ajaxEditGrpCode", produces = {"application/json"})
-	public ModelAndView ajaxEditGrpCode(@RequestParam Map<String, String> paramMap){
+	@RequestMapping(value="/admin/system/code/updateGrpCode", produces = {"application/json"})
+	public ModelAndView updateGrpCode(@RequestParam Map<String, String> paramMap){
 		ModelAndView mv = new ModelAndView();
 		
-		codeService.editGrpCode(paramMap);
+		codeService.updateGrpCode(paramMap);
 		
 		List<Map<String, String>> grpCodeList = codeService.selectGrpCodeList(paramMap);
 			

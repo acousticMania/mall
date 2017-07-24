@@ -22,7 +22,7 @@ function addGrpCode(){
 	}
 	
 	jQuery.ajax({
-		url : "/admin/system/code/ajaxAddGrpCode",
+		url : "/admin/system/code/insertGrpCode",
 		type : "post",
 		dataType : "json",
 		data : {
@@ -53,7 +53,7 @@ function editGrpCode(){
 	}
 	
 	jQuery.ajax({
-		url : "/admin/system/code/ajaxEditGrpCode",
+		url : "/admin/system/code/updateGrpCode",
 		type : "post",
 		dataType : "json",
 		data : {

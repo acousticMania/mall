@@ -110,14 +110,14 @@ public class CodeService {
 	 * @param paramMap
 	 */
 	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
-	public void editCode(Map<String, String> paramMap){
+	public void updateCode(Map<String, String> paramMap){
 		
 		paramMap.put("table_id", "cmm_code");
 		paramMap.put("ref_id", paramMap.get("cd_sys_id"));
 		paramMap.put("name", paramMap.get("cd_name"));
 		
-		codeDao.editCode(paramMap);
-		codeDao.editCodeResource(paramMap);
+		codeDao.updateCode(paramMap);
+		codeDao.updateCodeResource(paramMap);
 		
 	}
 	
@@ -126,14 +126,14 @@ public class CodeService {
 	 * @param paramMap
 	 */
 	@Transactional(rollbackFor=Exception.class, propagation=Propagation.REQUIRED)
-	public void editGrpCode(Map<String, String> paramMap){
+	public void updateGrpCode(Map<String, String> paramMap){
 		
 		paramMap.put("table_id", "cmm_grp_code");
 		paramMap.put("ref_id", paramMap.get("grp_cd"));
 		paramMap.put("name", paramMap.get("grp_cd_nm"));
 		
-		codeDao.editGrpCode(paramMap);
-		codeDao.editCodeResource(paramMap);
+		codeDao.updateGrpCode(paramMap);
+		codeDao.updateCodeResource(paramMap);
 		
 	}
 }

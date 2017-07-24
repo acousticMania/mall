@@ -8,13 +8,13 @@
 	<title>일반코드 추가</title>
 	
 	<!-- Bootstrap Core CSS -->
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Custom CSS -->
-	<link href="/css/admin.css" rel="stylesheet">
+	<link href="/resources/css/admin.css" rel="stylesheet">
 	
 	<!-- Custom Fonts -->
-	<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	
 	<!-- favicon -->
 	<link rel="shortcut icon" href="/resources/images/favicon.ico" />
@@ -27,7 +27,7 @@
 	<script src="/resources/mall/admin/system/code/writeCodePop.js"></script>
 	
     <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
     
     <script>
     /*  $(document).ready(function() {
@@ -93,15 +93,13 @@
                             	</tr>
                             </table>
                             <div title="버튼영역"  align="center">
-					        	<span><input style='margin-right: 10px;' type="button" value="저장"   ${codeInfo.editMode=="add"?"onclick='addCode();'":"onclick='editCode();'"}   ></span><span><input style="margin-right: 10px;"  type="button" value="취소" onclick="closePop()"></span>
+					        	<span><input style='margin-right: 10px;' class="btn btn-lg btn-success" type="button" value="저장"   ${codeInfo.editMode=="add"?"onclick='addCode();'":"onclick='editCode();'"}   ></span><span><input style="margin-right: 10px;" class="btn btn-lg btn-success" type="button" value="취소" onclick="closePop()"></span>
 							</div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        
-        
     </div>
 </body>
 </html>
