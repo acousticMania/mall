@@ -16,7 +16,6 @@
 $(function() {
 	$(document).ready(function(){
 		init();
-		searchInit();
 		eventInit();
 	});
 });
@@ -149,7 +148,7 @@ $(function() {
 		<!-- ./row -->
 		</form>
 		<div class="row" style="text-align: center;;">
-			<button type="button" class="btn btn-info">검색</button>
+			<button id="onsearch" name="onsearch" onclick="search();" type="button" class="btn btn-info">검색</button>
 		</div>
         <!-- jqGrid -->
         <div class="table-responsive" id="goods_div">

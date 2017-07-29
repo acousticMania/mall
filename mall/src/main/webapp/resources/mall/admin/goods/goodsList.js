@@ -5,11 +5,8 @@ var top = (screen.availHeight - height) / 2;
 var left = (screen.availWidth - width) / 2;	
 
 
-function searchInit() {
-	$.ajax({
-		url : '/admin/goods/selectGoodsGrpList.json',
-		type : "POST",
-		data : {
+function search() {
+	var searchKeyword =  {
 			  gdGrpId1 : $("#god_grp1 option:selected").val()
 			, gdGrpId2 : $("#god_grp2 option:selected").val()
 			, gdGrpId3 : $("#god_grp3 option:selected").val()
@@ -21,14 +18,9 @@ function searchInit() {
 			, useYn : $("#use_yn option:selected").val()
 			, goodsGroup : $("#goods_group option:selected").val()
 			, brandCode : $("#brandCode").val()
-		},
-		async : false,
-		success : function(data, status) {
-			fn_selectGoodsOneGrpList(data);
 		}
-		
 	
-	});
+	query(searchKeyword);
 }
 
 function eventInit() {
@@ -130,9 +122,12 @@ function fn_goodsGrpListBodyAppend(body, data, str) {
 	body.append(str);
 }
 
-
 //화면 로딩시 실행function
-function init(){
+function init() {
+	query();
+}
+
+function query(searchKeyword){
 		$("#goodsTable").jqGrid({
 			// data를 가져올 url
 			url : "/admin/goods/selectGoodsList.json",
