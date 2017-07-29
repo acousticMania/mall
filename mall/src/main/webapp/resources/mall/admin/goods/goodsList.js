@@ -9,7 +9,19 @@ function searchInit() {
 	$.ajax({
 		url : '/admin/goods/selectGoodsGrpList.json',
 		type : "POST",
-		data : this.param,
+		data : {
+			  gdGrpId1 : $("#god_grp1 option:selected").val()
+			, gdGrpId2 : $("#god_grp2 option:selected").val()
+			, gdGrpId3 : $("#god_grp3 option:selected").val()
+			, gdGrpId4 : $("#god_grp4 option:selected").val()
+			, goodsNm : $("#goods_nm option:selected").val()
+			, goodsNmText : $("#goods_nm_text").val()
+			, couponYn : $("#coupon_yn option:selected").val()
+			, quantityState : $("#quantity_state option:selected").val()
+			, useYn : $("#use_yn option:selected").val()
+			, goodsGroup : $("#goods_group option:selected").val()
+			, brandCode : $("#brandCode").val()
+		},
 		async : false,
 		success : function(data, status) {
 			fn_selectGoodsOneGrpList(data);

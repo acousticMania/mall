@@ -74,12 +74,12 @@ $(function() {
 								<label>검색조건</label>
 							</div>
 							<div class="col-sm-3">
-								<select class="form-control input-sm">
+								<select id="goods_nm" name="goods_nm" class="form-control input-sm">
 									<option>상품명</option>
 								</select>
 							</div>
 							<div class="col-sm-4">
-								<input class="form-control input-sm"/>
+								<input id="goods_nm_text" name="goods_nm_text" class="form-control input-sm"/>
 							</div>
 						</div>
 						<div class="col-sm-6">
@@ -87,7 +87,7 @@ $(function() {
 								<label>쿠폰적용</label>
 							</div>
 							<div class="col-sm-4">
-								<select class="form-control input-sm">
+								<select id="coupon_yn" name="coupon_yn" class="form-control input-sm">
 									<option>선택</option>
 								</select>
 							</div>
@@ -99,12 +99,12 @@ $(function() {
 								<label>재고여부</label>
 							</div>
 							<div class="col-sm-3">
-								<select class="form-control input-sm">
+								<select id="quantity_state" name="quantity_state"  class="form-control input-sm">
 									<option>재고여부</option>
 								</select>
 							</div>
 							<div class="col-sm-3">
-								<input class="form-control input-sm"/>
+								<input id="quantity" name="quantity" class="form-control input-sm"/>
 							</div>
 							<div class="col-sm-2" style="text-align: left;">
 							<label class="control-label">개 이하</label>
@@ -115,7 +115,7 @@ $(function() {
 								<label>진열여부</label>
 							</div>
 							<div class="col-sm-4">
-								<select class="form-control input-sm">
+								<select id="use_yn" name="use_yn" class="form-control input-sm">
 									<option>선택</option>
 								</select>
 							</div>
@@ -127,7 +127,7 @@ $(function() {
 								<label>그룹</label>
 							</div>
 							<div class="col-sm-4">
-								<select class="form-control input-sm">
+								<select id="goods_group" name="goods_group" class="form-control input-sm">
 									<option>그룹선택</option>
 								</select>
 							</div>
@@ -137,7 +137,7 @@ $(function() {
 								<label>브랜드</label>
 							</div>
 							<div class="col-sm-4">
-								<select class="form-control input-sm">
+								<select id="brand_code" name="brand_code" class="form-control input-sm">
 									<option>브랜드선택</option>
 								</select>
 							</div>
